@@ -26,3 +26,4 @@ env/
 
 # 报告产物
 *.skillguard-report.*
+site/
