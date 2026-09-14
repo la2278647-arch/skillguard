@@ -1,0 +1,37 @@
+site_name: SkillGuard
+site_description: Agent Skills 质量保障与测试框架
+site_url: https://skillguard.github.io/skillguard/
+repo_url: https://github.com/skillguard/skillguard
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+nav:
+  - 首页: index.md
+  - 快速开始: quickstart.md
+  - CLI 参考: cli.md
+  - API 参考: api.md
+  - 架构说明: architecture.md
+  - 质量规则: rules.md
+  - CI 集成: ci.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - tables
