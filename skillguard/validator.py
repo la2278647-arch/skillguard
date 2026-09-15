@@ -501,6 +501,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-244", r">>\s*/etc/crontab", Severity.WARNING),
     # systemd 服务创建
     ("SEC-245", r">>\s*/etc/systemd/system/.*\.service", Severity.WARNING),
+    # dconf 策略修改
+    ("SEC-246", r"\bdconf\s+write\b", Severity.INFO),
+    # polkit 操作
+    ("SEC-247", r"\bpolkit-agent-helper-1\b", Severity.INFO),
+    # apparmor 禁用
+    ("SEC-248", r"\baa-status\s+--complaining|apparmor_parser\s+-R", Severity.WARNING),
+    # selinux 禁用
+    ("SEC-249", r"\bsetenforce\s+0\b|\bsetenforce\s+permissive", Severity.WARNING),
+    # ufw 禁用
+    ("SEC-250", r"\bufw\s+disable\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

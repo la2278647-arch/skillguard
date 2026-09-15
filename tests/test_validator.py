@@ -367,6 +367,11 @@ class TestSafetyChecks:
             ("echo user:pass | chpasswd\n", "SEC-243"),
             ("echo * * * * * cmd >> /etc/crontab\n", "SEC-244"),
             ("echo [Unit] >> /etc/systemd/system/evil.service\n", "SEC-245"),
+            ("dconf write /org/gnome/desktop/background\n", "SEC-246"),
+            ("polkit-agent-helper-1 --action\n", "SEC-247"),
+            ("aa-status --complaining\n", "SEC-248"),
+            ("setenforce 0\n", "SEC-249"),
+            ("ufw disable\n", "SEC-250"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
