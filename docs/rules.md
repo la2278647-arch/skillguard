@@ -560,3 +560,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-508` | 🟡 | `chroma delete` | 向量库删除 |
 | `SEC-509` | 🟡 | `cat dataset.jsonl` | 训练数据窃取 |
 | `SEC-510` | 🟡 | `rm -rf cache` | 推理缓存投毒 |
+| `SEC-511` | 🔵 | `playwright --headless` | 浏览器自动化 |
+| `SEC-512` | 🟡 | `tesseract img | curl` | OCR 数据窃取 |
+| `SEC-513` | 🔵 | `xdotool key` | GUI 自动化 |
+| `SEC-514` | 🟡 | `xclip -o | while` | 剪贴板监控 |
+| `SEC-515` | 🔵 | `espeak | nc` | 辅助技术利用 |
