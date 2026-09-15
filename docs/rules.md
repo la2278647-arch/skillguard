@@ -530,3 +530,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-478` | 🟡 | `fwupdmgr downgrade` | 固件回滚 |
 | `SEC-479` | 🔵 | `systemctl acpid` | ACPI 操作 |
 | `SEC-480` | 🟡 | `tpm2_clear` | TPM 操作 |
+| `SEC-481` | 🟡 | `tar /etc | nc` | 系统备份外传 |
+| `SEC-482` | 🔴 | `lvremove /dev/vg` | LVM 破坏 |
+| `SEC-483` | 🔴 | `mdadm --stop` | RAID 破坏 |
+| `SEC-484` | 🔵 | `strings /dev/` | 磁盘泄露 |
+| `SEC-485` | 🔵 | `restic restore` | 系统还原 |
