@@ -1051,6 +1051,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-519", r"\b(?:vncserver|tightvncserver|teamviewer)\s+", Severity.INFO),
     # 恶意数据恢复滥用
     ("SEC-520", r"\b(?:foremost|photorec|testdisk)\s+[^\n]*/dev/sd", Severity.INFO),
+    # 恶意内核补丁
+    ("SEC-521", r"\b(?:patch|applypatch)\s+[^\n]*(?:/dev/sd|/usr/src)", Severity.WARNING),
+    # 危险安全工具绕过
+    ("SEC-522", r"\b(?:chkrootkit|rkhunter)\s+--(?:skip|disable)\s+", Severity.WARNING),
+    # 恶意安全扫描器
+    ("SEC-523", r"\b(?:nuclei|wpscan|nikto)\s+-u\s+", Severity.WARNING),
+    # 危险凭据爆破
+    ("SEC-524", r"\b(?:hydra|medusa|ncrack)\s+-l\s+", Severity.WARNING),
+    # 恶意流量重定向
+    ("SEC-525", r"\b(?:ip\s+rule\s+add|iptables\s+-t\s+nat\s+-A)\s+[^\n]*(?:PREROUTING|FORWARD)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

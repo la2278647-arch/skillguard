@@ -642,6 +642,11 @@ class TestSafetyChecks:
             ("beef-xss --version\n", "SEC-518"),
             ("vncserver :1\n", "SEC-519"),
             ("foremost /dev/sda\n", "SEC-520"),
+            ("patch /usr/src/kernel\n", "SEC-521"),
+            ("chkrootkit --skip x\n", "SEC-522"),
+            ("nuclei -u http://target.com\n", "SEC-523"),
+            ("hydra -l admin ssh://host\n", "SEC-524"),
+            ("iptables -t nat -A PREROUTING -j REDIRECT\n", "SEC-525"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
