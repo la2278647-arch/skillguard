@@ -21,6 +21,7 @@
 | [anthropics/skills](https://github.com/anthropics/skills)（官方） | 176k | 20 | 93.9 | **75%** | **7** | 4 |
 | [obra/superpowers](https://github.com/obra/superpowers) | 286k | 14 | 95.2 | 86% | **3** | 0 |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | 261k | 37 | **98.4** | **100%** | 0 | 0 |
+| [github/spec-kit](https://github.com/github/spec-kit) | 136k | 2 | 98.2 | 100% | 0 | 0 |
 
 ### 评分分布
 
@@ -28,6 +29,7 @@
 anthropics/skills:   90-100:15  75-89:4  60-74:1  (20 total)
 obra/superpowers:    90-100:12  75-89:1  60-74:1  (14 total)
 mattpocock/skills:   90-100:37                      (37 total)
+github/spec-kit:     90-100:2                       (2 total)
 ```
 
 ## 三、发现的问题类型（举例）
@@ -40,7 +42,7 @@ mattpocock/skills:   90-100:37                      (37 total)
 
 ## 四、给 Skill 作者的启示
 
-基于 71 个真实 Skill 的扫描：
+基于 **73 个真实 Skill**（4 个头部仓库）的扫描：
 
 1. **description 是最被忽视的元数据**——缺失直接导致 AI 无法正确触发 Skill
 2. **scripts/ 与 tests/ 是质量分水岭**——带测试的 Skill 分数显著更高
@@ -53,6 +55,7 @@ pip install skillguard
 skillguard bench https://github.com/anthropics/skills.git
 skillguard bench https://github.com/obra/superpowers.git
 skillguard bench https://github.com/mattpocock/skills.git
+skillguard bench https://github.com/github/spec-kit.git
 ```
 
 ## 六、关于 SkillGuard

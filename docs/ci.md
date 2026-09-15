@@ -83,19 +83,50 @@ jobs:
 
 ## 本地 pre-commit 钩子（可选）
 
+### 方式一：使用 pre-commit 框架
+
 `.pre-commit-config.yaml`：
 
 ```yaml
 repos:
-  - repo: local
+  - repo: https://github.com/la2278647-arch/skillguard
+    rev: v0.4.0
     hooks:
       - id: skillguard
-        name: SkillGuard quality gate
-        entry: skillguard check
-        language: system
-        types: [file]
-        files: ^skills/.+/SKILL\.md$
-        pass_filenames: false
+        args: [--threshold, "60"]
+```
+
+### 方式二：原生 git hook
+
+项目提供现成的 hook 脚本（`scripts/pre-commit`），自动检测本次提交变更的 Skill 目录并执行质量门禁：
+
+```bash
+# 安装
+ln -s ../../scripts/pre-commit .git/hooks/pre-commit
+# 或复制: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+```
+
+可通过环境变量调整阈值：
+
+```bash
+SKILLGUARD_THRESHOLD=70 git commit -m "update skill"
+```
+
+### 工作流效果
+
+```
+$ git commit -m "feat: update code-review skill"
+🔍 SkillGuard pre-commit: 检查 1 个变更的 Skill...
+  → skills/code-review
+✅ 全部 Skill 通过质量门禁
+[main abc1234] feat: update code-review skill
+```
+
+质量门禁未通过时提交被阻止：
+
+```
+❌ SkillGuard 质量门禁未通过。修复问题后重新提交。
+   提示: 运行 'skillguard check <dir> --format html -o report.html' 查看详情
 ```
 
 ## 常见问题
