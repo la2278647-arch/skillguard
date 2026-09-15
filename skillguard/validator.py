@@ -141,6 +141,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-064", r"\btee\s+-a\s+/etc/", Severity.WARNING),
     # rmdir 根目录
     ("SEC-065", r"\brmdir\s+/", Severity.WARNING),
+    # tmux/screen 隐藏会话
+    ("SEC-066", r"\btmux\s+new\s+-s\b|\bscreen\s+-dmS\b", Severity.INFO),
+    # awk 输出重定向系统文件
+    ("SEC-067", r"\bawk\s+.*>[^|]*/etc/", Severity.INFO),
+    # curl|bash 管道执行
+    ("SEC-068", r"\bcurl\s+.*\|\s*bash\b|\bwget\s+.*\|\s*bash\b", Severity.WARNING),
+    # git clone 后立即执行
+    ("SEC-069", r"git\s+clone\s+\S+\s*&&\s*(?:cd|bash|sh)", Severity.WARNING),
+    # 源码编译安装（隐藏恶意）
+    ("SEC-070", r"(?:./configure\s*&&\s*make|make\s+install)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

