@@ -595,3 +595,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-543` | 🔴 | `setfacl rwx /etc/passwd` | 系统文件 ACL |
 | `SEC-544` | 🟡 | `umask 000` | 权限放宽 |
 | `SEC-545` | 🔵 | `xmodmap -e` | 键盘映射 |
+| `SEC-546` | 🔵 | `bluetoothctl connect` | 蓝牙操作 |
+| `SEC-547` | 🔵 | `nfc-poll` | NFC 操作 |
+| `SEC-548` | 🟡 | `aircrack-ng` | 无线渗透 |
+| `SEC-549` | 🔵 | `adb shell` | 移动设备交互 |
+| `SEC-550` | 🟡 | `binwalk -e` | 固件提取 |
