@@ -447,6 +447,11 @@ class TestSafetyChecks:
             ("ssh -L 8080:localhost:80 user@host\n", "SEC-323"),
             ("ssh -D 1080 user@host\n", "SEC-324"),
             ("x2goclient --session session1\n", "SEC-325"),
+            ("nmap 192.168.1.0/24\n", "SEC-326"),
+            ("masscan -p 1-65535 10.0.0.0/8\n", "SEC-327"),
+            ("arpspoof -i eth0 -t 192.168.1.1\n", "SEC-328"),
+            ("mitmproxy --mode transparent\n", "SEC-329"),
+            ("tshark -i eth0 -w capture.pcap\n", "SEC-330"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

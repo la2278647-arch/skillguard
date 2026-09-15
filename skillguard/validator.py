@@ -661,6 +661,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-324", r"\bssh\s+-D\s+\d+", Severity.WARNING),
     # X2Go 连接
     ("SEC-325", r"\bx2goclient\s+--session", Severity.INFO),
+    # 内网 nmap 扫描
+    ("SEC-326", r"\bnmap\s+10\.|\bnmap\s+192\.168\.|\bnmap\s+172\.(?:1[6-9]|2[0-9]|3[01])\.", Severity.WARNING),
+    # masscan 扫描
+    ("SEC-327", r"\bmasscan\s+-p\s+", Severity.WARNING),
+    # ARP 欺骗
+    ("SEC-328", r"\barpspoof\b|\bbettercap\b.*\sarp", Severity.WARNING),
+    # MITM 攻击
+    ("SEC-329", r"\bmitmproxy\b|\bbettercap\b.*--mitm", Severity.WARNING),
+    # tshark 抓包
+    ("SEC-330", r"\btshark\s+-i\s+.*-w\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
