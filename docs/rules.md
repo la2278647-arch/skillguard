@@ -575,3 +575,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-523` | 🟡 | `nuclei -u` | 漏洞扫描器 |
 | `SEC-524` | 🟡 | `hydra -l` | 凭据爆破 |
 | `SEC-525` | 🟡 | `iptables -t nat PREROUTING` | 流量重定向 |
+| `SEC-526` | 🟡 | `export X=$(curl ...)` | 配置注入 |
+| `SEC-527` | 🟡 | `ssh -R` | 反向代理建立 |
+| `SEC-528` | 🟡 | `cd /tmp && curl -o` | 工作目录下载 |
+| `SEC-529` | 🔴 | `mimikatz` | 凭据转储 |
+| `SEC-530` | 🟡 | `for ... do curl` | 批量下载链 |
