@@ -1121,6 +1121,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-554", r"\bgit\s+checkout\s+[^\n]*(?:--|--force)[^\n]*(?:config|settings)", Severity.INFO),
     # 恶意定时脚本注入
     ("SEC-555", r"\b(?:at|cron)\s+now\s+\+|\bcrontab\s+-e\s*$", Severity.WARNING),
+    # 恶意环境文件注入
+    ("SEC-556", r">>\s*~?/\.(?:profile|bashrc|zshrc|bash_profile)", Severity.WARNING),
+    # 危险 sudo 持久化
+    ("SEC-557", r"\becho\s+.*\s>>\s*/etc/sudoers|\bvisudo\s+.*\s-f\s+", Severity.ERROR),
+    # 恶意证书安装
+    ("SEC-558", r"\b(?:update-ca-certificates|trust)\s+[^\n]*(?:-a|anchor)\s+", Severity.WARNING),
+    # 危险系统账户锁定
+    ("SEC-559", r"\b(?:passwd|usermod)\s+[^\n]*(?:-[lLU])\s+\w+\s*$", Severity.WARNING),
+    # 恶意 IME 切换
+    ("SEC-560", r"\b(?:ibus|fcitx5)\s+[^\n]*(?:-r|restart)\s*$", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

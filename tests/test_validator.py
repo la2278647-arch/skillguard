@@ -677,6 +677,11 @@ class TestSafetyChecks:
             ("pip install malicious-pkg\n", "SEC-553"),
             ("git checkout -- config.yml\n", "SEC-554"),
             ("at now + 5 minutes cmd\n", "SEC-555"),
+            ("echo evil >> ~/.bashrc\n", "SEC-556"),
+            ("echo user ALL >> /etc/sudoers\n", "SEC-557"),
+            ("trust anchor cert.pem\n", "SEC-558"),
+            ("usermod -L user\n", "SEC-559"),
+            ("ibus restart\n", "SEC-560"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
