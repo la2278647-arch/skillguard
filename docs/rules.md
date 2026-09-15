@@ -505,3 +505,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-453` | 🟡 | `export BASH_ENV=` | 环境注入 |
 | `SEC-454` | 🟡 | `curl -o x.tar.gz` | 隐蔽下载器 |
 | `SEC-455` | 🔵 | `tar -d /` | 恶意自解压 |
+| `SEC-456` | 🔴 | `curl http://evil/passwd.txt` | 凭据网页抓取 |
+| `SEC-457` | 🔴 | `sudo rm/shutdown` | 特权破坏 |
+| `SEC-458` | 🟡 | `tar /etc | base64` | 压缩外发 |
+| `SEC-459` | 🔴 | `mkfs /dev/sd` | 磁盘格式化 |
+| `SEC-460` | 🟡 | `insmod evil.ko` | 恶意模块加载 |
