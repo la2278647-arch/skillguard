@@ -54,6 +54,20 @@ class TestAggregateSummary:
         assert s["skill_count"] == 0
         assert s["avg_score"] == 0.0
 
+    def test_all_five_buckets(self) -> None:
+        """覆盖全部 5 个评分分档（90+/75-89/60-74/40-59/0-39）。"""
+        items = _items() + [
+            {"path": "d", "name": "delta", "score": 80.0, "passed": True,
+             "errors": 0, "warnings": 0, "tests": 0, "tests_passed": 0},
+            {"path": "e", "name": "epsilon", "score": 45.0, "passed": False,
+             "errors": 2, "warnings": 0, "tests": 0, "tests_passed": 0},
+        ]
+        s = aggregate_summary(items)
+        assert s["score_distribution"] == {
+            "90-100": 1, "75-89": 1, "60-74": 1, "40-59": 1, "0-39": 1,
+        }
+        assert s["skill_count"] == 5
+
 
 class TestRenderAggregate:
     def test_json(self) -> None:

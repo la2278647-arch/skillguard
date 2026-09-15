@@ -262,6 +262,32 @@ class TestFullScanDirectory:
         with pytest.raises(ValueError):
             guard.full_scan_directory(tmp_path / "missing")
 
+    def test_full_scan_skips_eval_errors(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        """评估抛异常（ValueError/OSError）的 Skill 应被跳过而非中断。"""
+        good = tmp_path / "skills" / "good"
+        good.mkdir(parents=True)
+        (good / "SKILL.md").write_text(
+            "---\nname: good\ndescription: d\nversion: 1.0.0\n---\n# good\n", encoding="utf-8"
+        )
+        (tmp_path / "skills" / "broken").mkdir()
+        (tmp_path / "skills" / "broken" / "SKILL.md").write_text(
+            "---\nname: broken\ndescription: d\nversion: 1.0.0\n---\n# broken\n", encoding="utf-8"
+        )
+
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        # 模拟 broken 目录在完整评估阶段抛错
+        original = guard._run_on_dir
+
+        def flaky(path):
+            if path.name == "broken":
+                raise OSError("simulated read failure")
+            return original(path)
+
+        monkeypatch.setattr(guard, "_run_on_dir", flaky)
+        items = guard.full_scan_directory(tmp_path)
+        names = {i["name"] for i in items}
+        assert names == {"good"}
+
     def test_full_scan_concurrent_same_results(self, tmp_path: Path) -> None:
         """并发 full_scan 与串行结果一致。"""
         for name in ("a", "b", "c", "d"):
