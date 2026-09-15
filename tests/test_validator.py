@@ -327,6 +327,11 @@ class TestSafetyChecks:
             ("glab ci variable delete VAR\n", "SEC-203"),
             ("gh secret delete MY_SECRET\n", "SEC-204"),
             ("bitbucket repo delete myrepo\n", "SEC-205"),
+            ("npm unpublish pkg\n", "SEC-206"),
+            ("twine upload --repository pypi --skip-existing\n", "SEC-207"),
+            ("docker push repo/image --all-tags\n", "SEC-208"),
+            ("helm repo remove repo1\n", "SEC-209"),
+            ("cargo publish --allow-dirty\n", "SEC-210"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

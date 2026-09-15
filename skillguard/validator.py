@@ -421,6 +421,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-204", r"\bgh\s+secret\s+delete\b", Severity.WARNING),
     # bitbucket 仓库删除
     ("SEC-205", r"\bbitbucket\s+repo\s+delete\b", Severity.WARNING),
+    # npm 撤销发布
+    ("SEC-206", r"\bnpm\s+unpublish\b", Severity.WARNING),
+    # twine 跳过已存在上传
+    ("SEC-207", r"\btwine\s+upload\s+--repository\s+.*--skip-existing", Severity.INFO),
+    # docker 推送全部标签
+    ("SEC-208", r"\bdocker\s+push\s+.*--all-tags", Severity.INFO),
+    # helm 仓库移除
+    ("SEC-209", r"\bhelm\s+repo\s+remove\b", Severity.INFO),
+    # cargo 脏发布
+    ("SEC-210", r"\bcargo\s+publish\s+--allow-dirty", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
