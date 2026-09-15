@@ -31,6 +31,17 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-007", r"\bgit\s+push\s+--force\b", Severity.WARNING),
     ("SEC-008", r"\beval\s+['\"]?\$?\(", Severity.ERROR),
     ("SEC-009", r"\bsudo\b", Severity.INFO),
+    # 云平台凭据（AWS/Azure/GCP/阿里云）
+    ("SEC-010", r"AKIA[0-9A-Z]{16}", Severity.ERROR),  # AWS Access Key ID
+    ("SEC-011", r"(aws_secret_access_key|AZURE_CLIENT_SECRET|GOOGLE_API_KEY|ALIBABA_CLOUD_ACCESS_KEY_SECRET)\s*[:=]\s*['\"][^'\"]{16,}['\"]", Severity.ERROR),
+    # 路径遍历
+    ("SEC-012", r"\.\./\.\./\.\./", Severity.WARNING),
+    # 下载并执行（非管道形式）
+    ("SEC-013", r"\b(?:wget|curl)\s+.*\s+-o\s+\S+\.(?:sh|py|exe|bat)\b", Severity.WARNING),
+    # 环境变量导出密钥（疑似密钥经 env 传递）
+    ("SEC-014", r"\bexport\s+(?:API_KEY|SECRET|TOKEN)\s*=", Severity.INFO),
+    # base64 编码的疑似凭据（常见混淆手段）
+    ("SEC-015", r"base64\s+['\"][A-Za-z0-9+/=]{32,}['\"]", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

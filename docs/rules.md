@@ -33,6 +33,12 @@
 | `SEC-007` | 🟡 | `git push --force` | 强制推送风险 |
 | `SEC-008` | 🔴 | `eval $(...)` | 动态执行 |
 | `SEC-009` | 🔵 | `sudo` | 权限提升操作 |
+| `SEC-010` | 🔴 | `AKIA` + 16 位大写字母数字 | AWS Access Key ID |
+| `SEC-011` | 🔴 | `aws_secret_access_key` / `AZURE_CLIENT_SECRET` / `GOOGLE_API_KEY` / 阿里云密钥 | 云平台凭据泄露 |
+| `SEC-012` | 🟡 | `../../../` | 路径遍历 |
+| `SEC-013` | 🟡 | `curl/wget -o *.sh/*.py/*.exe/*.bat` | 下载可执行文件 |
+| `SEC-014` | 🔵 | `export API_KEY/SECRET/TOKEN=` | 环境变量导出密钥 |
+| `SEC-015` | 🔵 | base64 编码 32+ 位字符串 | 疑似混淆凭据 |
 
 ## 评分权重
 
