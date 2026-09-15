@@ -135,3 +135,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-078` | 🔵 | `lsof /etc/shadow` | 敏感文件查看 |
 | `SEC-079` | 🟡 | `hexdump /dev/mem` | 内存转储 |
 | `SEC-080` | 🟡 | `iptables -F` | 清空防火墙 |
+| `SEC-086` | 🔵 | `encfs --reverse` | 加密绕过 |
+| `SEC-087` | 🔵 | `socat TCP:host:port` | 反连 |
+| `SEC-088` | 🔵 | `tcpdump -i -w` | 抓包 |
+| `SEC-089` | 🟡 | `scapy send()` | 构造包 |
+| `SEC-090` | 🔵 | `hostnamectl set-hostname` | 主机冒充 |
