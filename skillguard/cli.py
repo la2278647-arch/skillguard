@@ -39,6 +39,8 @@ def main() -> None:
               show_default=True, help="报告格式")
 @click.option("--output", "-o", type=click.Path(), default=None, help="报告输出路径（默认仅打印摘要）")
 @click.option("--ci", is_flag=True, help="CI 模式：不通过时退出码为 1")
+@click.option("--config", "config_path", type=click.Path(exists=True), default=None,
+              help="配置文件路径（skillguard.yml/toml）；默认自动发现")
 def check(
     skill_dir: str,
     rules: tuple[str, ...],
@@ -49,18 +51,33 @@ def check(
     fmt: str,
     output: str | None,
     ci: bool,
+    config_path: str | None,
 ) -> None:
     """检查一个 Skill 目录的质量。"""
+    from .configfile import build_config
+
     try:
-        config = Config(
-            skill_dir=skill_dir,
-            rules=rules,
-            run_tests=not no_tests,
-            skip_safety=skip_safety,
-            test_timeout=timeout,
-            report_format=fmt,
-            threshold=threshold,
-        )
+        if config_path is not None:
+            config = build_config(skill_dir=skill_dir, config_path=config_path)
+            # 命令行显式参数优先于配置文件
+            if rules:
+                config = config.with_overrides(rules=rules)
+            if no_tests:
+                config = config.with_overrides(run_tests=False)
+            if skip_safety:
+                config = config.with_overrides(skip_safety=True)
+            if fmt != "json":
+                config = config.with_overrides(report_format=fmt)
+        else:
+            config = Config(
+                skill_dir=skill_dir,
+                rules=rules,
+                run_tests=not no_tests,
+                skip_safety=skip_safety,
+                test_timeout=timeout,
+                report_format=fmt,
+                threshold=threshold,
+            )
     except ValueError as exc:
         click.echo(f"❌ 配置错误: {exc}", err=True)
         sys.exit(2)
@@ -237,6 +254,59 @@ def schema_cmd(report_json: str | None) -> None:
     except Exception as exc:  # noqa: BLE001 - jsonschema 抛出 ValidationError
         click.echo(f"❌ 校验失败: {exc}", err=True)
         sys.exit(1)
+
+
+@main.command("config")
+@click.option("--init", "init_flag", is_flag=True, help="在当前目录生成 skillguard.yml 模板")
+@click.option("--show", "show_flag", is_flag=True, help="显示当前生效配置")
+@click.option("--skill-dir", default=".", help="Skill 目录（配合 --show）")
+def config_cmd(init_flag: bool, show_flag: bool, skill_dir: str) -> None:
+    """管理 SkillGuard 配置文件（生成模板 / 显示当前配置）。"""
+    from .configfile import build_config, config_to_dict
+
+    if init_flag:
+        import yaml
+
+        target = Path.cwd() / "skillguard.yml"
+        if target.exists():
+            click.echo(f"⚠️  {target} 已存在，跳过", err=True)
+            return
+        template = {
+            "# SkillGuard 配置文件": None,
+            "# 质量门禁分数（0-100）": None,
+            "threshold": 60.0,
+            "# 测试超时秒数": None,
+            "test_timeout": 60,
+            "# 是否跳过安全扫描": None,
+            "skip_safety": False,
+            "# 是否运行测试": None,
+            "run_tests": True,
+            "# 报告格式: json / markdown / html": None,
+            "report_format": "json",
+            "# 启用规则列表（默认全部）": None,
+            "rules": [],
+        }
+        target.write_text(
+            yaml.safe_dump({k: v for k, v in template.items() if v is not None}, allow_unicode=True, sort_keys=False)
+            + "# rules:\n#   - SEC-001\n#   - CUS-001\n",
+            encoding="utf-8",
+        )
+        click.echo(f"✅ 已生成配置模板: {target}")
+        return
+
+    if show_flag:
+        try:
+            config = build_config(skill_dir=skill_dir)
+        except ValueError as exc:
+            click.echo(f"❌ {exc}", err=True)
+            sys.exit(2)
+        click.echo(f"当前配置（skill_dir={skill_dir}）:")
+        for key, value in config_to_dict(config).items():
+            click.echo(f"  {key}: {value}")
+        return
+
+    click.echo("用法: skillguard config --init | --show [--skill-dir DIR]", err=True)
+    sys.exit(2)
 
 
 @main.command("init")
