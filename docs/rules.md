@@ -495,3 +495,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-443` | 🔵 | `sysctl kernel.hidepid` | 内核隐藏参数 |
 | `SEC-444` | 🔴 | `shred /dev/sda` | 磁盘擦除 |
 | `SEC-445` | 🔴 | `flashrom -w` | 固件写入 |
+| `SEC-446` | 🟡 | `tar /etc | nc` | 配置外发 |
+| `SEC-447` | 🟡 | `cp ~/.ssh /tmp/` | 凭据导出 |
+| `SEC-448` | 🔵 | `rsync app.db` | 数据库复制 |
+| `SEC-449` | 🟡 | `openssl -d secret.pem` | 凭据解密 |
+| `SEC-450` | 🟡 | `curl -O && scp` | 传输链 |
