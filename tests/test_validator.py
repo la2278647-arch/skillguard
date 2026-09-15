@@ -492,6 +492,11 @@ class TestSafetyChecks:
             ("mount -l\n", "SEC-368"),
             ("sudo -l\n", "SEC-369"),
             ("find / -type f 2>/dev/null\n", "SEC-370"),
+            ("cat /proc/version\n", "SEC-371"),
+            ("lsmod\n", "SEC-372"),
+            ("route -n\n", "SEC-373"),
+            ("ss -tlnp\n", "SEC-374"),
+            ("iptables -L\n", "SEC-375"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

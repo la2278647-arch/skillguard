@@ -751,6 +751,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-369", r"\bsudo\s+-l\b|\bcat\s+/etc/sudoers", Severity.WARNING),
     # 文件系统遍历
     ("SEC-370", r"\bls\s+-laR\s+/|\bfind\s+/\s+-type\s+f\s+2>/dev/null", Severity.INFO),
+    # 内核与补丁信息
+    ("SEC-371", r"\bcat\s+/proc/version|\buname\s+-r\b", Severity.INFO),
+    # 内核模块枚举
+    ("SEC-372", r"\blsmod\b|\bcat\s+/proc/modules", Severity.INFO),
+    # 路由表收集
+    ("SEC-373", r"\broute\s+-n\b|\bip\s+route\b", Severity.INFO),
+    # 开放端口枚举
+    ("SEC-374", r"\bss\s+-tlnp\b|\bnetstat\s+-tlnp\b", Severity.INFO),
+    # 防火墙规则收集
+    ("SEC-375", r"\biptables\s+-L\b|\bip6tables\s+-L\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
