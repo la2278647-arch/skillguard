@@ -480,3 +480,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-428` | 🔵 | `sysctl -w kernel.` | 内核参数篡改 |
 | `SEC-429` | 🟡 | `cp evil /etc/systemd/system/` | 服务替换 |
 | `SEC-430` | 🔴 | `useradd -o -u 0` | 后门用户 |
+| `SEC-431` | 🟡 | `alias rm=shutdown` | 别名注入 |
+| `SEC-432` | 🟡 | `PATH=/tmp:$PATH` | 路径劫持 |
+| `SEC-433` | 🟡 | `cd() { ... }` | 函数覆盖 |
+| `SEC-434` | 🔵 | `echo \x1b[` | 终端注入 |
+| `SEC-435` | 🟡 | `trap rm EXIT` | 恶意 trap |
