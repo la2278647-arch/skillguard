@@ -190,3 +190,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-138` | 🔵 | `ctr images import` | containerd 导入 |
 | `SEC-139` | 🔵 | `kubeadm reset` | 集群重置 |
 | `SEC-140` | 🔵 | `helm template --set $(...)` | 模板命令注入 |
+| `SEC-141` | 🔵 | `serverless deploy --stage=prod` | 部署后门 |
+| `SEC-142` | 🔵 | `cloudformation --parameter-overrides` | 参数注入 |
+| `SEC-143` | 🟡 | `aws ... --minimum-password-length 0-5` | 弱密码策略 |
+| `SEC-144` | 🟡 | `gcloud firewall-rules --allow all` | 防火墙全开 |
+| `SEC-145` | 🔵 | `az storage blob upload --auth-mode key` | 密钥上传 |
