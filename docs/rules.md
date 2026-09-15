@@ -120,3 +120,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-063` | 🔵 | `scp user@host:` | 不可信主机 |
 | `SEC-064` | 🟡 | `tee -a /etc/` | 追加系统文件 |
 | `SEC-065` | 🟡 | `rmdir /` | 删除根目录 |
+| `SEC-066` | 🔵 | `tmux new -s` | 隐藏会话 |
+| `SEC-067` | 🔵 | `awk > /etc/` | 输出重定向系统文件 |
+| `SEC-068` | 🟡 | `curl ... | bash` | 管道执行 |
+| `SEC-069` | 🟡 | `git clone && cd && run` | 克隆后立即执行 |
+| `SEC-070` | 🔵 | `make install` | 源码编译安装 |
