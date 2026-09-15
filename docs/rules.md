@@ -345,3 +345,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-293` | 🟡 | `cat terraform.tfstate` | IaC 状态 |
 | `SEC-294` | 🟡 | `kubectl get secret -o yaml` | 密钥导出 |
 | `SEC-295` | 🟡 | `vault read secret` | 密钥读取 |
+| `SEC-296` | 🔴 | `mysql://user:pass@` | 数据库连接串 |
+| `SEC-297` | 🔴 | `redis-cli -a` | 明文密码 |
+| `SEC-298` | 🔴 | `amqp://user:pass@` | 消息队列凭据 |
+| `SEC-299` | 🟡 | `eyJ...` JWT | 硬编码令牌 |
+| `SEC-300` | 🔴 | `ghp_...` | GitHub Token |
