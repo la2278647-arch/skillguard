@@ -310,3 +310,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-258` | 🔵 | `mount -t cgroup` | cgroup 挂载 |
 | `SEC-259` | 🟡 | `unshare --mount/--pid` | namespace 逃逸 |
 | `SEC-260` | 🔵 | `io_uring` | 异步 IO |
+| `SEC-261` | 🟡 | `keyctl add/unlink` | 密钥环操作 |
+| `SEC-262` | 🟡 | `prctl PR_SET_SECCOMP 0` | seccomp 禁用 |
+| `SEC-263` | 🟡 | `capsh --caps=cap_sys_admin` | 能力提升 |
+| `SEC-264` | 🔵 | `ptrace attach` | 进程注入 |
+| `SEC-265` | 🔵 | `mprotect PROT_EXEC` | 内存执行 |
