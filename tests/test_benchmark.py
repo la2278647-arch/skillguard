@@ -82,6 +82,49 @@ class TestBenchmarkRunner:
         assert len(summary.skills) <= 1
 
 
+class TestScoreDistribution:
+    def _score_repo(self, tmp_path: Path, scores: dict[str, float]) -> Path:
+        """构造任意评分的 Skill 仓库（通过注入不同严重级检查）。"""
+        repo = tmp_path / "scores"
+        repo.mkdir()
+        for name, setup in scores.items():
+            d = repo / name
+            d.mkdir()
+            entry = f"---\nname: {name}\nversion: 1.0.0\n---\n# x\n"
+            if setup.get("desc"):
+                entry = f"---\nname: {name}\ndescription: d\nversion: 1.0.0\n---\n# x\n"
+            (d / "SKILL.md").write_text(entry, encoding="utf-8")
+            if setup.get("danger"):
+                (d / "x.sh").write_text("rm -rf /\n", encoding="utf-8")
+        subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=repo, check=True)
+        subprocess.run(
+            ["git", "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "init"],
+            cwd=repo,
+            check=True,
+        )
+        return repo
+
+    def test_all_buckets(self, tmp_path: Path) -> None:
+        # 高分 Skill（完整元数据）→ 90+ 档
+        # 有描述但无脚本 → ~88 档（75-89）
+        # 无描述无脚本 → 低分各档
+        repo = self._score_repo(
+            tmp_path,
+            {
+                "top": {"desc": True},
+                "mid": {"desc": True},
+                "low": {},
+                "worst": {"danger": True},
+            },
+        )
+        runner = BenchmarkRunner(repo_url=str(repo), max_skills=0)
+        summary = runner.run(keep_dir=repo)
+        # 至少覆盖 3 个分档（90+ 必然出现）
+        assert sum(summary.score_distribution.values()) == 4
+        assert summary.score_distribution["90-100"] >= 1
+
+
 class TestBenchmarkCLI:
     def test_bench_command(self, local_repo: Path, tmp_path: Path) -> None:
         from click.testing import CliRunner

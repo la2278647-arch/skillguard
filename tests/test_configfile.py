@@ -180,3 +180,25 @@ class TestConfigCLI:
         runner = CliRunner()
         result = runner.invoke(check, [str(good_skill), "--config", str(cfg)])
         assert result.exit_code == 2
+
+    def test_check_config_with_cli_overrides(self, good_skill: Path, tmp_path: Path) -> None:
+        """--config 与 CLI 参数叠加时 CLI 优先。"""
+        cfg = tmp_path / "skillguard.yml"
+        cfg.write_text("threshold: 10\nreport_format: markdown\n", encoding="utf-8")
+        runner = CliRunner()
+        result = runner.invoke(
+            check, [str(good_skill), "--config", str(cfg), "--no-tests", "-r", "SEC-001"]
+        )
+        assert result.exit_code == 0
+        assert "综合评分" in result.output
+
+    def test_check_config_with_format_override(self, good_skill: Path, tmp_path: Path) -> None:
+        cfg = tmp_path / "skillguard.yml"
+        cfg.write_text("report_format: json\n", encoding="utf-8")
+        out = tmp_path / "out.md"
+        runner = CliRunner()
+        result = runner.invoke(
+            check, [str(good_skill), "--config", str(cfg), "--format", "markdown", "-o", str(out)]
+        )
+        assert result.exit_code == 0
+        assert "# SkillGuard" in out.read_text(encoding="utf-8")

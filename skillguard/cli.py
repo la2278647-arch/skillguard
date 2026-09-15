@@ -309,6 +309,18 @@ def config_cmd(init_flag: bool, show_flag: bool, skill_dir: str) -> None:
     sys.exit(2)
 
 
+@main.command("mcp")
+def mcp_cmd() -> None:
+    """启动 MCP 服务器（stdio），供 AI 代理调用 SkillGuard 工具。"""
+    try:
+        from .mcp_server import run_stdio
+
+        run_stdio()
+    except ImportError:
+        click.echo('❌ MCP 支持需要额外依赖: pip install "skillguard[mcp]"', err=True)
+        sys.exit(2)
+
+
 @main.command("init")
 @click.argument("skill_dir", type=click.Path(), default=".")
 @click.option("--name", default=None, help="Skill 名称（默认取目录名）")
