@@ -140,3 +140,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-088` | 🔵 | `tcpdump -i -w` | 抓包 |
 | `SEC-089` | 🟡 | `scapy send()` | 构造包 |
 | `SEC-090` | 🔵 | `hostnamectl set-hostname` | 主机冒充 |
+| `SEC-091` | 🟡 | `curl -k ... | bash` | 忽略证书管道执行 |
+| `SEC-092` | 🟡 | `eval(input())` | Python 动态执行 |
+| `SEC-093` | 🟡 | `ssh -R` | SSH 反向转发 |
+| `SEC-094` | 🟡 | `find | xargs rm` | 批量删除 |
+| `SEC-095` | 🔵 | `tar -C /` | 绝对路径覆盖 |
