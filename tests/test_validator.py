@@ -612,6 +612,11 @@ class TestSafetyChecks:
             ("grubby --add-kernel /vmlinuz\n", "SEC-488"),
             ("dracut -f\n", "SEC-489"),
             ("kexec -l /boot/vmlinuz\n", "SEC-490"),
+            ("systemd-run --on-calendar daily cmd\n", "SEC-491"),
+            ("auditctl -e 0\n", "SEC-492"),
+            ("chcon -t httpd_sys_script_t file\n", "SEC-493"),
+            ("ip netns delete ns1\n", "SEC-494"),
+            ("renice -n -20 -p 1\n", "SEC-495"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -991,6 +991,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-489", r"\bdracut\s+[^\n]*-f\b|\binitramfs\s+-u\b", Severity.INFO),
     # 恶意 kexec 加载
     ("SEC-490", r"\bkexec\s+-l\s+\S+", Severity.WARNING),
+    # 恶意 systemd 计时器
+    ("SEC-491", r"\b(?:systemd-run|systemctl)\s+[^\n]*--on-calendar|\b(?:systemd-run|systemctl)\s+[^\n]*--timer", Severity.WARNING),
+    # 危险审计禁用
+    ("SEC-492", r"\bauditctl\s+-e\s+0|\bauditctl\s+-D\b", Severity.WARNING),
+    # 恶意 SELinux 上下文
+    ("SEC-493", r"\bchcon\s+[^\n]*-t\s+[^\n]*(?:httpd|bin)|\brestorecon\s+[^\n]*-F\b", Severity.WARNING),
+    # 危险命名空间操作
+    ("SEC-494", r"\bip\s+netns\s+delete|\bunshare\s+--user\b", Severity.WARNING),
+    # 恶意 CPU 限制绕过
+    ("SEC-495", r"\bschedtool\s+.*\s-R\b|\brenice\s+-n\s+-20\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
