@@ -8,8 +8,9 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Coverage](https://img.shields.io/badge/coverage-96.8%25-brightgreen)](https://github.com/la2278647-arch/skillguard)
+[![Coverage](https://img.shields.io/badge/coverage-95.2%25-brightgreen)](https://github.com/la2278647-arch/skillguard)
 [![Ruff](https://img.shields.io/badge/linter-ruff-purple)](https://github.com/astral-sh/ruff)
+[![Security](https://img.shields.io/badge/Security-Policy-important)](SECURITY.md)
 [![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)](https://github.com/la2278647-arch/skillguard/actions)
 
 **📊 可视化评估报告：**

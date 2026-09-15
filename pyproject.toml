@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skillguard"
-version = "0.1.0"
+version = "0.4.0"
 description = "Agent Skills 质量保障与测试框架 — 静态校验、沙箱测试、质量评分、CI 集成"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -61,3 +61,4 @@ target-version = "py310"
 [tool.mypy]
 python_version = "3.10"
 ignore_missing_imports = true
+
