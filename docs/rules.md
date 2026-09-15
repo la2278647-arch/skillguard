@@ -295,3 +295,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-243` | 🔴 | `chpasswd` / `>> /etc/passwd` | 凭据篡改 |
 | `SEC-244` | 🟡 | `>> /etc/crontab` | 系统定时任务 |
 | `SEC-245` | 🟡 | `>> /etc/systemd/system/*.service` | 服务创建 |
+| `SEC-246` | 🔵 | `dconf write` | 桌面策略篡改 |
+| `SEC-247` | 🔵 | `polkit-agent-helper-1` | 授权操作 |
+| `SEC-248` | 🟡 | `aa-status --complaining` | AppArmor 弱化 |
+| `SEC-249` | 🟡 | `setenforce 0` | SELinux 禁用 |
+| `SEC-250` | 🟡 | `ufw disable` | 防火墙禁用 |
