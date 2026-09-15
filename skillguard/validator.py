@@ -111,6 +111,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-049", r"\bgit\s+config\s+(?:user|core|alias)\.", Severity.INFO),
     # hosts 文件修改
     ("SEC-050", r">>\s*/etc/hosts|echo\s+.*\s*>>\s*/etc/hosts", Severity.WARNING),
+    # curl 下载到 /tmp 后执行
+    ("SEC-051", r"(?:curl|wget)\s+.*\s+-o\s+/tmp/.*\.(?:sh|py)", Severity.WARNING),
+    # pip install 从 URL
+    ("SEC-052", r"pip\s+install\s+(?:https?|git)\S+", Severity.WARNING),
+    # PATH 环境变量覆盖
+    ("SEC-053", r"\bPATH=\S*:\S*\b|\bexport\s+PATH=", Severity.INFO),
+    # curl POST 数据外传
+    ("SEC-054", r"\b(?:curl|wget)\b[^\n]*(?:-d|--data)[^\n]*(?:https?://)", Severity.INFO),
+    # openssl 弱加密
+    ("SEC-055", r"openssl\s+.*-(?:des|rc4|md5)\d*\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
