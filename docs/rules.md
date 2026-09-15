@@ -520,3 +520,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-468` | 🔵 | `aws configure export` | 云配置导出 |
 | `SEC-469` | 🟡 | `cat bash_sessions/` | 会话窃取 |
 | `SEC-470` | 🔴 | `gpg --export-secret-keys` | 私钥导出 |
+| `SEC-471` | 🔴 | `nsenter --mount /proc/*/ns/` | 命名空间逃逸 |
+| `SEC-472` | 🔴 | `echo > cgroup.procs` | cgroup 逃逸 |
+| `SEC-473` | 🟡 | `tc filter add egress` | eBPF 劫持 |
+| `SEC-474` | 🟡 | `crictl exec --privileged` | 运行时提权 |
+| `SEC-475` | 🟡 | `docker build --network=host` | 镜像投毒 |
