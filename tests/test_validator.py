@@ -487,6 +487,11 @@ class TestSafetyChecks:
             ("cat ~/.bash_history\n", "SEC-363"),
             ("ls ~/.ssh/\n", "SEC-364"),
             ("find / -name *secret* 2>/dev/null\n", "SEC-365"),
+            ("systemctl list-units\n", "SEC-366"),
+            ("crontab -l\n", "SEC-367"),
+            ("mount -l\n", "SEC-368"),
+            ("sudo -l\n", "SEC-369"),
+            ("find / -type f 2>/dev/null\n", "SEC-370"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

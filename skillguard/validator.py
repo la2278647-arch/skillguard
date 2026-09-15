@@ -741,6 +741,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-364", r"\bcat\s+~?/\.ssh/id_\w+\.pub|\bls\s+~?/\.ssh/", Severity.INFO),
     # 密钥环搜索
     ("SEC-365", r"\bfind\s+/\s+-name\s+.*(?:credential|secret|token|key)\S*\s+2>/dev/null", Severity.WARNING),
+    # 系统服务枚举
+    ("SEC-366", r"\bsystemctl\s+list-units\b|\bservice\s+--status-all\b", Severity.INFO),
+    # 计划任务枚举
+    ("SEC-367", r"\bcrontab\s+-l\b|\batq\b", Severity.INFO),
+    # 挂载信息收集
+    ("SEC-368", r"\bmount\s*-l\b|\bcat\s+/etc/fstab", Severity.INFO),
+    # sudo 配置侦察
+    ("SEC-369", r"\bsudo\s+-l\b|\bcat\s+/etc/sudoers", Severity.WARNING),
+    # 文件系统遍历
+    ("SEC-370", r"\bls\s+-laR\s+/|\bfind\s+/\s+-type\s+f\s+2>/dev/null", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
