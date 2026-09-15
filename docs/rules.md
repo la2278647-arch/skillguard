@@ -160,3 +160,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-108` | 🔵 | `ip link set address` | MAC 伪造 |
 | `SEC-109` | 🔴 | `sshpass -p` | 明文密码 |
 | `SEC-110` | 🟡 | `expect send password` | 密码脚本 |
+| `SEC-111` | 🟡 | `ProxyCommand bash` | SSH 代理命令注入 |
+| `SEC-112` | 🟡 | `LD_PRELOAD=` | 库劫持 |
+| `SEC-113` | 🔵 | `PYTHONPATH=` | Python 路径劫持 |
+| `SEC-114` | 🔵 | `NODE_OPTIONS=` | Node 注入 |
+| `SEC-115` | 🔵 | `JAVA_TOOL_OPTIONS=` | Java 注入 |
