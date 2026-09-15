@@ -90,6 +90,53 @@ class TestRenderHtml:
         assert 'class="badge pass"' in out
 
 
+class TestRadarAndBars:
+    def test_radar_svg_contains_polygon(self) -> None:
+        from skillguard.reporting import _radar_svg
+
+        svg = _radar_svg(
+            {"structure": 80, "documentation": 90, "safety": 50, "maintainability": 85, "usability": 70}
+        )
+        assert svg.startswith("<svg")
+        assert "polygon" in svg
+        assert "circle" in svg
+        assert "结构" in svg
+        assert "安全" in svg
+
+    def test_radar_scores_reflected(self) -> None:
+        from skillguard.reporting import _radar_svg
+
+        svg_all100 = _radar_svg(
+            {"structure": 100, "documentation": 100, "safety": 100, "maintainability": 100, "usability": 100}
+        )
+        svg_all0 = _radar_svg(
+            {"structure": 0, "documentation": 0, "safety": 0, "maintainability": 0, "usability": 0}
+        )
+        assert svg_all100 != svg_all0
+
+    def test_bar_width_and_color(self) -> None:
+        from skillguard.reporting import _bar
+
+        high = _bar(95.0, "测试")
+        low = _bar(30.0, "测试")
+        assert "width:95%" in high
+        assert "width:30%" in low
+        assert "4ade80" in high  # 绿色（高分）
+        assert "f87171" in low  # 红色（低分）
+
+    def test_bar_mid_color(self) -> None:
+        from skillguard.reporting import _bar
+
+        mid = _bar(70.0, "测试")
+        assert "fbbf24" in mid  # 黄色（中分）
+
+    def test_html_contains_radar(self) -> None:
+        out = render_report(_sample_report(), "html")
+        assert 'role="img"' in out
+        assert "bar-track" in out
+        assert "radar-wrap" in out
+
+
 class TestWriteReport:
     def test_writes_file(self, tmp_path: Path) -> None:
         out = tmp_path / "nested" / "report.json"

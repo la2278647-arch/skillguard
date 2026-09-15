@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import html as html_lib
+import math
 from pathlib import Path
 
 from .models import QualityReport, Severity, TestOutcome
@@ -23,6 +24,67 @@ _TEST_EMOJI = {
     TestOutcome.SKIPPED: "⏭️",
     TestOutcome.ERROR: "⚠️",
 }
+
+
+def _radar_svg(scores: dict[str, float], size: int = 320) -> str:
+    """生成五维评分的 SVG 雷达图（零外部依赖）。"""
+    labels = [
+        ("structure", "结构"),
+        ("documentation", "文档"),
+        ("safety", "安全"),
+        ("maintainability", "维护"),
+        ("usability", "实用"),
+    ]
+    n = len(labels)
+    cx = cy = size / 2
+    radius = size * 0.34
+
+    def point(i: int, value: float) -> tuple[float, float]:
+        angle = -90 + i * (360 / n)
+        r = radius * (value / 100.0)
+        rad = angle * math.pi / 180
+        return cx + r * math.cos(rad), cy + r * math.sin(rad)
+
+    # 背景网格（50 / 100 两层）
+    grid = ""
+    for level in (0.5, 1.0):
+        pts = " ".join(f"{point(i, level * 100)[0]:.1f},{point(i, level * 100)[1]:.1f}" for i in range(n))
+        grid += f'<polygon points="{pts}" fill="none" stroke="#334155" stroke-width="1"/>'
+
+    # 轴与标签
+    axes = ""
+    label_text = ""
+    for i, (key, zh) in enumerate(labels):
+        tip = point(i, 100)
+        axes += f'<line x1="{cx:.1f}" y1="{cy:.1f}" x2="{tip[0]:.1f}" y2="{tip[1]:.1f}" stroke="#334155" stroke-width="1"/>'
+        lp = point(i, 128)
+        label_text += f'<text x="{lp[0]:.1f}" y="{lp[1]:.1f}" fill="#94a3b8" font-size="12" text-anchor="middle" dominant-baseline="middle">{zh}</text>'
+
+    # 数据多边形
+    pts = " ".join(f"{point(i, scores.get(k, 0))[0]:.1f},{point(i, scores.get(k, 0))[1]:.1f}" for i, (k, _) in enumerate(labels))
+    # 数据点
+    dots = ""
+    for i, (k, _) in enumerate(labels):
+        px, py = point(i, scores.get(k, 0))
+        dots += f'<circle cx="{px:.1f}" cy="{py:.1f}" r="3" fill="#60a5fa"/>'
+
+    return (
+        f'<svg viewBox="0 0 {size} {size}" width="100%" style="max-width:{size}px" role="img" aria-label="五维评分雷达图">'
+        f"{grid}{axes}{label_text}"
+        f'<polygon points="{pts}" fill="rgba(96,165,250,.25)" stroke="#60a5fa" stroke-width="2"/>'
+        f"{dots}</svg>"
+    )
+
+
+def _bar(value: float, label: str) -> str:
+    """生成单维评分进度条。"""
+    pct = max(0.0, min(100.0, value))
+    color = "#4ade80" if pct >= 80 else "#fbbf24" if pct >= 60 else "#f87171"
+    return (
+        f'<div class="bar-row"><span class="bar-label">{label}</span>'
+        f'<div class="bar-track"><div class="bar-fill" style="width:{pct:.0f}%;background:{color}"></div></div>'
+        f'<span class="bar-value">{value:.1f}</span></div>'
+    )
 
 
 def render_report(report: QualityReport, fmt: str) -> str:
@@ -118,6 +180,24 @@ def _render_html(report: QualityReport) -> str:
         for t in report.tests
     )
     badge_class = "pass" if report.passed else "fail"
+    radar = _radar_svg(
+        {
+            "structure": report.score.structure,
+            "documentation": report.score.documentation,
+            "safety": report.score.safety,
+            "maintainability": report.score.maintainability,
+            "usability": report.score.usability,
+        }
+    )
+    bars = "".join(
+        [
+            _bar(report.score.structure, "结构完整性"),
+            _bar(report.score.documentation, "文档清晰度"),
+            _bar(report.score.safety, "安全性"),
+            _bar(report.score.maintainability, "可维护性"),
+            _bar(report.score.usability, "实用性"),
+        ]
+    )
     return f"""<!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -126,11 +206,12 @@ def _render_html(report: QualityReport) -> str:
 <title>SkillGuard 报告 — {html_lib.escape(s.name)}</title>
 <style>
   body {{ font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif; margin: 0; padding: 24px; background: #0f172a; color: #e2e8f0; }}
-  .wrap {{ max-width: 900px; margin: 0 auto; }}
+  .wrap {{ max-width: 920px; margin: 0 auto; }}
   h1 {{ font-size: 1.6rem; margin-bottom: 4px; }}
+  h2 {{ font-size: 1.15rem; margin-top: 32px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }}
   .meta {{ color: #94a3b8; font-size: .9rem; margin-bottom: 20px; }}
   .score {{ font-size: 3rem; font-weight: 700; }}
-  .badge {{ display: inline-block; padding: 4px 14px; border-radius: 999px; font-weight: 600; }}
+  .badge {{ display: inline-block; padding: 4px 14px; border-radius: 999px; font-weight: 600; vertical-align: middle; margin-left: 8px; }}
   .badge.pass {{ background: #14532d; color: #4ade80; }}
   .badge.fail {{ background: #7f1d1d; color: #fca5a5; }}
   table {{ width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: .9rem; }}
@@ -139,12 +220,21 @@ def _render_html(report: QualityReport) -> str:
   tr.error td {{ background: rgba(127,29,29,.35); }}
   tr.warning td {{ background: rgba(113,63,18,.3); }}
   tr.passed td {{ background: rgba(20,83,45,.3); }}
-  tr.failed td, tr.error td {{ background: rgba(127,29,29,.3); }}
+  tr.failed td {{ background: rgba(127,29,29,.3); }}
+  .dash {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }}
+  .radar-wrap {{ background: #1e293b; border-radius: 12px; padding: 16px; display: flex; justify-content: center; }}
+  .bars {{ display: flex; flex-direction: column; gap: 10px; }}
+  .bar-row {{ display: grid; grid-template-columns: 72px 1fr 44px; gap: 10px; align-items: center; }}
+  .bar-label {{ color: #94a3b8; font-size: .82rem; }}
+  .bar-value {{ color: #e2e8f0; font-size: .85rem; font-weight: 600; text-align: right; }}
+  .bar-track {{ background: #334155; border-radius: 999px; height: 8px; overflow: hidden; }}
+  .bar-fill {{ height: 100%; border-radius: 999px; transition: width .5s ease; }}
   .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }}
   .card {{ background: #1e293b; border-radius: 10px; padding: 14px; }}
   .card .label {{ color: #94a3b8; font-size: .8rem; }}
   .card .value {{ font-size: 1.3rem; font-weight: 600; }}
   code {{ background: #1e293b; padding: 1px 6px; border-radius: 4px; }}
+  @media (max-width: 640px) {{ .dash {{ grid-template-columns: 1fr; }} }}
 </style>
 </head>
 <body>
@@ -154,12 +244,9 @@ def _render_html(report: QualityReport) -> str:
   <div class="score">{report.overall_score:.1f}<span style="font-size:1rem;color:#94a3b8">/100</span>
     <span class="badge {badge_class}">{'✅ 通过' if report.passed else '❌ 未通过'}</span>
   </div>
-  <div class="grid">
-    <div class="card"><div class="label">结构完整性</div><div class="value">{report.score.structure:.1f}</div></div>
-    <div class="card"><div class="label">文档清晰度</div><div class="value">{report.score.documentation:.1f}</div></div>
-    <div class="card"><div class="label">安全性</div><div class="value">{report.score.safety:.1f}</div></div>
-    <div class="card"><div class="label">可维护性</div><div class="value">{report.score.maintainability:.1f}</div></div>
-    <div class="card"><div class="label">实用性</div><div class="value">{report.score.usability:.1f}</div></div>
+  <div class="dash">
+    <div class="radar-wrap">{radar}</div>
+    <div class="bars">{bars}</div>
   </div>
   <h2>检查明细（{len(report.checks)}）</h2>
   <table><thead><tr><th>级别</th><th>规则</th><th>文件</th><th>问题</th></tr></thead><tbody>{checks_rows or '<tr><td colspan=4>无</td></tr>'}</tbody></table>
