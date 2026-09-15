@@ -475,3 +475,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-423` | 🔴 | `curl | sudo bash` | 特权管道执行 |
 | `SEC-424` | 🟡 | `sudo python -c` | 提权滥用 |
 | `SEC-425` | 🟡 | `cp evil /usr/local/bin/` | 进程替换 |
+| `SEC-426` | 🔴 | `ln -s /etc/passwd` | 恶意符号链接 |
+| `SEC-427` | 🔵 | `chattr +i` | 文件锁定 |
+| `SEC-428` | 🔵 | `sysctl -w kernel.` | 内核参数篡改 |
+| `SEC-429` | 🟡 | `cp evil /etc/systemd/system/` | 服务替换 |
+| `SEC-430` | 🔴 | `useradd -o -u 0` | 后门用户 |
