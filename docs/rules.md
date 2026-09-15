@@ -465,3 +465,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-413` | 🟡 | `aws s3 delete` | 云资源删除 |
 | `SEC-414` | 🟡 | `aws ... 0.0.0.0/0` | 安全组放开 |
 | `SEC-415` | 🟡 | `s3api put-bucket-acl public-read` | 存储公开 |
+| `SEC-416` | 🟡 | `>> .github/workflows/` | CI 脚本注入 |
+| `SEC-417` | 🟡 | `curl ... $TOKEN` | CI 凭据外传 |
+| `SEC-418` | 🟡 | `npm publish --unsafe-perm` | 构建投毒 |
+| `SEC-419` | 🟡 | `curl x.py >> app.py` | 代码注入 |
+| `SEC-420` | 🔵 | `npm install --no-lockfile` | 锁定绕过 |
