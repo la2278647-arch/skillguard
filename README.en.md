@@ -151,3 +151,4 @@ ruff check skillguard tests  # lint
 ## ⭐ Support
 
 If SkillGuard helps you, give it a Star ⭐ and share it with other developers!
+
