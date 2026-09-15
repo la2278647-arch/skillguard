@@ -302,6 +302,11 @@ class TestSafetyChecks:
             ("aws eks delete-cluster --name mycluster\n", "SEC-178"),
             ("gcloud container clusters delete mycluster\n", "SEC-179"),
             ("az aks delete -n mycluster\n", "SEC-180"),
+            ("flyway undo\n", "SEC-181"),
+            ("liquibase rollback --count=10\n", "SEC-182"),
+            ("alembic downgrade base\n", "SEC-183"),
+            ("migrate zero\n", "SEC-184"),
+            ("prisma migrate reset\n", "SEC-185"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -371,6 +371,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-179", r"\bgcloud\s+container\s+clusters\s+delete", Severity.WARNING),
     # aks 集群删除
     ("SEC-180", r"\baz\s+aks\s+delete", Severity.WARNING),
+    # flyway 回滚
+    ("SEC-181", r"\bflyway\s+undo\b", Severity.WARNING),
+    # liquibase 回滚
+    ("SEC-182", r"\bliquibase\s+rollback", Severity.WARNING),
+    # alembic 降级
+    ("SEC-183", r"\balembic\s+downgrade\b", Severity.WARNING),
+    # django migrate 回滚
+    ("SEC-184", r"\bmigrate\s+zero\b", Severity.WARNING),
+    # prisma 重置
+    ("SEC-185", r"\bprisma\s+migrate\s+reset\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
