@@ -562,6 +562,11 @@ class TestSafetyChecks:
             ("aws s3 cp shadow s3://bucket\n", "SEC-438"),
             ("gdb -batch -c dump 1234\n", "SEC-439"),
             ("nmap -sS 192.168.1.1\n", "SEC-440"),
+            ("rm -rf /\n", "SEC-441"),
+            ("mount --bind /tmp /etc\n", "SEC-442"),
+            ("sysctl -w kernel.hidepid=2\n", "SEC-443"),
+            ("shred /dev/sda\n", "SEC-444"),
+            ("flashrom -w firmware.bin\n", "SEC-445"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -891,6 +891,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-439", r"\b(?:gdb|lldb)\s+[^\n]*-batch[^\n]*-c\s+[^\n]*(?:dump|attach)", Severity.WARNING),
     # 隐蔽网络扫描
     ("SEC-440", r"\b(?:nc|nmap)\s+[^\n]*(?:-sS|--scan-delay)\b", Severity.WARNING),
+    # 恶意数据清理
+    ("SEC-441", r"\brm\s+-rf\s+/|\brm\s+-rf\s+\*", Severity.ERROR),
+    # 危险挂载覆盖
+    ("SEC-442", r"\bmount\s+--bind\s+\S+\s+/|\bmount\s+-o\s+remount\s+rw\s+/", Severity.WARNING),
+    # 恶意内核参数
+    ("SEC-443", r"\b(?:echo|sysctl)\s+.*(?:/proc/sys/|kernel\.).*(?:hide|ignore)", Severity.INFO),
+    # 磁盘擦除
+    ("SEC-444", r"\bshred\s+.*(?:/dev/sd|/etc)|\bwipefs\s+.*/dev/sd", Severity.ERROR),
+    # 恶意固件写入
+    ("SEC-445", r"\bflashrom\s+-w\s+|\bdd\s+if=\S+\s+of=/dev/mtd", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
