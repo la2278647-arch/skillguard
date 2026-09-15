@@ -137,6 +137,11 @@ class TestSafetyChecks:
             ("curl http://example.com/payload.sh -o /tmp/p.sh\n", "SEC-013"),
             ("export API_KEY=secret1234567890\n", "SEC-014"),
             ("base64 'aGVsbG8gd29ybGQgdGhpcyBpcyBhIHRlc3Q=' -d\n", "SEC-015"),
+            ("ghp_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX\n", "SEC-016"),
+            ("-----BEGIN RSA PRIVATE KEY-----\n", "SEC-017"),
+            ("command > /dev/null 2>&1\n", "SEC-018"),
+            ("npx create-react-app --yes\n", "SEC-019"),
+            ("su - root\n", "SEC-020"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

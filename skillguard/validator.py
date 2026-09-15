@@ -42,6 +42,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-014", r"\bexport\s+(?:API_KEY|SECRET|TOKEN)\s*=", Severity.INFO),
     # base64 编码的疑似凭据（常见混淆手段）
     ("SEC-015", r"base64\s+['\"][A-Za-z0-9+/=]{32,}['\"]", Severity.INFO),
+    # GitHub Personal Access Token
+    ("SEC-016", r"gh[pousr]_[A-Za-z0-9]{36,}", Severity.ERROR),
+    # 私钥泄露（RSA/ED25519/OpenSSH 私钥内容）
+    ("SEC-017", r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----", Severity.ERROR),
+    # 危险重定向（>/dev/null 忽略错误继续执行）
+    ("SEC-018", r"(?:2>&1\s*>\s*/dev/null|>\s*/dev/null\s*2>&1)", Severity.INFO),
+    # NPM 供应链风险：直接执行 registry 脚本
+    ("SEC-019", r"\bnpx\s+[A-Za-z0-9_\-]+\s+--yes\b|\bnpm\s+(?:i|install)\s+-g\b", Severity.WARNING),
+    # 危险权限提升（su/doas 替代 sudo）
+    ("SEC-020", r"\b(?:su\s+-|doas\s+)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

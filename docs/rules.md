@@ -39,6 +39,11 @@
 | `SEC-013` | 🟡 | `curl/wget -o *.sh/*.py/*.exe/*.bat` | 下载可执行文件 |
 | `SEC-014` | 🔵 | `export API_KEY/SECRET/TOKEN=` | 环境变量导出密钥 |
 | `SEC-015` | 🔵 | base64 编码 32+ 位字符串 | 疑似混淆凭据 |
+| `SEC-016` | 🔴 | `ghp_`/`gho_` 等 GitHub Token | GitHub 个人访问令牌泄露 |
+| `SEC-017` | 🔴 | `-----BEGIN ... PRIVATE KEY-----` | 私钥泄露（RSA/EC/OpenSSH） |
+| `SEC-018` | 🔵 | `>/dev/null 2>&1` | 忽略错误继续执行 |
+| `SEC-019` | 🟡 | `npx pkg --yes` / `npm i -g` | NPM 供应链执行风险 |
+| `SEC-020` | 🔵 | `su -` / `doas` | 其他权限提升方式 |
 
 ## 评分权重
 
