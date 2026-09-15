@@ -791,6 +791,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-389", r"\b(?:at|cron)\s+.*\s+2>/dev/null|\b(?:nohup|setsid)\s+.*\s+&\s*$", Severity.WARNING),
     # 恶意软件安装
     ("SEC-390", r"\b(?:apt|yum|dnf)\s+install\s+.*(?:netcat|ncat|socat|chisel)", Severity.WARNING),
+    # 恶意脚本批量执行
+    ("SEC-391", r"\bfor\s+\w+\s+in\s+.*;\s*do\s+.*\s*(?:curl|wget|nc)", Severity.WARNING),
+    # 凭据环境变量覆盖
+    ("SEC-392", r"\bexport\s+\w*(?:PASSWORD|PASSWD|APIKEY|APISECRET)\s*=", Severity.ERROR),
+    # 隐蔽 DNS 外传
+    ("SEC-393", r"\b(?:host|nslookup|dig)\s+[a-z0-9.-]{25,}\.", Severity.WARNING),
+    # 命令混淆执行
+    ("SEC-394", r"\b(?:eval|exec|source)\s+.*\$(?:[a-zA-Z0-9_]+|[^\s]+)", Severity.WARNING),
+    # 日志清理
+    ("SEC-395", r"\brm\s+-rf\s+(?:/var/log|\S*\.log)|\btruncate\s+-s\s+0\s+/var/log", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
