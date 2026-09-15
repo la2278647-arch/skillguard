@@ -482,6 +482,11 @@ class TestSafetyChecks:
             ("ip addr show\n", "SEC-358"),
             ("cat /etc/passwd\n", "SEC-359"),
             ("ps aux\n", "SEC-360"),
+            ("env\n", "SEC-361"),
+            ("grep -r password /etc\n", "SEC-362"),
+            ("cat ~/.bash_history\n", "SEC-363"),
+            ("ls ~/.ssh/\n", "SEC-364"),
+            ("find / -name *secret* 2>/dev/null\n", "SEC-365"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

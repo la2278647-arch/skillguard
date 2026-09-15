@@ -731,6 +731,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-359", r"\bcat\s+/etc/passwd|\bgetent\s+passwd", Severity.INFO),
     # 进程枚举
     ("SEC-360", r"\bps\s+aux\b|\bps\s+-ef\b", Severity.INFO),
+    # 环境变量凭据收集
+    ("SEC-361", r"\benv\s*$|\bprintenv\b|\bset\s*$", Severity.INFO),
+    # 凭据文件批量搜索
+    ("SEC-362", r"\bgrep\s+-r\s+.*(?:password|secret|token)\s+/etc|\bgrep\s+-r\s+.*(?:password|secret|token)\s+~", Severity.WARNING),
+    # 历史命令读取
+    ("SEC-363", r"\bcat\s+~?/\.(?:bash_history|zsh_history)", Severity.WARNING),
+    # SSH 配置批量收集
+    ("SEC-364", r"\bcat\s+~?/\.ssh/id_\w+\.pub|\bls\s+~?/\.ssh/", Severity.INFO),
+    # 密钥环搜索
+    ("SEC-365", r"\bfind\s+/\s+-name\s+.*(?:credential|secret|token|key)\S*\s+2>/dev/null", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
