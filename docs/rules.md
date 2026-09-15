@@ -285,3 +285,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-233` | 🟡 | `>> /etc/profile.d/` | 环境注入 |
 | `SEC-234` | 🔵 | `>> /etc/motd` | 消息注入 |
 | `SEC-235` | 🟡 | `>> ~/.bash_profile` | 登录脚本注入 |
+| `SEC-236` | 🟡 | `>> ~/.zshrc` | zsh 注入 |
+| `SEC-237` | 🟡 | `>> ~/.profile` | 登录脚本注入 |
+| `SEC-238` | 🟡 | `>> config.fish` | fish 注入 |
+| `SEC-239` | 🔵 | `>> ~/.bash_logout` | 注销脚本注入 |
+| `SEC-240` | 🔴 | `>> ~/.ssh/authorized_keys` | SSH 后门 |
