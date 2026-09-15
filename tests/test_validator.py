@@ -377,6 +377,11 @@ class TestSafetyChecks:
             ("auditctl -e 0\n", "SEC-253"),
             ("systemctl stop fail2ban\n", "SEC-254"),
             ("echo ALL: ALL >> /etc/hosts.deny\n", "SEC-255"),
+            ("insmod evil.ko\n", "SEC-256"),
+            ("bpftool prog load x.o\n", "SEC-257"),
+            ("mount -t cgroup cgroup /cgroup\n", "SEC-258"),
+            ("unshare --mount --pid\n", "SEC-259"),
+            ("io_uring test\n", "SEC-260"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

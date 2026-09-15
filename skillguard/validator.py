@@ -521,6 +521,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-254", r"\bsystemctl\s+stop\s+fail2ban", Severity.WARNING),
     # hosts.deny 修改
     ("SEC-255", r">>\s*/etc/hosts.deny", Severity.INFO),
+    # 内核模块加载
+    ("SEC-256", r"\binsmod\b|\bmodprobe\s+.*--force", Severity.WARNING),
+    # eBPF 程序加载
+    ("SEC-257", r"\bbpftool\s+prog\s+load", Severity.INFO),
+    # cgroup 挂载
+    ("SEC-258", r"\bmount\s+-t\s+cgroup", Severity.INFO),
+    # namespace 逃逸
+    ("SEC-259", r"\bunshare\s+--mount\b|\bunshare\s+--pid\b", Severity.WARNING),
+    # io_uring
+    ("SEC-260", r"\bio_uring\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
