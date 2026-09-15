@@ -397,6 +397,11 @@ class TestSafetyChecks:
             ("dd if=evil.bin of=/dev/sda\n", "SEC-273"),
             ("dmidecode -s system-serial-number\n", "SEC-274"),
             ("fwupd update --force\n", "SEC-275"),
+            ("rkhunter --disable\n", "SEC-276"),
+            ("chkrootkit --skip x\n", "SEC-277"),
+            ("lynis audit --skip-security\n", "SEC-278"),
+            ("tripwire --update\n", "SEC-279"),
+            ("aide --init\n", "SEC-280"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

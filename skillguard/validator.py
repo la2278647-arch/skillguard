@@ -561,6 +561,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-274", r"\bdmidecode\s+-s\s+system-serial-number", Severity.INFO),
     # 固件更新
     ("SEC-275", r"\bfwupd\s+update\s+.*--force", Severity.WARNING),
+    # rkhunter 禁用
+    ("SEC-276", r"\brkhunter\s+--disable\b", Severity.WARNING),
+    # chkrootkit 跳过
+    ("SEC-277", r"\bchkrootkit\s+--skip\b", Severity.INFO),
+    # lynis 跳过审计
+    ("SEC-278", r"\blynis\s+audit\s+--skip-.*security", Severity.INFO),
+    # tripwire 更新
+    ("SEC-279", r"\btripwire\s+--update\b", Severity.WARNING),
+    # aide 初始化
+    ("SEC-280", r"\baide\s+--init\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
