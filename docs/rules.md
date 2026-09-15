@@ -155,3 +155,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-103` | 🔵 | `ssh-keygen -f` | 生成密钥后门 |
 | `SEC-104` | 🔴 | `nc -e` | 远程 shell |
 | `SEC-105` | 🟡 | `/dev/tcp/` | TCP 后门 |
+| `SEC-106` | 🔵 | `cryptsetup luksFormat` | 加密覆盖 |
+| `SEC-107` | 🔵 | `zerotier-cli join` | 远程组网 |
+| `SEC-108` | 🔵 | `ip link set address` | MAC 伪造 |
+| `SEC-109` | 🔴 | `sshpass -p` | 明文密码 |
+| `SEC-110` | 🟡 | `expect send password` | 密码脚本 |
