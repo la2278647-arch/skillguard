@@ -42,6 +42,7 @@ def score_skill(skill: SkillInfo, checks: list[CheckResult], tests: list) -> tup
         "REF": "maintainability",
         "SEC": "safety",
         "DOC": "documentation",
+        "CUS": "maintainability",  # 自定义规则默认归入可维护性
     }
     for check in checks:
         prefix = check.rule_id.split("-")[0]

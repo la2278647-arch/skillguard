@@ -41,8 +41,21 @@
 | 结构完整性 structure | 25% | SRC |
 | 文档清晰度 documentation | 20% | DOC |
 | 安全性 safety | 30% | SEC |
-| 可维护性 maintainability | 15% | REF + 脚本加分 |
+| 可维护性 maintainability | 15% | REF + CUS（自定义） + 脚本加分 |
 | 实用性 usability | 10% | 缺失项扣分 + 测试加分 |
+
+## 自定义规则（插件）
+
+支持注册团队自定义检查规则，详见 [API 文档 - 插件系统](api.md#插件系统自定义规则)。
+
+```python
+from skillguard.rules import registry
+from skillguard.models import CheckResult, Severity
+
+registry.register("CUS", lambda d, s: [CheckResult("CUS-001", Severity.WARNING, "自定义")])
+```
+
+自定义前缀（如 `CUS`）的规则会并入**可维护性**维度评分，并与内置规则一同输出报告。
 
 ## 门禁判定
 

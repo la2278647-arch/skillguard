@@ -52,12 +52,16 @@ def _find_entry(skill_dir: Path) -> Path | None:
 
 
 def run_static_checks(skill_dir: Path, skill: SkillInfo, skip_safety: bool = False) -> list[CheckResult]:
-    """执行全部静态检查，返回检查结果列表（按严重级排序）。"""
+    """执行全部静态检查（内置 + 已注册的自定义规则），返回按严重级排序的结果。"""
     results: list[CheckResult] = []
     results.extend(_structure_checks(skill_dir, skill))
     results.extend(_reference_checks(skill_dir, skill))
     if not skip_safety:
         results.extend(_safety_checks(skill_dir))
+    # 自定义规则（插件系统）
+    from .rules import registry
+
+    results.extend(registry.run_custom(skill_dir, skill))
     results.sort(key=lambda r: (r.severity.value != Severity.ERROR.value, r.severity.value))
     return results
 

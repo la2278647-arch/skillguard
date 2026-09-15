@@ -193,6 +193,60 @@ c2 = c.with_overrides(run_tests=False)   # threshold 仍为 80
 
 ---
 
+## 插件系统（自定义规则）
+
+SkillGuard 支持注册自定义检查规则（插件），用于团队特定的质量规范。
+
+### 注册自定义规则
+
+```python
+from pathlib import Path
+from skillguard.rules import registry
+from skillguard.models import CheckResult, Severity, SkillInfo
+
+def no_todo_checker(skill_dir: Path, skill: SkillInfo) -> list[CheckResult]:
+    """示例：扫描 SKILL.md 中的 TODO 遗留。"""
+    entry = skill_dir / "SKILL.md"
+    if entry.is_file() and "TODO" in entry.read_text(encoding="utf-8", errors="replace"):
+        return [CheckResult("CUS-001", Severity.WARNING, "SKILL.md 包含 TODO", file="SKILL.md")]
+    return []
+
+registry.register("CUS", no_todo_checker)   # 前缀 CUS → 规则 ID 如 CUS-001
+```
+
+注册后，`run()` / `validate()` / CLI `check` 会自动执行自定义规则。
+
+### 规则前缀约定
+
+- 内置前缀：`SRC`（结构）、`REF`（引用）、`SEC`（安全）、`DOC`（文档）
+- 自定义前缀：任意 3+ 位字母数字（如 `CUS`、`STYLE`、`TEAM`），不可与内置冲突
+
+### 规则注册表 API
+
+| 方法 | 说明 |
+|------|------|
+| `registry.register(prefix, checker)` | 注册检查器（抛 ValueError：前缀非法或冲突） |
+| `registry.unregister(prefix)` | 注销（大小写不敏感） |
+| `registry.run_custom(skill_dir, skill)` | 运行全部自定义规则 |
+| `registry.has_custom()` | 是否已有自定义规则 |
+| `registry.custom_prefixes()` | 已注册前缀列表 |
+
+### RuleSet：组合多个检查器
+
+```python
+from skillguard.rules import RuleSet
+
+rs = RuleSet("team-rules")
+rs.add(checker_a).add(checker_b)
+results = rs.run_all(skill_dir, skill)
+```
+
+### 评分集成
+
+自定义规则（`CUS-` 前缀）默认归入**可维护性**维度参与评分。
+
+---
+
 ## 错误处理
 
 | 场景 | 行为 |
