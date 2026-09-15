@@ -44,6 +44,11 @@
 | `SEC-018` | 🔵 | `>/dev/null 2>&1` | 忽略错误继续执行 |
 | `SEC-019` | 🟡 | `npx pkg --yes` / `npm i -g` | NPM 供应链执行风险 |
 | `SEC-020` | 🔵 | `su -` / `doas` | 其他权限提升方式 |
+| `SEC-021` | 🔴 | `FLUSHALL` / `FLUSHDB` / `DROP DATABASE` | 数据库高危命令 |
+| `SEC-022` | 🟡 | `curl -k` / `--insecure` | 跳过证书校验 |
+| `SEC-023` | 🟡 | `importlib.import_module(url)` | 远程模块导入 |
+| `SEC-024` | 🟡 | `git reset --hard` / `checkout .` | 丢弃未提交修改 |
+| `SEC-025` | 🔵 | `curl -F file=@path` POST/PUT | 上传文件到远程服务 |
 
 ## 评分权重
 

@@ -52,6 +52,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-019", r"\bnpx\s+[A-Za-z0-9_\-]+\s+--yes\b|\bnpm\s+(?:i|install)\s+-g\b", Severity.WARNING),
     # 危险权限提升（su/doas 替代 sudo）
     ("SEC-020", r"\b(?:su\s+-|doas\s+)", Severity.INFO),
+    # Redis/DB 高危命令（flushdb/flushall/drop database）
+    ("SEC-021", r"\b(?:FLUSHALL|FLUSHDB|DROP\s+DATABASE)\b", Severity.ERROR),
+    # 危险 curl 选项（-k 跳过证书校验 / --insecure）
+    ("SEC-022", r"\bcurl\s+(?:-k\b|--insecure\b)|(?:-k\b|--insecure\b)\s+(?:https?://)", Severity.WARNING),
+    # 从远程 URL 导入模块/执行（Python imp/importlib + url）
+    ("SEC-023", r"\b(?:imp|importlib)\.[a-z_]+\(['\"]?https?://", Severity.WARNING),
+    # 危险 git 操作（reset --hard / checkout . 丢弃未提交修改）
+    ("SEC-024", r"\bgit\s+(?:reset\s+--hard|checkout\s+\.)\b", Severity.WARNING),
+    # 上传用户数据到公开服务（curl/wget POST/PUT 带文件）
+    ("SEC-025", r"\b(?:curl|wget)\s+.*?-(?:X\s*)?(?:POST|PUT)\s+.*?(?:@[\w./-]+|-F\s)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
