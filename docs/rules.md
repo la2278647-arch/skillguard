@@ -535,3 +535,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-483` | 🔴 | `mdadm --stop` | RAID 破坏 |
 | `SEC-484` | 🔵 | `strings /dev/` | 磁盘泄露 |
 | `SEC-485` | 🔵 | `restic restore` | 系统还原 |
+| `SEC-486` | 🟡 | `grub set root` | 引导修复绕过 |
+| `SEC-487` | 🟡 | `efibootmgr --uninstall` | 安全启动禁用 |
+| `SEC-488` | 🟡 | `grubby --add-kernel` | 内核命令行 |
+| `SEC-489` | 🔵 | `dracut -f` | 引导重建 |
+| `SEC-490` | 🟡 | `kexec -l` | 内核热加载 |
