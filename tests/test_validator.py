@@ -407,6 +407,11 @@ class TestSafetyChecks:
             ("cat ~/.ssh/id_rsa\n", "SEC-283"),
             ("export API_KEY=secret123\n", "SEC-284"),
             ("history | grep -i password\n", "SEC-285"),
+            ("cat .env\n", "SEC-286"),
+            ("cat ~/.docker/config.json\n", "SEC-287"),
+            ("cat ~/.aws/credentials\n", "SEC-288"),
+            ("cat ~/.config/gcloud/credentials.db\n", "SEC-289"),
+            ("cat ~/.npmrc\n", "SEC-290"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

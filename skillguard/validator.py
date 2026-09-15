@@ -581,6 +581,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-284", r"\bexport\s+\w*\b(?:API_KEY|TOKEN|SECRET|PASSWORD)=", Severity.ERROR),
     # 历史命令凭据搜索
     ("SEC-285", r"\bhistory\s+\|\s*grep\s+-i\s+.*(?:pass|token|secret)", Severity.INFO),
+    # .env 文件读取
+    ("SEC-286", r"\bcat\s+\.env\b|\bsource\s+\.env\b", Severity.ERROR),
+    # docker 凭据读取
+    ("SEC-287", r"\bcat\s+~?/\.docker/config.json", Severity.ERROR),
+    # aws 凭据读取
+    ("SEC-288", r"\bcat\s+~?/\.aws/credentials", Severity.ERROR),
+    # gcloud 凭据读取
+    ("SEC-289", r"\bcat\s+~?/\.config/gcloud/credentials.db", Severity.ERROR),
+    # npm 凭据读取
+    ("SEC-290", r"\bcat\s+~?/\.npmrc", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
