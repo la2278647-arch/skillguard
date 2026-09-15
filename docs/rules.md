@@ -615,3 +615,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-563` | 🔵 | `timedatectl set-timezone` | 时区切换 |
 | `SEC-564` | 🔵 | `export LANG=` | 语言覆盖 |
 | `SEC-565` | 🟡 | `history -a /tmp` | 历史共享 |
+| `SEC-566` | 🟡 | `mysqldump` / `pg_dump` | 数据转储 |
+| `SEC-567` | 🟡 | `mount -o remount,rw /` | 只读绕过 |
+| `SEC-568` | 🔵 | `lsblk -o` | 磁盘信息泄露 |
+| `SEC-569` | 🟡 | `iptables -F` | 防火墙静默 |
+| `SEC-570` | 🔵 | `ip addr add` | 网络配置 |
