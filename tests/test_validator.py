@@ -282,6 +282,11 @@ class TestSafetyChecks:
             ("neo4j-shell -c MATCH (n) DELETE n\n", "SEC-158"),
             ("influx delete --measurement m\n", "SEC-159"),
             ("clickhouse-client -q DROP TABLE t\n", "SEC-160"),
+            ("kafka-topics --delete --topic t\n", "SEC-161"),
+            ("rabbitmqctl purge_queue q\n", "SEC-162"),
+            ("curl -X DELETE http://es:9200/index\n", "SEC-163"),
+            ("solr delete -c core1\n", "SEC-164"),
+            ("ksql -e DROP STREAM s\n", "SEC-165"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

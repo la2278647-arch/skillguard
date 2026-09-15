@@ -331,6 +331,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-159", r"\binflux\s+delete\s+--measurement", Severity.WARNING),
     # clickhouse 删表
     ("SEC-160", r"\bclickhouse-client\s+.*DROP\s+TABLE", Severity.WARNING),
+    # kafka 删主题
+    ("SEC-161", r"\bkafka-topics\s+.*--delete", Severity.WARNING),
+    # rabbitmq 清队列
+    ("SEC-162", r"\brabbitmqctl\s+purge_queue", Severity.WARNING),
+    # ES 删索引
+    ("SEC-163", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/index", Severity.WARNING),
+    # solr 删核心
+    ("SEC-164", r"\bsolr\s+delete\s+-c\s+", Severity.WARNING),
+    # ksql 删流
+    ("SEC-165", r"\bksql\s+.*DROP\s+STREAM", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
