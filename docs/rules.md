@@ -100,3 +100,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-043` | 🟡 | `awk system()` | awk 内命令执行 |
 | `SEC-044` | 🟡 | `tee /etc/` | 写系统文件 |
 | `SEC-045` | 🔵 | `ln lib` | 覆盖系统库 |
+| `SEC-046` | 🔵 | `source ./x.sh` | 点执行外部脚本 |
+| `SEC-047` | 🟡 | `rsync --delete` | 覆盖删除 |
+| `SEC-048` | 🔵 | `mktemp /tmp/fixed` | 固定临时路径 |
+| `SEC-049` | 🔵 | `git config user/core/alias` | git 配置篡改 |
+| `SEC-050` | 🟡 | `>> /etc/hosts` | hosts 文件修改 |
