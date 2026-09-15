@@ -180,3 +180,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-128` | 🔵 | `gradle -e/--init-script` | 动态执行 |
 | `SEC-129` | 🔵 | `mvn -Dmaven.repo.remote` | 远程仓库 |
 | `SEC-130` | 🟡 | `npm exec` | 脚本执行 |
+| `SEC-131` | 🟡 | `docker run --pid/net=host` | 容器逃逸 |
+| `SEC-132` | 🟡 | `kubectl --as=system:admin` | 权限提升 |
+| `SEC-133` | 🔵 | `terraform destroy` | 基础设施破坏 |
+| `SEC-134` | 🔵 | `ansible --skip-tags=security` | 跳过安全 |
+| `SEC-135` | 🟡 | `systemctl stop firewalld` | 禁用防火墙 |
