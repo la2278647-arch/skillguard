@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pytest
@@ -120,6 +121,32 @@ class TestScanCommand:
         assert result.exit_code == 0
         assert "未在目录树中发现" in result.output
 
+    def test_scan_invalid_threshold(self) -> None:
+        """scan 阈值越界应报配置错误。"""
+        runner = CliRunner()
+        result = runner.invoke(scan, [".", "--threshold", "150"])
+        assert result.exit_code == 2
+        assert "配置错误" in result.output
+
+    def test_scan_truncation_message(self, tmp_path: Path) -> None:
+        """多于 top 数量的 Skill 应显示略过提示。"""
+        for name in ("a", "b", "c"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\n---\n# {name}\n", encoding="utf-8"
+            )
+        runner = CliRunner()
+        result = runner.invoke(scan, [str(tmp_path), "--top", "2"])
+        assert result.exit_code == 0
+        assert "略过" in result.output
+
+    def test_scan_nonexistent_dir(self) -> None:
+        """scan 不存在的目录应报错。"""
+        runner = CliRunner()
+        result = runner.invoke(scan, ["/definitely/not/exist"])
+        assert result.exit_code == 2
+
 
 class TestCompletionCommand:
     @pytest.mark.parametrize("shell", ["bash", "zsh", "fish", "powershell"])
@@ -142,3 +169,24 @@ class TestDoctorCommand:
         assert result.exit_code == 0
         assert "SkillGuard Doctor" in result.output
         assert "Python" in result.output
+
+    def test_doctor_warns_missing_tools(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """bash/git 缺失时 doctor 输出警告。"""
+        import builtins
+
+        real_import = builtins.__import__
+
+        def fake_import(name, *args, **kwargs):
+            if name == "shutil":
+                module = type(sys)("fake_shutil")
+                module.which = lambda _: None  # type: ignore[attr-defined]
+                return module
+            return real_import(name, *args, **kwargs)
+
+        monkeypatch.setattr(builtins, "__import__", fake_import)
+        runner = CliRunner()
+        result = runner.invoke(doctor)
+        assert result.exit_code == 0  # doctor 不因缺失退出非零
+        assert "bash 缺失" in result.output
+        assert "git 缺失" in result.output
+        assert "存在缺失组件" in result.output

@@ -151,3 +151,8 @@ class TestReportCLI:
         assert result.exit_code == 0
         assert out.exists()
         assert '"skill_count": 2' in out.read_text(encoding="utf-8")
+
+    def test_report_nonexistent_dir(self) -> None:
+        """report 不存在的目录应报错。"""
+        result = CliRunner().invoke(report_cmd, ["/definitely/not/exist"])
+        assert result.exit_code == 2

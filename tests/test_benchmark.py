@@ -145,3 +145,24 @@ class TestBenchmarkCLI:
         result = runner.invoke(bench, ["https://invalid.invalid/x.git"])
         assert result.exit_code == 2
         assert "克隆失败" in result.output or "❌" in result.output
+
+    def test_bench_repo_without_skills(self, tmp_path: Path) -> None:
+        """bench 无 Skill 的仓库应给出提示。"""
+        import subprocess as sp
+
+        from click.testing import CliRunner
+
+        repo = tmp_path / "noskills"
+        repo.mkdir()
+        (repo / "README.md").write_text("# no skills here\n", encoding="utf-8")
+        sp.run(["git", "init", "-q"], cwd=repo, check=True)
+        sp.run(["git", "add", "-A"], cwd=repo, check=True)
+        sp.run(
+            ["git", "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "i"],
+            cwd=repo,
+            check=True,
+        )
+        runner = CliRunner()
+        result = runner.invoke(bench, [str(repo), "--max-skills", "0"])
+        assert result.exit_code == 0
+        assert "未发现任何 Skill" in result.output

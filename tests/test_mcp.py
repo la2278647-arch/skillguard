@@ -142,6 +142,20 @@ class TestBenchRepoImpl:
 
 
 class TestCLI:
+    def test_run_stdio_direct(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """run_stdio 应创建服务器并调用 run()。"""
+        import skillguard.mcp_server as mcp_mod
+
+        called: list[str] = []
+
+        class FakeServer:
+            def run(self, *a, **kw):  # noqa: ANN002, ANN003
+                called.append("run")
+
+        monkeypatch.setattr(mcp_mod, "create_server", lambda: FakeServer())
+        mcp_mod.run_stdio()
+        assert called == ["run"]
+
     def test_mcp_in_help(self) -> None:
         """CLI 帮助应包含 mcp 命令。"""
         from click.testing import CliRunner

@@ -346,6 +346,26 @@ class TestFullScanDirectory:
         results = guard.scan_directory(tmp_path)
         assert len(results) == 2
 
+    def test_scan_skips_seen_dirs_once(self, tmp_path: Path) -> None:
+        """同一 Skill 目录经符号链接被多父目录引用时只评估一次。"""
+        import os
+
+        real = tmp_path / "real"
+        real.mkdir()
+        (real / "SKILL.md").write_text(
+            "---\nname: real\ndescription: d\nversion: 1.0.0\n---\n# real\n", encoding="utf-8"
+        )
+        for parent in ("a", "b"):
+            (tmp_path / parent).mkdir()
+            try:
+                os.symlink(real, tmp_path / parent / "link")
+            except OSError:
+                pytest.skip("symlink 不可用")
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        results = guard.scan_directory(tmp_path, max_depth=2)
+        names = [r["name"] for r in results]
+        assert names.count("real") == 1
+
     def test_full_scan_skips_broken_dirs(self, tmp_path: Path) -> None:
         """含无效 Skill 的目录应被跳过而非中断。"""
         good = tmp_path / "skills" / "good"
