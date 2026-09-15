@@ -161,6 +161,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-074", r"\bmount\s+.*\s/(?:etc|usr|bin|lib)\b", Severity.WARNING),
     # ulimit 移除限制
     ("SEC-075", r"\bulimit\s+-c\s+0\b", Severity.INFO),
+    # gdb 附加进程
+    ("SEC-076", r"\bgdb\s+-p\s+\d+", Severity.WARNING),
+    # strace 跟踪
+    ("SEC-077", r"\bstrace\s+-p\s+\d+", Severity.INFO),
+    # lsof 敏感文件
+    ("SEC-078", r"\blsof\s+/etc/shadow|\blsof\s+/dev/mem", Severity.INFO),
+    # hexdump 内存
+    ("SEC-079", r"\bhexdump\s+/dev/(?:mem|kmem)", Severity.WARNING),
+    # iptables 清空
+    ("SEC-080", r"\biptables\s+-F\b|\biptables\s+--flush\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

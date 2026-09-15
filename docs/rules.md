@@ -125,3 +125,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-068` | 🟡 | `curl ... | bash` | 管道执行 |
 | `SEC-069` | 🟡 | `git clone && cd && run` | 克隆后立即执行 |
 | `SEC-070` | 🔵 | `make install` | 源码编译安装 |
+| `SEC-071` | 🔵 | `telnet` | 明文连接 |
+| `SEC-072` | 🟡 | `curl -o ~/.bashrc` | RC 文件远程覆盖 |
+| `SEC-073` | 🔵 | `dbus-send` | 系统调用 |
+| `SEC-074` | 🟡 | `mount ... /etc` | 覆盖系统目录 |
+| `SEC-075` | 🔵 | `ulimit -c 0` | 移除限制 |

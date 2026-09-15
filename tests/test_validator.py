@@ -197,6 +197,11 @@ class TestSafetyChecks:
             ("dbus-send --system\n", "SEC-073"),
             ("mount /dev/sdb1 /etc\n", "SEC-074"),
             ("ulimit -c 0\n", "SEC-075"),
+            ("gdb -p 1234\n", "SEC-076"),
+            ("strace -p 5678\n", "SEC-077"),
+            ("lsof /etc/shadow\n", "SEC-078"),
+            ("hexdump /dev/mem\n", "SEC-079"),
+            ("iptables -F\n", "SEC-080"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
