@@ -220,3 +220,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-168` | 🟡 | `curl -X DELETE /loki` | 删除日志 |
 | `SEC-169` | 🔵 | `curl -X DELETE /jaeger` | 删除追踪 |
 | `SEC-170` | 🟡 | `curl -X DELETE /kibana` | 删除索引模式 |
+| `SEC-171` | 🟡 | `consul services deregister` | 服务注销 |
+| `SEC-172` | 🟡 | `etcdctl member remove` | 成员移除 |
+| `SEC-173` | 🔵 | `nomad job stop` | 作业停止 |
+| `SEC-174` | 🟡 | `vault delete secret` | 密钥删除 |
+| `SEC-175` | 🟡 | `kcadm delete realms` | 领域删除 |
