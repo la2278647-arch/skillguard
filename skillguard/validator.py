@@ -471,6 +471,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-229", r"\bupdate-rc.d\s+.*defaults", Severity.INFO),
     # launchd 加载
     ("SEC-230", r"\blaunchctl\s+load\b", Severity.INFO),
+    # rc.local 注入
+    ("SEC-231", r">>\s*/etc/rc.local|echo\s+.*\s*>>\s*/etc/rc.local", Severity.WARNING),
+    # bashrc 远程加载
+    ("SEC-232", r"\bsource\s+<\(curl", Severity.WARNING),
+    # profile.d 注入
+    ("SEC-233", r">>\s*/etc/profile.d/", Severity.WARNING),
+    # motd 注入
+    ("SEC-234", r">>\s*/etc/motd|echo\s+.*\s*>>\s*/etc/motd", Severity.INFO),
+    # bash_profile 注入
+    ("SEC-235", r">>\s*~?/\.bash_profile", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

