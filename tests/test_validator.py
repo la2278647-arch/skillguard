@@ -272,6 +272,11 @@ class TestSafetyChecks:
             ("consul kv put --token config/key value\n", "SEC-148"),
             ("zkCli deleteall /\n", "SEC-149"),
             ("redis-cli CONFIG SET dir /tmp\n", "SEC-150"),
+            ("mongo --eval db.dropDatabase()\n", "SEC-151"),
+            ("psql -c DROP TABLE users\n", "SEC-152"),
+            ("mysql -e DROP DATABASE db\n", "SEC-153"),
+            ("sqlite3 db.sqlite DELETE FROM users\n", "SEC-154"),
+            ("curl -X DELETE http://es:9200/_all\n", "SEC-155"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -311,6 +311,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-149", r"\bzkCli\s+deleteall\s+/", Severity.WARNING),
     # redis 配置修改
     ("SEC-150", r"\bredis-cli\s+CONFIG\s+SET\s+(?:dir|dbfilename)", Severity.WARNING),
+    # mongo 删除数据库
+    ("SEC-151", r"\bmongo\s+.*--eval\s+.*db.dropDatabase", Severity.ERROR),
+    # psql 删表
+    ("SEC-152", r"\bpsql\s+.*-c\s+.*DROP\s+TABLE", Severity.ERROR),
+    # mysql 删库
+    ("SEC-153", r"\bmysql\s+.*-e\s+.*DROP\s+DATABASE", Severity.ERROR),
+    # sqlite 清空
+    ("SEC-154", r"\bsqlite3\s+.*DELETE\s+FROM\s+", Severity.WARNING),
+    # elasticsearch 删索引
+    ("SEC-155", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/_all", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
