@@ -305,3 +305,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-253` | 🟡 | `auditctl -e 0` | 审计禁用 |
 | `SEC-254` | 🟡 | `systemctl stop fail2ban` | 防护停止 |
 | `SEC-255` | 🔵 | `>> /etc/hosts.deny` | 访问控制修改 |
+| `SEC-256` | 🟡 | `insmod` / `modprobe --force` | 内核模块加载 |
+| `SEC-257` | 🔵 | `bpftool prog load` | eBPF 加载 |
+| `SEC-258` | 🔵 | `mount -t cgroup` | cgroup 挂载 |
+| `SEC-259` | 🟡 | `unshare --mount/--pid` | namespace 逃逸 |
+| `SEC-260` | 🔵 | `io_uring` | 异步 IO |
