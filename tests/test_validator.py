@@ -357,6 +357,11 @@ class TestSafetyChecks:
             ("echo export evil=1 >> /etc/profile.d/x.sh\n", "SEC-233"),
             ("echo hacked >> /etc/motd\n", "SEC-234"),
             ("echo alias evil >> ~/.bash_profile\n", "SEC-235"),
+            ("echo evil >> ~/.zshrc\n", "SEC-236"),
+            ("echo evil >> ~/.profile\n", "SEC-237"),
+            ("echo evil >> ~/.config/fish/config.fish\n", "SEC-238"),
+            ("echo evil >> ~/.bash_logout\n", "SEC-239"),
+            ("echo ssh-rsa AAA >> ~/.ssh/authorized_keys\n", "SEC-240"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

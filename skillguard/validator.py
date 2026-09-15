@@ -481,6 +481,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-234", r">>\s*/etc/motd|echo\s+.*\s*>>\s*/etc/motd", Severity.INFO),
     # bash_profile 注入
     ("SEC-235", r">>\s*~?/\.bash_profile", Severity.WARNING),
+    # zshrc 注入
+    ("SEC-236", r">>\s*~?/\.zshrc", Severity.WARNING),
+    # profile 注入
+    ("SEC-237", r">>\s*~?/\.profile", Severity.WARNING),
+    # fish config 注入
+    ("SEC-238", r">>\s*~?/\.config/fish/config.fish", Severity.WARNING),
+    # bash_logout 注入
+    ("SEC-239", r">>\s*~?/\.bash_logout", Severity.INFO),
+    # SSH authorized_keys 追加
+    ("SEC-240", r">>\s*~?/\.ssh/authorized_keys", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
