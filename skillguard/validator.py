@@ -761,6 +761,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-374", r"\bss\s+-tlnp\b|\bnetstat\s+-tlnp\b", Severity.INFO),
     # 防火墙规则收集
     ("SEC-375", r"\biptables\s+-L\b|\bip6tables\s+-L\b", Severity.INFO),
+    # DNS 配置侦察
+    ("SEC-376", r"\bcat\s+/etc/resolv.conf|\bdig\s+.*\s+any\b", Severity.INFO),
+    # ARP 缓存收集
+    ("SEC-377", r"\barp\s+-a\b|\bip\s+neigh\b", Severity.INFO),
+    # 主机名收集
+    ("SEC-378", r"\bhostname\s*$|\bcat\s+/etc/hostname", Severity.INFO),
+    # 日志敏感信息
+    ("SEC-379", r"\bgrep\s+-i\s+.*(?:password|token)\s+/var/log", Severity.WARNING),
+    # 临时文件侦察
+    ("SEC-380", r"\bls\s+-la\s+/tmp|\bls\s+-la\s+/var/tmp", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

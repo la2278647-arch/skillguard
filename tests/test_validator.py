@@ -497,6 +497,11 @@ class TestSafetyChecks:
             ("route -n\n", "SEC-373"),
             ("ss -tlnp\n", "SEC-374"),
             ("iptables -L\n", "SEC-375"),
+            ("cat /etc/resolv.conf\n", "SEC-376"),
+            ("arp -a\n", "SEC-377"),
+            ("hostname\n", "SEC-378"),
+            ("grep -i password /var/log\n", "SEC-379"),
+            ("ls -la /tmp\n", "SEC-380"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
