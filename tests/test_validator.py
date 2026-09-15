@@ -342,6 +342,11 @@ class TestSafetyChecks:
             ("flutter pub publish\n", "SEC-218"),
             ("swift package publish\n", "SEC-219"),
             ("anaconda upload pkg.tar.bz2\n", "SEC-220"),
+            ("pip install --force-reinstall pkg\n", "SEC-221"),
+            ("npm install --force\n", "SEC-222"),
+            ("gem install --force pkg\n", "SEC-223"),
+            ("cargo install --force pkg\n", "SEC-224"),
+            ("go get -u github.com/x@latest\n", "SEC-225"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

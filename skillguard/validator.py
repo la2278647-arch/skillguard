@@ -451,6 +451,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-219", r"\bswift\s+package\s+publish\b", Severity.INFO),
     # conda 上传
     ("SEC-220", r"\banaconda\s+upload\b", Severity.INFO),
+    # pip 强制重装
+    ("SEC-221", r"\bpip\s+install\s+--force-reinstall", Severity.WARNING),
+    # npm 强制安装
+    ("SEC-222", r"\bnpm\s+install\s+--force\b", Severity.WARNING),
+    # gem 强制安装
+    ("SEC-223", r"\bgem\s+install\s+--force\b", Severity.INFO),
+    # cargo 强制安装
+    ("SEC-224", r"\bcargo\s+install\s+--force\b", Severity.INFO),
+    # go get 最新版
+    ("SEC-225", r"\bgo\s+get\s+-u\s+.*@latest", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
