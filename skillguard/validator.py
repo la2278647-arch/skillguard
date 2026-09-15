@@ -491,6 +491,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-239", r">>\s*~?/\.bash_logout", Severity.INFO),
     # SSH authorized_keys 追加
     ("SEC-240", r">>\s*~?/\.ssh/authorized_keys", Severity.ERROR),
+    # ssh config 修改
+    ("SEC-241", r">>\s*~?/\.ssh/config", Severity.WARNING),
+    # sudoers 修改
+    ("SEC-242", r">>\s*/etc/sudoers|echo\s+.*\s*>>\s*/etc/sudoers.d/", Severity.ERROR),
+    # passwd/shadow 修改
+    ("SEC-243", r"\bchpasswd\b|>>\s*/etc/passwd", Severity.ERROR),
+    # crontab 系统级
+    ("SEC-244", r">>\s*/etc/crontab", Severity.WARNING),
+    # systemd 服务创建
+    ("SEC-245", r">>\s*/etc/systemd/system/.*\.service", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

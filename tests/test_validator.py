@@ -362,6 +362,11 @@ class TestSafetyChecks:
             ("echo evil >> ~/.config/fish/config.fish\n", "SEC-238"),
             ("echo evil >> ~/.bash_logout\n", "SEC-239"),
             ("echo ssh-rsa AAA >> ~/.ssh/authorized_keys\n", "SEC-240"),
+            ("echo Host evil >> ~/.ssh/config\n", "SEC-241"),
+            ("echo user ALL=(ALL) NOPASSWD:ALL >> /etc/sudoers\n", "SEC-242"),
+            ("echo user:pass | chpasswd\n", "SEC-243"),
+            ("echo * * * * * cmd >> /etc/crontab\n", "SEC-244"),
+            ("echo [Unit] >> /etc/systemd/system/evil.service\n", "SEC-245"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
