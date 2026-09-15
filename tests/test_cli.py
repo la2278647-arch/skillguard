@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from click.testing import CliRunner
 
-from skillguard.cli import check, init, main, scan
+from skillguard.cli import check, completion, doctor, init, main, scan
 
 
 class TestMain:
@@ -118,3 +119,26 @@ class TestScanCommand:
         result = runner.invoke(scan, [str(tmp_path)])
         assert result.exit_code == 0
         assert "未在目录树中发现" in result.output
+
+
+class TestCompletionCommand:
+    @pytest.mark.parametrize("shell", ["bash", "zsh", "fish", "powershell"])
+    def test_generates_completion(self, shell: str) -> None:
+        runner = CliRunner()
+        result = runner.invoke(completion, [shell])
+        assert result.exit_code == 0
+        assert len(result.output) > 50  # 生成了补全脚本
+
+    def test_invalid_shell(self) -> None:
+        runner = CliRunner()
+        result = runner.invoke(completion, ["tcsh"])
+        assert result.exit_code == 2  # 非法 shell
+
+
+class TestDoctorCommand:
+    def test_doctor_runs(self) -> None:
+        runner = CliRunner()
+        result = runner.invoke(doctor)
+        assert result.exit_code == 0
+        assert "SkillGuard Doctor" in result.output
+        assert "Python" in result.output

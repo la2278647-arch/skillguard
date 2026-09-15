@@ -228,6 +228,54 @@ tags:
     click.echo(f"\n下一步: skillguard check {target}")
 
 
+@main.command("completion")
+@click.argument("shell", type=click.Choice(["bash", "zsh", "fish", "powershell"]))
+def completion(shell: str) -> None:
+    """输出指定 shell 的自动补全脚本。"""
+    import click.shell_completion
+
+    if shell == "powershell":
+        click.echo(
+            "Register-ArgumentCompleter -Native -CommandName skillguard -ScriptBlock {\n"
+            "    param($wordToComplete, $commandAst, $cursorPosition)\n"
+            "    $commands = @('check','init','scan','bench','completion','doctor','--help','--version')\n"
+            "    $commands | Where-Object { $_ -like \"$wordToComplete*\" } | ForEach-Object {\n"
+            "        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)\n"
+            "    }\n"
+            "}\n"
+        )
+        return
+
+    comp_cls = {"bash": click.shell_completion.BashComplete, "zsh": click.shell_completion.ZshComplete, "fish": click.shell_completion.FishComplete}[shell]
+    comp = comp_cls(main, {}, "skillguard", "_SKILLGUARD_COMPLETE")
+    click.echo(comp.source())
+
+
+@main.command("doctor")
+def doctor() -> None:
+    """检查 SkillGuard 运行环境是否健康。"""
+    import platform
+    import shutil
+
+    click.echo(f"🏥 SkillGuard Doctor — v{__version__}")
+    click.echo(f"  系统: {platform.system()} {platform.release()}")
+    click.echo(f"  Python: {platform.python_version()}")
+    click.echo(f"  Shell: {shutil.which('bash') or 'bash 未找到（测试脚本需 bash）'}")
+    click.echo(f"  Git: {shutil.which('git') or 'git 未找到（bench 命令需要）'}")
+
+    ok = True
+    if not shutil.which("bash"):
+        click.echo("  ⚠️  bash 缺失：沙箱测试中的 .sh 脚本将无法执行", err=True)
+        ok = False
+    if not shutil.which("git"):
+        click.echo("  ⚠️  git 缺失：bench 生态扫描将无法使用", err=True)
+        ok = False
+    if ok:
+        click.echo("  ✅ 环境健康")
+    else:
+        click.echo("  ⚠️ 存在缺失组件（不影响 check/init 基础功能）")
+
+
 def _print_summary(report) -> None:
     """打印人类可读的评估摘要。"""
     s = report.skill
