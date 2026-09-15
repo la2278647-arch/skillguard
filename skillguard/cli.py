@@ -202,6 +202,43 @@ def badge(skill_dir: str, output: str, markdown: bool, repo_url: str) -> None:
         click.echo(badge_markdown(output, repo_url))
 
 
+@main.command("schema")
+@click.argument("report_json", type=click.Path(exists=True), required=False)
+def schema_cmd(report_json: str | None) -> None:
+    """输出 QualityReport 的 JSON Schema，或校验报告文件。"""
+    import json as json_lib
+
+    from .schema import QUALITY_REPORT_SCHEMA
+
+    if report_json is None:
+        click.echo(json_lib.dumps(QUALITY_REPORT_SCHEMA, ensure_ascii=False, indent=2))
+        return
+
+    # 校验模式：读取报告文件并检查是否符合 schema
+    try:
+        data = json_lib.loads(Path(report_json).read_text(encoding="utf-8"))
+    except (OSError, json_lib.JSONDecodeError) as exc:
+        click.echo(f"❌ 无法读取 JSON: {exc}", err=True)
+        sys.exit(2)
+
+    try:
+        import jsonschema
+
+        jsonschema.validate(data, QUALITY_REPORT_SCHEMA)
+        click.echo(f"✅ {report_json} 符合 SkillGuard JSON Schema")
+    except ImportError:
+        # 无 jsonschema 库时做基础校验
+        required = {"skill", "tool", "tool_version", "timestamp", "summary", "checks", "tests"}
+        missing = required - set(data.keys())
+        if missing:
+            click.echo(f"❌ 缺少字段: {', '.join(sorted(missing))}", err=True)
+            sys.exit(1)
+        click.echo(f"✅ {report_json} 通过基础字段校验（安装 jsonschema 可做完整校验）")
+    except Exception as exc:  # noqa: BLE001 - jsonschema 抛出 ValidationError
+        click.echo(f"❌ 校验失败: {exc}", err=True)
+        sys.exit(1)
+
+
 @main.command("init")
 @click.argument("skill_dir", type=click.Path(), default=".")
 @click.option("--name", default=None, help="Skill 名称（默认取目录名）")

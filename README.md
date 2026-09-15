@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo.svg" alt="SkillGuard Logo" width="96"/>
+
 # 🛡️ SkillGuard
 
 **Agent Skills 质量保障与测试框架** — 为 Claude Code / Codex / Cursor 等 AI 编码代理的 Skills 提供静态校验、沙箱测试、质量评分与 CI 集成。
