@@ -651,6 +651,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-319", r"\bperl\s+-e\s+.*socket.*connect", Severity.ERROR),
     # pty 反弹 shell
     ("SEC-320", r"python.*-c\s+import\s+pty.*spawn", Severity.ERROR),
+    # SSH X11 转发
+    ("SEC-321", r"\bssh\s+-X\b|\bssh\s+-Y\b", Severity.INFO),
+    # SSH 代理转发
+    ("SEC-322", r"\bssh\s+-A\b", Severity.INFO),
+    # SSH 本地端口转发
+    ("SEC-323", r"\bssh\s+-L\s+\d+:", Severity.WARNING),
+    # SSH 动态转发（SOCKS）
+    ("SEC-324", r"\bssh\s+-D\s+\d+", Severity.WARNING),
+    # X2Go 连接
+    ("SEC-325", r"\bx2goclient\s+--session", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

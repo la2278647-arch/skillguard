@@ -442,6 +442,11 @@ class TestSafetyChecks:
             ("python -c import socket,os; s.connect((host,port))\n", "SEC-318"),
             ("perl -e use Socket; connect(...)\n", "SEC-319"),
             ("python -c import pty; pty.spawn(/bin/bash)\n", "SEC-320"),
+            ("ssh -X user@host\n", "SEC-321"),
+            ("ssh -A user@host\n", "SEC-322"),
+            ("ssh -L 8080:localhost:80 user@host\n", "SEC-323"),
+            ("ssh -D 1080 user@host\n", "SEC-324"),
+            ("x2goclient --session session1\n", "SEC-325"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
