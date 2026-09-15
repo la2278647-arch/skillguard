@@ -315,3 +315,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-263` | 🟡 | `capsh --caps=cap_sys_admin` | 能力提升 |
 | `SEC-264` | 🔵 | `ptrace attach` | 进程注入 |
 | `SEC-265` | 🔵 | `mprotect PROT_EXEC` | 内存执行 |
+| `SEC-266` | 🟡 | `cat /proc/*/mem` | 进程内存读取 |
+| `SEC-267` | 🟡 | `dd if=/dev/sda` | 磁盘直接访问 |
+| `SEC-268` | 🔵 | `mount -t debugfs` | 调试文件系统 |
+| `SEC-269` | 🟡 | `> /sys/` | 内核参数写入 |
+| `SEC-270` | 🟡 | `update-grub` / `grub-install --force` | 引导配置修改 |
