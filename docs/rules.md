@@ -610,3 +610,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-558` | 🟡 | `trust anchor` | 证书安装 |
 | `SEC-559` | 🟡 | `usermod -L` | 账户锁定 |
 | `SEC-560` | 🔵 | `ibus restart` | IME 切换 |
+| `SEC-561` | 🟡 | `rm /var/log/auth.log` | 审计日志清理 |
+| `SEC-562` | 🔵 | `touch -d` | 时间戳篡改 |
+| `SEC-563` | 🔵 | `timedatectl set-timezone` | 时区切换 |
+| `SEC-564` | 🔵 | `export LANG=` | 语言覆盖 |
+| `SEC-565` | 🟡 | `history -a /tmp` | 历史共享 |
