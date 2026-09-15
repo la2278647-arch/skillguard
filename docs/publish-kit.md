@@ -1,90 +1,100 @@
-# SkillGuard 一键发布包（Publish Kit）
+# V2EX 帖子（中文）
 
-> 平台发布凭据的替代方案：所有文案与物料已备齐，登录各平台后**复制粘贴**即可发布。
-> 本文件汇总全部发布内容与步骤，配合 `docs/promotion/` 下的详细文案使用。
-
----
-
-## 📦 物料清单
-
-| 物料 | 路径 | 用途 |
-|------|------|------|
-| 掘金深度文 | `docs/promotion/juejin_article.md` | 掘金首发 |
-| V2EX 帖子 | `docs/promotion/v2ex_zhihu.md`（前半） | V2EX 分享创造 |
-| 知乎回答 | `docs/promotion/v2ex_zhihu.md`（后半） | 知乎问答 |
-| Twitter thread | `docs/promotion/english_posts.md`（前半） | X/推特 |
-| HN Show HN | `docs/promotion/english_posts.md`（Show HN 段） | Hacker News |
-| Reddit 帖子 | `docs/promotion/english_posts.md`（Reddit 段） | r/ClaudeAI 等 |
-| 生态质量报告 | `docs/promotion/ECOSYSTEM_REPORT.md` | 数据支撑材料 |
-| 可视化报告截图 | `docs/promotion/report-screenshot.png` | 配图 |
-| 项目 Logo | `docs/logo.svg` | 配图 |
-
-## 🔗 核心链接（所有帖子通用 CTA）
-
-- Repository: https://github.com/la2278647-arch/skillguard
-- Docs: https://la2278647-arch.github.io/skillguard/
-- Ecosystem report: https://la2278647-arch.github.io/skillguard/ecosystem-report/
-- Install: `pip install https://github.com/la2278647-arch/skillguard/releases/download/v0.5.0/skillguard-0.5.0-py3-none-any.whl`
-
-## 📝 发布步骤
-
-### 1. 掘金（juejin.cn）
-1. 登录掘金 → 创作者中心 → 写文章
-2. 粘贴 `juejin_article.md` 全文（Markdown 直接支持）
-3. 标题建议：《我用 218 个测试，给 AI Agent 的 Skills 建了一条质检流水线》
-4. 配图：报告截图 + Logo
-5. 标签：AI / 开源 / 开发者工具 / Claude
-6. 发布后参与「玩 Android 每月征文」等活动提高曝光
-
-### 2. V2EX（v2ex.com）
-1. 登录 → 「分享创造」节点 → 发帖
-2. 粘贴 v2ex_zhihu.md 前半部分
-3. 标题：SkillGuard —— 给 AI Agent 的 Skills 做质检的开源工具
-4. 保持简洁，突出"能用"而非"好看"
-
-### 3. 知乎（zhihu.com）
-1. 搜索问题《如何评估和选择高质量的 AI Agent Skills？》
-2. 或创建问题后自答
-3. 粘贴 v2ex_zhihu.md 后半部分
-4. 回答末尾附 GitHub 链接与生态报告
-
-### 4. Twitter/X
-1. 将 english_posts.md 的 thread 部分逐条发布（10 条）
-2. 配图：报告截图 + Logo
-3. 话题：#AgentSkills #ClaudeCode #OpenSource #DevTools
-4. @相关大 V 可增加曝光（superpowers、anthropics 等生态账号）
-
-### 5. Hacker News（news.ycombinator.com）
-1. 登录 → Submit
-2. 标题：Show HN: SkillGuard – Quality gates for AI agent skills
-3. URL: https://github.com/la2278647-arch/skillguard
-4. 正文用 english_posts.md 的 Show HN 段（HN 评论需用代码块引用）
-
-### 6. Reddit（r/ClaudeAI、r/OpenAI、r/artificial）
-1. 登录 Reddit → r/ClaudeAI → Submit
-2. 标题：We have 200k+ star skill repos but zero tooling to verify a skill is safe — I built SkillGuard
-3. 正文用 english_posts.md 的 Reddit 段
-4. 回复评论建立讨论（这是 Reddit 的核心互动方式）
-
-## ⏰ 最佳发布时间
-
-| 平台 | 最佳时间（UTC+8） |
-|------|------------------|
-| 掘金 | 工作日 9:00-11:00 / 20:00-22:00 |
-| V2EX | 工作日 10:00-12:00 |
-| 知乎 | 晚间 20:00-23:00 |
-| Twitter | 22:00-24:00（对应美东上午） |
-| HN | 22:00-24:00（对应美东上午 9-11 点，HN 流量高峰） |
-| Reddit | 21:00-23:00 |
-
-## 📊 发布后数据记录
-
-发布后回到 `docs/promotion/FEEDBACK_TRACKING.md` 填写实际数据：
-- 各平台浏览/赞/评论
-- GitHub Star 增量
-- Release 下载量
+> 节点：分享创造 · 标题：SkillGuard —— 给 AI Agent 的 Skills 做质检的开源工具
 
 ---
 
-_生成时间: 2026-09 · 配套工具: [SkillGuard](https://github.com/la2278647-arch/skillguard)_
+装了一堆 Claude Code / Codex 的 Skills，坏的比好的多？
+
+这个开源工具能对 Skill 目录做这些事：
+
+1. **静态校验**：SKILL.md 结构、引用完整性、33 条安全规则扫描（rm -rf、硬编码 API Key、GitHub Token、私钥泄露、curl|sh、eval 等）
+2. **沙箱测试**：把整个 Skill 目录复制到隔离临时目录跑 tests/ 脚本，脚本删库也碰不到你的源码，强制超时
+3. **质量评分**：结构/文档/安全/可维护/实用五维打分（0-100）+ CI 门禁
+4. **聚合报告**：一个命令给出全仓库 Skills 的质量总览
+5. **MCP 服务器**：Claude / Cursor 配置后，AI 代理可以直接在对话里调用质检（`check_skill` / `scan_skills` / `bench_repo`）
+
+自卖自夸一下工程质量：274 个测试、95%+ 覆盖率、ruff clean、Python 3.10-3.13、MIT。
+另外我们用这个工具扫了 GitHub 上 6 个最热门的 Skills 仓库（共 113 个 Skill），发现一个有意思的结果：**Anthropic 官方仓库只有 75% 通过率，而社区头部仓库（mattpocock 等）100% 通过** —— 官方≠最优。完整报告见文档站。
+
+```bash
+pip install skillguard
+skillguard init my-skill --framework claude-code
+skillguard check my-skill --ci --threshold 70
+skillguard bench https://github.com/anthropics/skills.git   # 生态扫描
+```
+
+GitHub：https://github.com/la2278647-arch/skillguard
+文档：https://la2278647-arch.github.io/skillguard/
+教程（从零建 Skill）：https://la2278647-arch.github.io/skillguard/tutorial/
+生态报告：https://la2278647-arch.github.io/skillguard/ecosystem-report/
+
+---
+
+# 知乎回答（中文）
+
+> 问题：《如何评估和选择高质量的 AI Agent Skills？》
+
+## 先说结论
+
+目前这个领域**几乎没有标准化工具**。微软有个 waza（1310 star）还在早期，中文社区空白。我最近开源了 SkillGuard 来填补这个空缺，下面结合它讲讲我理解的评估维度。
+
+## 一、为什么需要评估 Skills？
+
+AI 编码代理（Claude Code、Codex、Cursor）正在大规模使用 Skills，生态增长惊人（superpowers 28.6 万 star、Anthropic 官方仓库 17.6 万 star）。但 Skills 本质上是「提示词 + 脚本」的混合体，质量参差：
+
+- 有的 Skill 的脚本里藏着 `rm -rf`（我实际见过）
+- 有的引用了不存在的文件，跑一次报一次错
+- 有的元数据缺失，AI 根本不知道该什么时候用它
+
+## 二、我建议从 5 个维度评估
+
+### 1. 结构完整性（权重 25%）
+- SKILL.md 是否存在、name/description/version 元数据是否完整
+- scripts/ 目录是否规范
+
+### 2. 文档清晰度（权重 20%）
+- 描述是否能让 AI 准确理解用途
+- 是否包含使用方式和注意事项
+
+### 3. 安全性（权重 30%）
+这是最重要的维度：
+- 破坏性命令：rm -rf、mkfs、dd 到 /dev/
+- 远程执行：curl | sh、eval
+- 密钥泄露：硬编码 API Key / Token
+- 权限滥用：chmod 777、sudo、git push --force
+
+### 4. 可维护性（权重 15%）
+- 引用的文件是否都存在（防断链）
+- 体积是否可控（超过 40KB 的 SKILL.md 建议拆分）
+
+### 5. 实用性（权重 10%）
+- 有没有测试脚本（tests/ 目录）
+- tags、版本号是否规范
+
+## 三、自动化评估工具
+
+手评估太累，我写了个开源 CLI 把这些维度自动化了：
+
+```bash
+pip install skillguard
+skillguard check path/to/skill --format html -o report.html
+```
+
+它会输出每个维度的分数、全部检查明细，还能跑沙箱测试 + CI 门禁。
+
+## 四、选择 Skills 的实操建议
+
+1. **优先看有没有测试**：一个带 tests/ 的 Skill 通常比没有的靠谱一个量级
+2. **扫一遍安全**：哪怕手动 grep 一下 `rm -rf`、`api_key` 都行
+3. **看元数据完整度**：name/description/version 都齐的，作者大概率认真
+4. **社区背书**：star 数和 issue 响应速度是重要信号
+
+## 五、关于 SkillGuard
+
+- GitHub：https://github.com/la2278647-arch/skillguard
+- 文档：https://la2278647-arch.github.io/skillguard/
+- 项目自身：126 tests、98%+ coverage、ruff clean、MIT
+
+欢迎批评指正，也欢迎贡献规则和插件。
 
