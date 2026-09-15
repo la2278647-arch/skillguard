@@ -12,6 +12,31 @@
 - 规则插件系统（自定义检查器注册，已支持基础版本）
 - Skill 生态质量基准（bench 命令已支持，规划定期报告）
 
+## [0.6.0] - 2026-09-15
+
+### 新增
+- MCP 服务器：AI 代理（Claude/Cursor/Codex）可直接调用 SkillGuard
+  - `check_skill`：检查 Skill 目录质量
+  - `scan_skills`：批量扫描目录树
+  - `bench_repo`：生态基准扫描
+- `mcp` 命令（stdio 传输），兼容 mcp 1.x (FastMCP) 与 2.x (MCPServer)
+- `[mcp]` 可选依赖：`pip install "skillguard[mcp]"`
+- 各平台 MCP 客户端配置文档（Claude/Cursor/VS Code）
+
+## [0.5.0] - 2026-09-15
+
+### 新增
+- pre-commit 质量门禁（原生 git hook + pre-commit 框架双路径）
+- CHANGELOG.md（Keep-a-Changelog 格式）
+- SECURITY.md（安全披露政策）
+- GitHub Release 直接安装分发（PyPI 替代通道）
+- 多平台 CI 配置（CircleCI/Azure Pipelines）
+- 一键发布包（docs/publish-kit.md）
+- 英文 README（README.en.md）
+
+### 修复
+- 版本一致性：pyproject/version.py 统一
+
 ## [0.4.0] - 2026-09-15
 
 ### 新增
