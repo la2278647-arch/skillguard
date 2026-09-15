@@ -372,6 +372,11 @@ class TestSafetyChecks:
             ("aa-status --complaining\n", "SEC-248"),
             ("setenforce 0\n", "SEC-249"),
             ("ufw disable\n", "SEC-250"),
+            ("PermitRootLogin yes\n", "SEC-251"),
+            ("echo auth required pam_evil.so >> /etc/pam.d/sshd\n", "SEC-252"),
+            ("auditctl -e 0\n", "SEC-253"),
+            ("systemctl stop fail2ban\n", "SEC-254"),
+            ("echo ALL: ALL >> /etc/hosts.deny\n", "SEC-255"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

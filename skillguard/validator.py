@@ -511,6 +511,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-249", r"\bsetenforce\s+0\b|\bsetenforce\s+permissive", Severity.WARNING),
     # ufw 禁用
     ("SEC-250", r"\bufw\s+disable\b", Severity.WARNING),
+    # sshd 弱配置
+    ("SEC-251", r"PermitRootLogin\s+yes|PasswordAuthentication\s+no", Severity.WARNING),
+    # pam 配置绕过
+    ("SEC-252", r">>\s*/etc/pam.d/", Severity.WARNING),
+    # auditd 禁用
+    ("SEC-253", r"\bauditctl\s+-e\s+0\b", Severity.WARNING),
+    # fail2ban 停止
+    ("SEC-254", r"\bsystemctl\s+stop\s+fail2ban", Severity.WARNING),
+    # hosts.deny 修改
+    ("SEC-255", r">>\s*/etc/hosts.deny", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
