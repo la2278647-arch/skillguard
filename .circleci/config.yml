@@ -1,0 +1,30 @@
+# CircleCI 配置 — SkillGuard CI 流水线
+# 激活方式：在 CircleCI 添加该项目即可（无需 GitHub workflow scope）
+version: 2.1
+
+orbs:
+  python: circleci/python@2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          args: "-e .[dev]"
+      - run:
+          name: Lint (ruff)
+          command: ruff check skillguard tests
+      - run:
+          name: Test + coverage
+          command: pytest --cov=skillguard --cov-fail-under=95
+      - run:
+          name: Build check
+          command: python -m build
+
+workflows:
+  ci:
+    jobs:
+      - test
