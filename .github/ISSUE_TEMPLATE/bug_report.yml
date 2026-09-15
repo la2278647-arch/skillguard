@@ -1,0 +1,47 @@
+name: 🐛 Bug Report
+description: 报告一个 Bug
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你花时间报告这个问题！请尽量提供完整信息。
+  - type: input
+    id: version
+    attributes:
+      label: SkillGuard 版本
+      description: 运行 `skillguard --version` 查看
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+      description: 如何复现这个问题？
+      placeholder: |
+        1. 执行 `skillguard check my-skill`
+        2. 看到...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      description: 你期望发生什么？
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 实际发生了什么？请附上完整错误输出。
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: 环境
+      description: 操作系统与 Python 版本
+      placeholder: "Windows 11 / Python 3.12"

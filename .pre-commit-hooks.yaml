@@ -1,0 +1,21 @@
+# SkillGuard pre-commit hooks 配置
+# 供 pre-commit 框架（https://pre-commit.com）使用。
+#
+# 在目标仓库的 .pre-commit-config.yaml 中添加：
+#
+#   repos:
+#     - repo: https://github.com/la2278647-arch/skillguard
+#       rev: v0.4.0
+#       hooks:
+#         - id: skillguard
+#           args: [--threshold, "60"]
+#
+- id: skillguard
+  name: SkillGuard quality gate
+  description: 检查变更的 Agent Skills 是否通过质量门禁
+  entry: skillguard check
+  language: python
+  types: [file]
+  files: ^(?:.+/)?SKILL\.md$
+  pass_filenames: false
+  minimum_pre_commit_version: 2.0.0

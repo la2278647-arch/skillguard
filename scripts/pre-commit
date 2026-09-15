@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# SkillGuard pre-commit hook
+# 提交前自动检查被修改的 Skill 目录，未通过质量门禁则阻止提交。
+#
+# 安装:
+#   ln -s ../../scripts/pre-commit .git/hooks/pre-commit
+#   # 或复制: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+set -euo pipefail
+
+# 收集本次提交涉及的 Skill 目录（含 SKILL.md 的目录）
+changed_skills=()
+while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    # 找出包含该文件的 Skill 目录（向上查找 SKILL.md）
+    dir=$(dirname "$file")
+    while [ "$dir" != "." ] && [ "$dir" != "/" ]; do
+        if [ -f "$dir/SKILL.md" ] || [ -f "$dir/skill.md" ]; then
+            changed_skills+=("$dir")
+            break
+        fi
+        dir=$(dirname "$dir")
+    done
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+if [ ${#changed_skills[@]} -eq 0 ]; then
+    exit 0  # 无 Skill 变更
+fi
+
+echo "🔍 SkillGuard pre-commit: 检查 ${#changed_skills[@]} 个变更的 Skill..."
+
+failed=0
+for skill in "${changed_skills[@]}"; do
+    echo "  → $skill"
+    if ! skillguard check "$skill" --ci --threshold "${SKILLGUARD_THRESHOLD:-60}"; then
+        failed=1
+    fi
+done
+
+if [ "$failed" -ne 0 ]; then
+    echo ""
+    echo "❌ SkillGuard 质量门禁未通过。修复问题后重新提交。"
+    echo "   提示: 运行 'skillguard check <dir> --format html -o report.html' 查看详情"
+    exit 1
+fi
+
+echo "✅ 全部 Skill 通过质量门禁"

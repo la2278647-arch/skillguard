@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="SkillGuard Logo">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="checkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 盾牌主体 -->
+  <path d="M64 8 L112 26 V66 C112 96 92 114 64 122 C36 114 16 96 16 66 V26 Z"
+        fill="url(#shieldGrad)" stroke="#1e40af" stroke-width="3"/>
+
+  <!-- 盾牌高光 -->
+  <path d="M64 14 L106 29.5 V66 C106 92 88 108 64 116 C40 108 22 92 22 66 V29.5 Z"
+        fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+
+  <!-- 对勾 -->
+  <path d="M40 64 L56 80 L90 44"
+        fill="none" stroke="url(#checkGrad)" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 底部徽章文字区（省略文字，仅图形，保持简洁） -->
+</svg>
