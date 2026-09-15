@@ -540,3 +540,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-488` | 🟡 | `grubby --add-kernel` | 内核命令行 |
 | `SEC-489` | 🔵 | `dracut -f` | 引导重建 |
 | `SEC-490` | 🟡 | `kexec -l` | 内核热加载 |
+| `SEC-491` | 🟡 | `systemd-run --on-calendar` | 恶意计时器 |
+| `SEC-492` | 🟡 | `auditctl -e 0` | 审计禁用 |
+| `SEC-493` | 🟡 | `chcon -t httpd` | SELinux 上下文 |
+| `SEC-494` | 🟡 | `ip netns delete` | 命名空间操作 |
+| `SEC-495` | 🔵 | `renice -n -20` | CPU 优先级绕过 |
