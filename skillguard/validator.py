@@ -831,6 +831,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-409", r"\bhelm\s+install\s+\S+\s+\S+\s+--repo\s+\S*(?:evil|malware)\S*", Severity.WARNING),
     # K8s 权限提升
     ("SEC-410", r"\bkubectl\s+.*--as=cluster-admin|\bkubectl\s+.*--as=system:masters", Severity.WARNING),
+    # 恶意云函数部署
+    ("SEC-411", r"\b(?:serverless|sls)\s+deploy\s+[^\n]*(?:backdoor|evil)", Severity.WARNING),
+    # 云凭据注入环境
+    ("SEC-412", r"\bexport\s+(?:AWS_SECRET|AZURE_CLIENT_SECRET|GOOGLE_APPLICATION_CREDENTIALS)\s*=", Severity.ERROR),
+    # 云资源删除
+    ("SEC-413", r"\baws\s+(?:s3|ec2|rds)\s+delete\s+", Severity.WARNING),
+    # 云安全组放开
+    ("SEC-414", r"\baws\s+ec2\s+authorize-security-group-ingress\s+[^\n]*0\.0\.0\.0/0", Severity.WARNING),
+    # 云存储公开
+    ("SEC-415", r"\baws\s+s3api\s+put-bucket-acl\s+[^\n]*public-read", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
