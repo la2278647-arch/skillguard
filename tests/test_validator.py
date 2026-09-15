@@ -622,6 +622,11 @@ class TestSafetyChecks:
             ("avahi-browse -a\n", "SEC-498"),
             ("cat </dev/ttyS0\n", "SEC-499"),
             ("lsusb | grep usb\n", "SEC-500"),
+            ("echo aGk= | base64 -d | bash\n", "SEC-501"),
+            ("socat UDP:10.0.0.1:4444\n", "SEC-502"),
+            ("echo alias evil=rm >> ~/.bashrc\n", "SEC-503"),
+            ("chroot /mnt /bin/sh\n", "SEC-504"),
+            ("env -i /bin/sh\n", "SEC-505"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

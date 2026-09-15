@@ -1011,6 +1011,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-499", r"\b(?:stty|screen)\s+.*\s/dev/tty\S*|\bcat\s+</dev/ttyS0", Severity.WARNING),
     # 恶意 USB 设备操作
     ("SEC-500", r"\b(?:dmesg|lsusb)\s+[^\n]*\|\s*grep\s+.*usb|\busbhid\s+-d\s+", Severity.INFO),
+    # 恶意数据混淆执行
+    ("SEC-501", r"\b(?:echo|printf)\s+.*\|\s*(?:base64|xxd)\s+-d\s*\|\s*(?:bash|sh|python)", Severity.WARNING),
+    # 危险自定义协议隧道
+    ("SEC-502", r"\b(?:socat|nc)\s+[^\n]*(?:UDP|TCP):\S+:\d+", Severity.WARNING),
+    # 恶意别名持久化
+    ("SEC-503", r"\becho\s+.*alias\s+.*>>\s*~?/\.(?:bashrc|zshrc)", Severity.WARNING),
+    # 危险 chroot 逃逸
+    ("SEC-504", r"\bchroot\s+\S+\s+/bin/sh|\bchroot\s+\S+\s+/bin/bash", Severity.ERROR),
+    # 恶意环境清理
+    ("SEC-505", r"\benv\s+-i\s+|\bexec\s+env\s+-i\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
