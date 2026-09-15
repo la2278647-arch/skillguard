@@ -585,3 +585,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-533` | 🟡 | `openocd -c` | 硬件调试器 |
 | `SEC-534` | 🔵 | `mount -o rw` | 读写挂载 |
 | `SEC-535` | 🔵 | `perf -e --timeout` | 性能工具滥用 |
+| `SEC-536` | 🟡 | `zip -e/-p` | 加密压缩投毒 |
+| `SEC-537` | 🔵 | `ip netns exec` | 网络命名空间 |
+| `SEC-538` | 🟡 | `find / -name *password*` | 文件扫描 |
+| `SEC-539` | 🟡 | `insmod --force` | 签名绕过 |
+| `SEC-540` | 🔵 | `timeshift create` | 快照操作 |
