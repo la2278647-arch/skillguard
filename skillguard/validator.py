@@ -1111,6 +1111,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-549", r"\b(?:adb|fastboot)\s+[^\n]*(?:shell|install|push)\s+", Severity.INFO),
     # 恶意固件提取
     ("SEC-550", r"\b(?:binwalk|firmware-mod-kit)\s+[^\n]*(?:-e|--extract)\s+", Severity.WARNING),
+    # 恶意沙箱逃逸
+    ("SEC-551", r"\b(?:firejail|bwrap|snap)\s+[^\n]*(?:--noprofile|--share-net|--private-tmp)", Severity.WARNING),
+    # 危险容器镜像替换
+    ("SEC-552", r"\b(?:docker|podman)\s+commit\s+\S+\s+\S+|\b(?:docker|podman)\s+tag\s+\S+\s+\S+:latest", Severity.WARNING),
+    # 恶意依赖伪装
+    ("SEC-553", r"\b(?:pip|npm)\s+install\s+[^\n]*(?:typosquat|malicious|hijack)", Severity.WARNING),
+    # 危险配置注入回滚
+    ("SEC-554", r"\bgit\s+checkout\s+[^\n]*(?:--|--force)[^\n]*(?:config|settings)", Severity.INFO),
+    # 恶意定时脚本注入
+    ("SEC-555", r"\b(?:at|cron)\s+now\s+\+|\bcrontab\s+-e\s*$", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

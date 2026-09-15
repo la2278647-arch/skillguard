@@ -672,6 +672,11 @@ class TestSafetyChecks:
             ("aircrack-ng -b target\n", "SEC-548"),
             ("adb shell id\n", "SEC-549"),
             ("binwalk -e firmware.bin\n", "SEC-550"),
+            ("firejail --noprofile app\n", "SEC-551"),
+            ("docker commit c1 image:latest\n", "SEC-552"),
+            ("pip install malicious-pkg\n", "SEC-553"),
+            ("git checkout -- config.yml\n", "SEC-554"),
+            ("at now + 5 minutes cmd\n", "SEC-555"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
