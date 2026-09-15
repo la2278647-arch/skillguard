@@ -257,6 +257,11 @@ class TestSafetyChecks:
             ("terraform destroy\n", "SEC-133"),
             ("ansible-playbook --skip-tags=security play.yml\n", "SEC-134"),
             ("systemctl stop firewalld\n", "SEC-135"),
+            ("docker load -i image.tar\n", "SEC-136"),
+            ("docker exec -it container chroot /\n", "SEC-137"),
+            ("ctr images import image.tar\n", "SEC-138"),
+            ("kubeadm reset\n", "SEC-139"),
+            ("helm template --set x=$( $val) chart\n", "SEC-140"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -281,6 +281,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-134", r"\bansible-playbook\s+.*--skip-tags=.*security", Severity.INFO),
     # systemctl 禁用防火墙
     ("SEC-135", r"\bsystemctl\s+(?:disable|stop)\s+(?:firewalld|ufw)", Severity.WARNING),
+    # docker load 镜像
+    ("SEC-136", r"\bdocker\s+load\s+-i\s+", Severity.INFO),
+    # docker exec 逃逸
+    ("SEC-137", r"\bdocker\s+exec\s+-it\s+.*\s+chroot", Severity.WARNING),
+    # containerd 导入
+    ("SEC-138", r"\bctr\s+images\s+import", Severity.INFO),
+    # kubeadm reset
+    ("SEC-139", r"\bkubeadm\s+reset\b", Severity.INFO),
+    # helm 模板注入
+    ("SEC-140", r"\bhelm\s+template\s+.*--set\s+.*\$\(", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
