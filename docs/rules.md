@@ -590,3 +590,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-538` | 🟡 | `find / -name *password*` | 文件扫描 |
 | `SEC-539` | 🟡 | `insmod --force` | 签名绕过 |
 | `SEC-540` | 🔵 | `timeshift create` | 快照操作 |
+| `SEC-541` | 🔵 | `logger -p` | 日志投毒 |
+| `SEC-542` | 🟡 | `>> /etc/pam.d/` | PAM 篡改 |
+| `SEC-543` | 🔴 | `setfacl rwx /etc/passwd` | 系统文件 ACL |
+| `SEC-544` | 🟡 | `umask 000` | 权限放宽 |
+| `SEC-545` | 🔵 | `xmodmap -e` | 键盘映射 |
