@@ -671,6 +671,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-329", r"\bmitmproxy\b|\bbettercap\b.*--mitm", Severity.WARNING),
     # tshark 抓包
     ("SEC-330", r"\btshark\s+-i\s+.*-w\s+", Severity.INFO),
+    # 漏洞利用框架
+    ("SEC-331", r"\bsearchsploit\s+", Severity.WARNING),
+    # 提权工具
+    ("SEC-332", r"\b(?:linpeas|linenum|linux-exploit-suggester)\b", Severity.WARNING),
+    # 密码破解
+    ("SEC-333", r"\bjohn\s+.*--wordlist|\bhashcat\s+-m\s+", Severity.WARNING),
+    # 流量嗅探
+    ("SEC-334", r"\bdnschef\b|\bresponder\b.*\s-I\s+", Severity.WARNING),
+    # 远程控制工具
+    ("SEC-335", r"\b(?:chisel|ligolo-ng|nps)\b.*\sclient", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

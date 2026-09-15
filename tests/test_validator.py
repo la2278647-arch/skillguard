@@ -452,6 +452,11 @@ class TestSafetyChecks:
             ("arpspoof -i eth0 -t 192.168.1.1\n", "SEC-328"),
             ("mitmproxy --mode transparent\n", "SEC-329"),
             ("tshark -i eth0 -w capture.pcap\n", "SEC-330"),
+            ("searchsploit apache\n", "SEC-331"),
+            ("linpeas -a\n", "SEC-332"),
+            ("john --wordlist=rockyou.txt hash\n", "SEC-333"),
+            ("responder -I eth0\n", "SEC-334"),
+            ("chisel client 10.0.0.1:8080\n", "SEC-335"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
