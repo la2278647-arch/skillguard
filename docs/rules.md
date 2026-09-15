@@ -430,3 +430,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-378` | 🔵 | `hostname` | 主机信息 |
 | `SEC-379` | 🟡 | `grep password /var/log` | 日志敏感信息 |
 | `SEC-380` | 🔵 | `ls -la /tmp` | 临时文件侦察 |
+| `SEC-381` | 🟡 | `cat ~/.bash_history | base64` | 历史转储 |
+| `SEC-382` | 🔴 | `cat /etc/shadow | nc` | 凭据外传 |
+| `SEC-383` | 🟡 | `mysqldump -p` | 数据库转储 |
+| `SEC-384` | 🟡 | `tar .git | nc` | 源码外传 |
+| `SEC-385` | 🟡 | `tar /etc | nc` | 配置外传 |
