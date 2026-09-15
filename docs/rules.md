@@ -350,3 +350,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-298` | 🔴 | `amqp://user:pass@` | 消息队列凭据 |
 | `SEC-299` | 🟡 | `eyJ...` JWT | 硬编码令牌 |
 | `SEC-300` | 🔴 | `ghp_...` | GitHub Token |
+| `SEC-301` | 🔴 | `AKIA...` | AWS Access Key |
+| `SEC-302` | 🔴 | `sk-...` | OpenAI 密钥 |
+| `SEC-303` | 🔴 | `BEGIN PRIVATE KEY` | 私钥块 |
+| `SEC-304` | 🔴 | `sk_live_...` | Stripe 密钥 |
+| `SEC-305` | 🔴 | `api_key=...` | 通用密钥模式 |
