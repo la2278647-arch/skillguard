@@ -101,6 +101,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-044", r"\btee\s+/etc/|\btee\s+/usr/", Severity.WARNING),
     # ln 覆盖系统库
     ("SEC-045", r"\bln\s+.*lib(?:64)?\b", Severity.INFO),
+    # source/点执行外部脚本
+    ("SEC-046", r"\bsource\s+[^ ]+\.sh|\b\.\s+[^ ]+\.sh", Severity.INFO),
+    # rsync 覆盖删除
+    ("SEC-047", r"\brsync\s+.*--delete\b", Severity.WARNING),
+    # mktemp 固定路径（不可预测）
+    ("SEC-048", r"\bmktemp\s+/tmp/[A-Za-z0-9_]+\b", Severity.INFO),
+    # git config 篡改
+    ("SEC-049", r"\bgit\s+config\s+(?:user|core|alias)\.", Severity.INFO),
+    # hosts 文件修改
+    ("SEC-050", r">>\s*/etc/hosts|echo\s+.*\s*>>\s*/etc/hosts", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

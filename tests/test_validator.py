@@ -167,6 +167,11 @@ class TestSafetyChecks:
             ("awk system(\"cmd\") file\n", "SEC-043"),
             ("echo x | tee /etc/hosts\n", "SEC-044"),
             ("ln -s /tmp/lib.so /usr/lib/libc.so\n", "SEC-045"),
+            ("source ./evil.sh\n", "SEC-046"),
+            ("rsync -av --delete src/ dst/\n", "SEC-047"),
+            ("mktemp /tmp/fixedname\n", "SEC-048"),
+            ("git config user.name attacker\n", "SEC-049"),
+            ("echo 1.2.3.4 evil.com >> /etc/hosts\n", "SEC-050"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
