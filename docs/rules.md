@@ -335,3 +335,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-283` | 🔴 | `cat ~/.ssh/id_rsa` | SSH 私钥读取 |
 | `SEC-284` | 🔴 | `export API_KEY/TOKEN=` | 凭据导出 |
 | `SEC-285` | 🔵 | `history | grep pass/token` | 历史凭据搜索 |
+| `SEC-286` | 🔴 | `cat .env` | 环境变量读取 |
+| `SEC-287` | 🔴 | `cat ~/.docker/config.json` | Docker 凭据 |
+| `SEC-288` | 🔴 | `cat ~/.aws/credentials` | AWS 凭据 |
+| `SEC-289` | 🔴 | `cat gcloud credentials.db` | GCP 凭据 |
+| `SEC-290` | 🔴 | `cat ~/.npmrc` | npm 凭据 |
