@@ -287,6 +287,11 @@ class TestSafetyChecks:
             ("curl -X DELETE http://es:9200/index\n", "SEC-163"),
             ("solr delete -c core1\n", "SEC-164"),
             ("ksql -e DROP STREAM s\n", "SEC-165"),
+            ("grafana-cli datasource update ds\n", "SEC-166"),
+            ("promtool check config --enable-feature x\n", "SEC-167"),
+            ("curl -X DELETE http://loki:3100/loki/api\n", "SEC-168"),
+            ("curl -X DELETE http://jaeger:16686/jaeger/api\n", "SEC-169"),
+            ("curl -X DELETE http://kibana:5601/kibana/api\n", "SEC-170"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

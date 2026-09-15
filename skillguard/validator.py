@@ -341,6 +341,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-164", r"\bsolr\s+delete\s+-c\s+", Severity.WARNING),
     # ksql 删流
     ("SEC-165", r"\bksql\s+.*DROP\s+STREAM", Severity.WARNING),
+    # grafana 数据源篡改
+    ("SEC-166", r"\bgrafana-cli\s+.*datasource", Severity.INFO),
+    # prometheus 配置注入
+    ("SEC-167", r"\bpromtool\s+check\s+config.*--enable-feature", Severity.INFO),
+    # loki 删日志
+    ("SEC-168", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/loki", Severity.WARNING),
+    # jaeger 删追踪
+    ("SEC-169", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/jaeger", Severity.INFO),
+    # kibana 删索引模式
+    ("SEC-170", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/kibana", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
