@@ -667,6 +667,11 @@ class TestSafetyChecks:
             ("setfacl -m u:x:rwx /etc/passwd\n", "SEC-543"),
             ("umask 000\n", "SEC-544"),
             ("xmodmap -e keycode\n", "SEC-545"),
+            ("bluetoothctl connect 00:11:22:33:44:55\n", "SEC-546"),
+            ("nfc-poll\n", "SEC-547"),
+            ("aircrack-ng -b target\n", "SEC-548"),
+            ("adb shell id\n", "SEC-549"),
+            ("binwalk -e firmware.bin\n", "SEC-550"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

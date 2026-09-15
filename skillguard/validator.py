@@ -1101,6 +1101,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-544", r"\bumask\s+0?0?0\b|\bumask\s+000\b", Severity.WARNING),
     # 恶意键盘映射
     ("SEC-545", r"\b(?:xmodmap|setxkbmap)\s+[^\n]*(?:-e|--map)", Severity.INFO),
+    # 恶意蓝牙操作
+    ("SEC-546", r"\b(?:bluetoothctl|hciconfig)\s+[^\n]*(?:connect|scan|remove)\s+", Severity.INFO),
+    # 危险 NFC 操作
+    ("SEC-547", r"\b(?:nfc-poll|nfc-mfclassic)\s+", Severity.INFO),
+    # 恶意无线渗透
+    ("SEC-548", r"\b(?:aircrack-ng|reaver|wifite)\s+", Severity.WARNING),
+    # 危险移动设备交互
+    ("SEC-549", r"\b(?:adb|fastboot)\s+[^\n]*(?:shell|install|push)\s+", Severity.INFO),
+    # 恶意固件提取
+    ("SEC-550", r"\b(?:binwalk|firmware-mod-kit)\s+[^\n]*(?:-e|--extract)\s+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
