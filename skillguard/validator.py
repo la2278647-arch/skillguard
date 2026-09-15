@@ -181,6 +181,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-084", r"\bhydra\s+-l\b|\bhydra\s+-L\b", Severity.WARNING),
     # wifi 破解
     ("SEC-085", r"\bwifite\b|\baircrack-ng\b", Severity.WARNING),
+    # encfs 加密绕过
+    ("SEC-086", r"\bencfs\s+.*--reverse", Severity.INFO),
+    # socat 反连
+    ("SEC-087", r"\bsocat\s+TCP:.*:\d+", Severity.INFO),
+    # tcpdump 抓包
+    ("SEC-088", r"\btcpdump\s+-i\s+.*-w\s+", Severity.INFO),
+    # scapy 构造包
+    ("SEC-089", r"\bscapy\b.*\bsend\(|\bscapy\b.*\bsr1\(", Severity.WARNING),
+    # hostname 冒充
+    ("SEC-090", r"\bhostnamectl\s+set-hostname\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
