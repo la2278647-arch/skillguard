@@ -149,7 +149,7 @@ class TestCLI:
         called: list[str] = []
 
         class FakeServer:
-            def run(self, *a, **kw):  # noqa: ANN002, ANN003
+            def run(self, *a, **kw):
                 called.append("run")
 
         monkeypatch.setattr(mcp_mod, "create_server", lambda: FakeServer())
