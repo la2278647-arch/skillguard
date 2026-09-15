@@ -500,3 +500,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-448` | 🔵 | `rsync app.db` | 数据库复制 |
 | `SEC-449` | 🟡 | `openssl -d secret.pem` | 凭据解密 |
 | `SEC-450` | 🟡 | `curl -O && scp` | 传输链 |
+| `SEC-451` | 🟡 | `crontab curl` | 定时回连 |
+| `SEC-452` | 🟡 | `for ... do ssh` | SSH 批量 |
+| `SEC-453` | 🟡 | `export BASH_ENV=` | 环境注入 |
+| `SEC-454` | 🟡 | `curl -o x.tar.gz` | 隐蔽下载器 |
+| `SEC-455` | 🔵 | `tar -d /` | 恶意自解压 |
