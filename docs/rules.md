@@ -225,3 +225,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-173` | 🔵 | `nomad job stop` | 作业停止 |
 | `SEC-174` | 🟡 | `vault delete secret` | 密钥删除 |
 | `SEC-175` | 🟡 | `kcadm delete realms` | 领域删除 |
+| `SEC-176` | 🟡 | `oc delete cluster` | OpenShift 集群删除 |
+| `SEC-177` | 🟡 | `rancher clusters rm` | Rancher 集群删除 |
+| `SEC-178` | 🟡 | `aws eks delete-cluster` | EKS 集群删除 |
+| `SEC-179` | 🟡 | `gcloud clusters delete` | GKE 集群删除 |
+| `SEC-180` | 🟡 | `az aks delete` | AKS 集群删除 |
