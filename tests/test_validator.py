@@ -392,6 +392,11 @@ class TestSafetyChecks:
             ("mount -t debugfs none /sys/kernel/debug\n", "SEC-268"),
             ("echo 1 > /sys/kernel/security\n", "SEC-269"),
             ("grub-install --force\n", "SEC-270"),
+            ("bootctl set-efivar x\n", "SEC-271"),
+            ("echo 1 >> /sys/firmware/efi/efivars/x\n", "SEC-272"),
+            ("dd if=evil.bin of=/dev/sda\n", "SEC-273"),
+            ("dmidecode -s system-serial-number\n", "SEC-274"),
+            ("fwupd update --force\n", "SEC-275"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

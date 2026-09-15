@@ -551,6 +551,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-269", r">\s*/sys/|echo\s+.*\s*\|\s*tee\s+/sys/", Severity.WARNING),
     # grub 修改
     ("SEC-270", r"\bupdate-grub\b|\bgrub-install\s+.*--force", Severity.WARNING),
+    # bootctl EFI 变量
+    ("SEC-271", r"\bbootctl\s+set-efivar\b", Severity.INFO),
+    # UEFI 变量写入
+    ("SEC-272", r">>\s*/sys/firmware/efi/efivars", Severity.WARNING),
+    # MBR 写入
+    ("SEC-273", r"\bdd\s+if=\S+\s+of=/dev/sd[a-z]\b", Severity.WARNING),
+    # dmidecode 篡改
+    ("SEC-274", r"\bdmidecode\s+-s\s+system-serial-number", Severity.INFO),
+    # 固件更新
+    ("SEC-275", r"\bfwupd\s+update\s+.*--force", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
