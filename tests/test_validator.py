@@ -337,6 +337,11 @@ class TestSafetyChecks:
             ("gradle publish\n", "SEC-213"),
             ("mvn deploy -DskipTests\n", "SEC-214"),
             ("dotnet nuget push pkg.nupkg --skip-duplicate\n", "SEC-215"),
+            ("gem push pkg.gem\n", "SEC-216"),
+            ("pod trunk push Podspec\n", "SEC-217"),
+            ("flutter pub publish\n", "SEC-218"),
+            ("swift package publish\n", "SEC-219"),
+            ("anaconda upload pkg.tar.bz2\n", "SEC-220"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

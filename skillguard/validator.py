@@ -441,6 +441,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-214", r"\bmvn\s+deploy\s+-DskipTests", Severity.WARNING),
     # nuget 跳过重复推送
     ("SEC-215", r"\bdotnet\s+nuget\s+push\s+.*--skip-duplicate", Severity.INFO),
+    # gem 发布
+    ("SEC-216", r"\bgem\s+push\b", Severity.INFO),
+    # pod trunk 发布
+    ("SEC-217", r"\bpod\s+trunk\s+push\b", Severity.WARNING),
+    # flutter 发布
+    ("SEC-218", r"\bflutter\s+pub\s+publish\b", Severity.WARNING),
+    # swift 发布
+    ("SEC-219", r"\bswift\s+package\s+publish\b", Severity.INFO),
+    # conda 上传
+    ("SEC-220", r"\banaconda\s+upload\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
