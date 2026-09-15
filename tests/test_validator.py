@@ -277,6 +277,11 @@ class TestSafetyChecks:
             ("mysql -e DROP DATABASE db\n", "SEC-153"),
             ("sqlite3 db.sqlite DELETE FROM users\n", "SEC-154"),
             ("curl -X DELETE http://es:9200/_all\n", "SEC-155"),
+            ("hive -e DROP TABLE users\n", "SEC-156"),
+            ("cqlsh -e DROP KEYSPACE ks\n", "SEC-157"),
+            ("neo4j-shell -c MATCH (n) DELETE n\n", "SEC-158"),
+            ("influx delete --measurement m\n", "SEC-159"),
+            ("clickhouse-client -q DROP TABLE t\n", "SEC-160"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

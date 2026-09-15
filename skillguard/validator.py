@@ -321,6 +321,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-154", r"\bsqlite3\s+.*DELETE\s+FROM\s+", Severity.WARNING),
     # elasticsearch 删索引
     ("SEC-155", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/_all", Severity.WARNING),
+    # hive 删表
+    ("SEC-156", r"\bhive\s+.*DROP\s+TABLE", Severity.WARNING),
+    # cassandra 删键空间
+    ("SEC-157", r"\bcqlsh\s+.*DROP\s+KEYSPACE", Severity.ERROR),
+    # neo4j 清空库
+    ("SEC-158", r"\bneo4j(?:-shell)?\s+.*MATCH.*DELETE", Severity.WARNING),
+    # influx 删测量
+    ("SEC-159", r"\binflux\s+delete\s+--measurement", Severity.WARNING),
+    # clickhouse 删表
+    ("SEC-160", r"\bclickhouse-client\s+.*DROP\s+TABLE", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
