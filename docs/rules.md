@@ -265,3 +265,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-213` | 🔵 | `gradle publish` | 发布 |
 | `SEC-214` | 🟡 | `mvn deploy -DskipTests` | 跳过测试部署 |
 | `SEC-215` | 🔵 | `dotnet nuget --skip-duplicate` | 跳过重复推送 |
+| `SEC-216` | 🔵 | `gem push` | 发布 |
+| `SEC-217` | 🟡 | `pod trunk push` | 发布 |
+| `SEC-218` | 🟡 | `flutter pub publish` | 发布 |
+| `SEC-219` | 🔵 | `swift package publish` | 发布 |
+| `SEC-220` | 🔵 | `anaconda upload` | 上传 |
