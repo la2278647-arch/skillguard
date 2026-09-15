@@ -201,6 +201,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-094", r"\b(?:find|ls)\s+.*\|\s*xargs\s+rm", Severity.WARNING),
     # tar 绝对路径覆盖
     ("SEC-095", r"\btar\s+.*\s-C\s+/", Severity.INFO),
+    # curl 管道 sudo sh（高危）
+    ("SEC-096", r"\bcurl\s+.*\|\s*sudo\s+sh", Severity.ERROR),
+    # pickle 反序列化执行
+    ("SEC-097", r"\b(?:pickle|cPickle)\.loads?\(.*(?:exec|eval)", Severity.WARNING),
+    # git 递归子模块
+    ("SEC-098", r"\bgit\s+submodule\s+update\s+--recursive", Severity.INFO),
+    # suid 后门
+    ("SEC-099", r"\bchmod\s+u\+s\b|\bchmod\s+g\+s\b", Severity.WARNING),
+    # 系统关机重启
+    ("SEC-100", r"\b(?:shutdown|reboot|halt|poweroff)\s+-?(?:h|r|f|now)?\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
