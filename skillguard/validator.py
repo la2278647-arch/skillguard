@@ -1091,6 +1091,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-539", r"\b(?:modprobe|insmod)\s+[^\n]*--(?:force|unsafe)", Severity.WARNING),
     # 恶意系统快照窃取
     ("SEC-540", r"\b(?:timeshift|snapper)\s+create\s+[^\n]*(?:-d|--description)", Severity.INFO),
+    # 恶意系统日志投毒
+    ("SEC-541", r"\b(?:logger|journalctl)\s+[^\n]*(?:-p|-t)\s+\S+\s+\S+", Severity.INFO),
+    # 危险 PAM 配置篡改
+    ("SEC-542", r">>\s*/etc/pam\.d/|\b(?:pam-auth-update|pam-config)\s+", Severity.WARNING),
+    # 恶意系统文件 ACL
+    ("SEC-543", r"\b(?:setfacl|getfacl)\s+[^\n]*-m\s+\S*:rwx\S*\s+/etc/passwd", Severity.ERROR),
+    # 危险 umask 放宽
+    ("SEC-544", r"\bumask\s+0?0?0\b|\bumask\s+000\b", Severity.WARNING),
+    # 恶意键盘映射
+    ("SEC-545", r"\b(?:xmodmap|setxkbmap)\s+[^\n]*(?:-e|--map)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

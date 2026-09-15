@@ -662,6 +662,11 @@ class TestSafetyChecks:
             ("find / -name password.txt\n", "SEC-538"),
             ("insmod --force evil.ko\n", "SEC-539"),
             ("timeshift create -d backup\n", "SEC-540"),
+            ("logger -p auth notice fake\n", "SEC-541"),
+            ("echo x >> /etc/pam.d/common-auth\n", "SEC-542"),
+            ("setfacl -m u:x:rwx /etc/passwd\n", "SEC-543"),
+            ("umask 000\n", "SEC-544"),
+            ("xmodmap -e keycode\n", "SEC-545"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
