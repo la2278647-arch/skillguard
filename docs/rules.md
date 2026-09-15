@@ -580,3 +580,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-528` | 🟡 | `cd /tmp && curl -o` | 工作目录下载 |
 | `SEC-529` | 🔴 | `mimikatz` | 凭据转储 |
 | `SEC-530` | 🟡 | `for ... do curl` | 批量下载链 |
+| `SEC-531` | 🔵 | `obfuscate -o` | 掩码绕过 |
+| `SEC-532` | 🔵 | `nm /usr/lib/modules` | 内核符号导出 |
+| `SEC-533` | 🟡 | `openocd -c` | 硬件调试器 |
+| `SEC-534` | 🔵 | `mount -o rw` | 读写挂载 |
+| `SEC-535` | 🔵 | `perf -e --timeout` | 性能工具滥用 |
