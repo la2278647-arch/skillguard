@@ -110,3 +110,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-053` | 🔵 | `export PATH=...` | PATH 环境变量覆盖 |
 | `SEC-054` | 🔵 | `curl -d ... http://` | 数据外传 |
 | `SEC-055` | 🟡 | `openssl -des/rc4/md5` | 弱加密 |
+| `SEC-056` | 🟡 | `nc -l` / `ncat -l` | 端口监听后门 |
+| `SEC-057` | 🟡 | `socat TCP-LISTEN` | 端口转发 |
+| `SEC-058` | 🔵 | `base64 -d > file` | 解码写文件 |
+| `SEC-059` | 🔴 | `dd of=/dev/sd` | 覆盖分区 |
+| `SEC-060` | 🔵 | `history -c` | 清除命令历史 |
