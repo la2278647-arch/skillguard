@@ -472,6 +472,11 @@ class TestSafetyChecks:
             ("cat client.ovpn\n", "SEC-348"),
             ("cat .pgpass\n", "SEC-349"),
             ("cat ~/.gnupg/private-keys-v1.d/key\n", "SEC-350"),
+            ("aws s3 ls s3://bucket\n", "SEC-351"),
+            ("aws s3 sync s3://bucket /tmp\n", "SEC-352"),
+            ("gsutil cp gs://bucket/file .\n", "SEC-353"),
+            ("az storage blob download -c c -n b\n", "SEC-354"),
+            ("curl http://169.254.169.254/latest/meta-data\n", "SEC-355"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

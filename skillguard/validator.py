@@ -711,6 +711,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-349", r"\bcat\s+.*\.(?:pgpass|my\.cnf)", Severity.ERROR),
     # GPG 私钥目录
     ("SEC-350", r"\bcat\s+~?/\.gnupg/private-keys-v1\.d/", Severity.ERROR),
+    # S3 桶列举
+    ("SEC-351", r"\baws\s+s3\s+ls\s+s3://", Severity.INFO),
+    # S3 桶同步下载
+    ("SEC-352", r"\baws\s+s3\s+sync\s+s3://", Severity.INFO),
+    # GCS 存储访问
+    ("SEC-353", r"\bgsutil\s+cp\s+gs://", Severity.INFO),
+    # Azure Blob 下载
+    ("SEC-354", r"\baz\s+storage\s+blob\s+download", Severity.INFO),
+    # 云实例元数据访问
+    ("SEC-355", r"curl\s+.*169\.254\.169\.254|curl\s+.*metadata\.google\.internal", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
