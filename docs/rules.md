@@ -270,3 +270,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-218` | 🟡 | `flutter pub publish` | 发布 |
 | `SEC-219` | 🔵 | `swift package publish` | 发布 |
 | `SEC-220` | 🔵 | `anaconda upload` | 上传 |
+| `SEC-221` | 🟡 | `pip --force-reinstall` | 强制重装 |
+| `SEC-222` | 🟡 | `npm install --force` | 强制安装 |
+| `SEC-223` | 🔵 | `gem install --force` | 强制安装 |
+| `SEC-224` | 🔵 | `cargo install --force` | 强制安装 |
+| `SEC-225` | 🔵 | `go get -u @latest` | 最新版获取 |
