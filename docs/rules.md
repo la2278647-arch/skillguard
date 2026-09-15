@@ -275,3 +275,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-223` | 🔵 | `gem install --force` | 强制安装 |
 | `SEC-224` | 🔵 | `cargo install --force` | 强制安装 |
 | `SEC-225` | 🔵 | `go get -u @latest` | 最新版获取 |
+| `SEC-226` | 🟡 | `crontab -e` / `echo | crontab` | 定时任务注入 |
+| `SEC-227` | 🔵 | `at HH:MM` | 定时任务 |
+| `SEC-228` | 🔵 | `systemd-analyze verify` | 服务验证 |
+| `SEC-229` | 🔵 | `update-rc.d defaults` | 启动脚本 |
+| `SEC-230` | 🔵 | `launchctl load` | macOS 服务加载 |
