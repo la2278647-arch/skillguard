@@ -1061,6 +1061,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-524", r"\b(?:hydra|medusa|ncrack)\s+-l\s+", Severity.WARNING),
     # 恶意流量重定向
     ("SEC-525", r"\b(?:ip\s+rule\s+add|iptables\s+-t\s+nat\s+-A)\s+[^\n]*(?:PREROUTING|FORWARD)", Severity.WARNING),
+    # 恶意配置注入
+    ("SEC-526", r"\b(?:export|set)\s+\w+\s*=\s*\$?\(\s*(?:curl|wget)", Severity.WARNING),
+    # 危险反向代理建立
+    ("SEC-527", r"\b(?:ssh|socat|frp)\s+[^\n]*(?:-R|-L)\s+\S+:\S+", Severity.WARNING),
+    # 恶意工作目录切换
+    ("SEC-528", r"\bcd\s+\S+\s*&&\s*(?:curl|wget)\s+[^\n]*-o\s+/tmp", Severity.WARNING),
+    # 危险凭据转储工具
+    ("SEC-529", r"\b(?:mimikatz|secretsdump|wce)\s+", Severity.ERROR),
+    # 恶意下载链批量
+    ("SEC-530", r"\bfor\s+\w+\s+in\s+\S+;\s*do\s+.*(?:curl|wget)\s+.*;\s*done", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

