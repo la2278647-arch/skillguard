@@ -402,6 +402,11 @@ class TestSafetyChecks:
             ("lynis audit --skip-security\n", "SEC-278"),
             ("tripwire --update\n", "SEC-279"),
             ("aide --init\n", "SEC-280"),
+            ("cat /etc/shadow\n", "SEC-281"),
+            ("cat /etc/gshadow\n", "SEC-282"),
+            ("cat ~/.ssh/id_rsa\n", "SEC-283"),
+            ("export API_KEY=secret123\n", "SEC-284"),
+            ("history | grep -i password\n", "SEC-285"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

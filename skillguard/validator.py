@@ -571,6 +571,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-279", r"\btripwire\s+--update\b", Severity.WARNING),
     # aide 初始化
     ("SEC-280", r"\baide\s+--init\b", Severity.WARNING),
+    # shadow 文件读取
+    ("SEC-281", r"\bcat\s+/etc/shadow|\bless\s+/etc/shadow|\btail\s+/etc/shadow", Severity.ERROR),
+    # gshadow 读取
+    ("SEC-282", r"\bcat\s+/etc/gshadow|\bless\s+/etc/gshadow", Severity.ERROR),
+    # SSH 私钥读取
+    ("SEC-283", r"\bcat\s+~?/\.ssh/id_rsa|\bcat\s+~?/\.ssh/id_ed25519", Severity.ERROR),
+    # 环境变量凭据导出
+    ("SEC-284", r"\bexport\s+\w*\b(?:API_KEY|TOKEN|SECRET|PASSWORD)=", Severity.ERROR),
+    # 历史命令凭据搜索
+    ("SEC-285", r"\bhistory\s+\|\s*grep\s+-i\s+.*(?:pass|token|secret)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
