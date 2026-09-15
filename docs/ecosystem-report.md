@@ -22,6 +22,8 @@
 | [obra/superpowers](https://github.com/obra/superpowers) | 286k | 14 | 95.2 | 86% | **3** | 0 |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | 261k | 37 | **98.4** | **100%** | 0 | 0 |
 | [github/spec-kit](https://github.com/github/spec-kit) | 136k | 2 | 98.2 | 100% | 0 | 0 |
+| [affaan-m/ECC](https://github.com/affaan-m/ECC) | 258k | 20 | 98.9 | 100% | 0 | 0 |
+| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 245k | 20 | **99.5** | 100% | 0 | 0 |
 
 ### 评分分布
 
@@ -30,6 +32,8 @@ anthropics/skills:   90-100:15  75-89:4  60-74:1  (20 total)
 obra/superpowers:    90-100:12  75-89:1  60-74:1  (14 total)
 mattpocock/skills:   90-100:37                      (37 total)
 github/spec-kit:     90-100:2                       (2 total)
+affaan-m/ECC:        90-100:20                      (20 total)
+hermes-agent:        90-100:20                      (20 total)
 ```
 
 ## 三、发现的问题类型（举例）
@@ -42,11 +46,12 @@ github/spec-kit:     90-100:2                       (2 total)
 
 ## 四、给 Skill 作者的启示
 
-基于 **73 个真实 Skill**（4 个头部仓库）的扫描：
+基于 **113 个真实 Skill**（6 个头部仓库）的扫描：
 
 1. **description 是最被忽视的元数据**——缺失直接导致 AI 无法正确触发 Skill
 2. **scripts/ 与 tests/ 是质量分水岭**——带测试的 Skill 分数显著更高
 3. **安全扫描值得做**——连头部仓库都有 error 级问题，发布前自检成本极低
+4. **头部生态整体高质量**——6 仓库中 5 个通过率 100%，但官方仓库（anthropics/skills）仅 75%
 
 ## 五、复现方法
 
@@ -56,12 +61,14 @@ skillguard bench https://github.com/anthropics/skills.git
 skillguard bench https://github.com/obra/superpowers.git
 skillguard bench https://github.com/mattpocock/skills.git
 skillguard bench https://github.com/github/spec-kit.git
+skillguard bench https://github.com/affaan-m/ECC.git
+skillguard bench https://github.com/NousResearch/hermes-agent.git
 ```
 
 ## 六、关于 SkillGuard
 
 SkillGuard 是 Agent Skills 质量保障与测试框架：
-- 🧹 静态校验（23 条安全规则）
+- 🧹 静态校验（28 条安全规则）
 - 🏜️ 沙箱测试执行
 - 🔢 五维质量评分 + CI 门禁
 - 📊 生态基准扫描（本报告生成器）
