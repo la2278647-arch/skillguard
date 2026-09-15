@@ -230,3 +230,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-178` | 🟡 | `aws eks delete-cluster` | EKS 集群删除 |
 | `SEC-179` | 🟡 | `gcloud clusters delete` | GKE 集群删除 |
 | `SEC-180` | 🟡 | `az aks delete` | AKS 集群删除 |
+| `SEC-181` | 🟡 | `flyway undo` | 迁移回滚 |
+| `SEC-182` | 🟡 | `liquibase rollback` | 迁移回滚 |
+| `SEC-183` | 🟡 | `alembic downgrade` | 迁移降级 |
+| `SEC-184` | 🟡 | `migrate zero` | 迁移重置 |
+| `SEC-185` | 🟡 | `prisma migrate reset` | 迁移重置 |
