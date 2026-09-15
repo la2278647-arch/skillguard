@@ -1031,6 +1031,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-509", r"\b(?:cat|tar)\s+.*\S*(?:dataset|train|labels)\S*\.(?:jsonl|csv|parquet)\s*$", Severity.WARNING),
     # 恶意推理缓存投毒
     ("SEC-510", r"\b(?:rm|mv)\s+.*\S*(?:cache|prompt_cache|kv_cache)", Severity.WARNING),
+    # 恶意浏览器自动化
+    ("SEC-511", r"\b(?:playwright|puppeteer|selenium)\s+.*\s(?:--headless|launch\s*\()", Severity.INFO),
+    # 危险 OCR 数据窃取
+    ("SEC-512", r"\b(?:tesseract|ocrmypdf)\s+.*\S*\.(?:png|jpg|pdf)\s*\|\s*(?:curl|nc)", Severity.WARNING),
+    # 恶意 GUI 自动化
+    ("SEC-513", r"\b(?:xdotool|wmctrl)\s+[^\n]*(?:key|click|type)\s+", Severity.INFO),
+    # 危险剪贴板监控
+    ("SEC-514", r"\b(?:xclip|xsel)\s+-o\s*\|\s*while\s+read", Severity.WARNING),
+    # 恶意辅助技术利用
+    ("SEC-515", r"\b(?:espeak|festival)\s+.*\S+\s*\|\s*(?:curl|nc)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

