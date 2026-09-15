@@ -80,3 +80,13 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 ```
 
 默认 `threshold = 60`，可通过 `--threshold` 调整。
+| `SEC-026` | 🟡 | `system("${VAR}")` | 环境变量命令执行 |
+| `SEC-027` | 🟡 | `cron` + `curl/wget` | 定时远程下载执行 |
+| `SEC-028` | 🔵 | `echo hex | xxd` | 混淆数据解码 |
+| `SEC-029` | 🔵 | `sed -i d/c` | 就地破坏性编辑 |
+| `SEC-030` | 🟡 | `ln -sf` | 强制符号链接覆盖 |
+| `SEC-031` | 🔵 | `tar -xzf` | 解压 zip-slip |
+| `SEC-032` | 🟡 | `StrictHostKeyChecking no` | SSH 禁用主机校验 |
+| `SEC-033` | 🟡 | `docker --privileged` | 特权容器 |
+| `SEC-034` | 🟡 | `pickle.loads` | 不安全反序列化 |
+| `SEC-035` | 🔵 | `IFS=` | Bash IFS 劫持 |
