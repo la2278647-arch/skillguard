@@ -215,3 +215,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-163` | 🟡 | `curl -X DELETE /index` | 删除索引 |
 | `SEC-164` | 🟡 | `solr delete -c` | 删除核心 |
 | `SEC-165` | 🟡 | `ksql DROP STREAM` | 删除流 |
+| `SEC-166` | 🔵 | `grafana-cli datasource` | 数据源篡改 |
+| `SEC-167` | 🔵 | `promtool --enable-feature` | 配置注入 |
+| `SEC-168` | 🟡 | `curl -X DELETE /loki` | 删除日志 |
+| `SEC-169` | 🔵 | `curl -X DELETE /jaeger` | 删除追踪 |
+| `SEC-170` | 🟡 | `curl -X DELETE /kibana` | 删除索引模式 |
