@@ -545,3 +545,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-493` | 🟡 | `chcon -t httpd` | SELinux 上下文 |
 | `SEC-494` | 🟡 | `ip netns delete` | 命名空间操作 |
 | `SEC-495` | 🔵 | `renice -n -20` | CPU 优先级绕过 |
+| `SEC-496` | 🔵 | `mosquitto_pub -t -m` | IoT 控制 |
+| `SEC-497` | 🔵 | `ip link set down/up` | 网络设备配置 |
+| `SEC-498` | 🟡 | `avahi-browse` | 多播发现 |
+| `SEC-499` | 🟡 | `cat </dev/ttyS0` | 串口操作 |
+| `SEC-500` | 🔵 | `lsusb | grep usb` | USB 设备枚举 |
