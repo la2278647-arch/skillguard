@@ -390,3 +390,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-338` | 🔵 | `xinput test` | 键盘记录 |
 | `SEC-339` | 🔵 | `import -window` | 屏幕截图 |
 | `SEC-340` | 🟡 | `fswebcam /dev/video0` | 摄像头访问 |
+| `SEC-341` | 🟡 | `History.json | curl` | 浏览器历史窃取 |
+| `SEC-342` | 🟡 | `cp ~/.ssh/id_rsa` | SSH 密钥复制 |
+| `SEC-343` | 🟡 | `secret-tool` | 密钥环转储 |
+| `SEC-344` | 🟡 | `gcore -k` | 进程内存转储 |
+| `SEC-345` | 🟡 | `scp wallet.dat` | 加密钱包窃取 |
