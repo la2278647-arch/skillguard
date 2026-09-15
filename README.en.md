@@ -103,6 +103,7 @@ for item in guard.scan_directory("./skills"):
 
 ## 📚 Documentation
 
+- [Tutorial: Build a High-Quality Skill from Scratch](docs/tutorial.en.md)
 - [API Reference](docs/api.md)
 - [CLI Reference](docs/cli.md)
 - [Architecture](docs/architecture.md)
