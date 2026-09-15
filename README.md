@@ -48,7 +48,11 @@ Agent Skills 生态正在爆发式增长（superpowers 28.6万★、anthropics/s
 ### 安装
 
 ```bash
+# 方式一：PyPI（待发布后可用）
 pip install skillguard
+
+# 方式二：GitHub Release 直接安装（当前可用，等效 PyPI）
+pip install https://github.com/la2278647-arch/skillguard/releases/download/v0.5.0/skillguard-0.5.0-py3-none-any.whl
 ```
 
 ### 1. 初始化一个新 Skill

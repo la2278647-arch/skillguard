@@ -44,7 +44,11 @@ The Agent Skills ecosystem is exploding (superpowers ⭐286k, anthropics/skills 
 ### Install
 
 ```bash
+# Option 1: PyPI (once published)
 pip install skillguard
+
+# Option 2: Install directly from GitHub Release (available now, same as PyPI)
+pip install https://github.com/la2278647-arch/skillguard/releases/download/v0.5.0/skillguard-0.5.0-py3-none-any.whl
 ```
 
 ### 1. Initialize a new Skill
