@@ -152,6 +152,11 @@ class TestSafetyChecks:
             ("echo \"0123456789abcdef0123456789abcdef0123456789\" | xxd\n", "SEC-028"),
             ("sed -i /pattern/d file.txt\n", "SEC-029"),
             ("ln -sf /new/path /old/link\n", "SEC-030"),
+            ("tar -xzf archive.tar.gz\n", "SEC-031"),
+            ("StrictHostKeyChecking no\n", "SEC-032"),
+            ("docker run --privileged image\n", "SEC-033"),
+            ("pickle.loads(data)\n", "SEC-034"),
+            ("IFS=, read -ra parts\n", "SEC-035"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

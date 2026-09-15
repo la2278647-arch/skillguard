@@ -71,6 +71,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-029", r"\bsed\s+-i\b.*\bd\b|\bsed\s+-i\b.*\bc\b", Severity.INFO),
     # ln 强制符号链接覆盖
     ("SEC-030", r"\bln\s+-sf\b|\bln\s+--symbolic\s+--force\b", Severity.WARNING),
+    # 解压 zip-slip 风险
+    ("SEC-031", r"\btar\s+-x.*\.tar.*\.gz", Severity.INFO),
+    # SSH 禁用主机密钥校验
+    ("SEC-032", r"StrictHostKeyChecking\s*(?:=|\s+)no|UserKnownHostsFile\s*/dev/null", Severity.WARNING),
+    # Docker 特权模式/根挂载
+    ("SEC-033", r"docker\s+run.*--privileged|docker\s+run.*-v\s+/:", Severity.WARNING),
+    # pickle/yaml 不安全反序列化
+    ("SEC-034", r"pickle\.loads?\(|yaml\.load\(.*Loader=[^)]*UnsafeLoader", Severity.WARNING),
+    # Bash IFS 劫持
+    ("SEC-035", r"\bIFS\s*=|\bunset\s+IFS\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
