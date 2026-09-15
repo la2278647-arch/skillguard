@@ -116,6 +116,7 @@ for item in guard.scan_directory("./skills"):
 
 ## 📚 文档
 
+- [从零构建高质量 Skill 教程](docs/tutorial.md) — 完整开发流程
 - [API 文档](docs/api.md) — Python API 完整参考
 - [CLI 参考](docs/cli.md) — 命令行完整参考
 - [架构说明](docs/architecture.md) — 系统架构与设计决策

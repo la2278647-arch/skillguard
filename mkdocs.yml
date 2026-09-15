@@ -1,7 +1,7 @@
 site_name: SkillGuard
 site_description: Agent Skills 质量保障与测试框架
-site_url: https://skillguard.github.io/skillguard/
-repo_url: https://github.com/skillguard/skillguard
+site_url: https://la2278647-arch.github.io/skillguard/
+repo_url: https://github.com/la2278647-arch/skillguard
 theme:
   name: material
   language: zh
@@ -24,6 +24,7 @@ theme:
 nav:
   - 首页: index.md
   - 快速开始: quickstart.md
+  - 教程（从零构建高质量 Skill）: tutorial.md
   - CLI 参考: cli.md
   - API 参考: api.md
   - 架构说明: architecture.md
