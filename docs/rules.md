@@ -210,3 +210,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-158` | 🟡 | `neo4j MATCH DELETE` | 清空图库 |
 | `SEC-159` | 🟡 | `influx delete --measurement` | 删除测量 |
 | `SEC-160` | 🟡 | `clickhouse DROP TABLE` | 删除表 |
+| `SEC-161` | 🟡 | `kafka-topics --delete` | 删除主题 |
+| `SEC-162` | 🟡 | `rabbitmqctl purge_queue` | 清空队列 |
+| `SEC-163` | 🟡 | `curl -X DELETE /index` | 删除索引 |
+| `SEC-164` | 🟡 | `solr delete -c` | 删除核心 |
+| `SEC-165` | 🟡 | `ksql DROP STREAM` | 删除流 |
