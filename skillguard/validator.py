@@ -961,6 +961,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-474", r"\bcrictl\s+exec\s+--privileged|\bctr\s+run\s+--privileged", Severity.WARNING),
     # 恶意容器镜像投毒
     ("SEC-475", r"\b(?:docker|podman)\s+build\s+[^\n]*(?:--network=host|--security-opt)", Severity.WARNING),
+    # 恶意多架构下载
+    ("SEC-476", r"\b(?:curl|wget)\s+[^\n]*(?:amd64|arm64|x86_64)\S*(?:tar|zip|bin)\b", Severity.INFO),
+    # 危险内核模块强制加载
+    ("SEC-477", r"\b(?:modprobe|insmod)\s+[^\n]*-f\b", Severity.WARNING),
+    # 恶意固件回滚
+    ("SEC-478", r"\b(?:fwupdmgr|fwupd)\s+(?:downgrade|reinstall)\s+", Severity.WARNING),
+    # 危险 ACPI 操作
+    ("SEC-479", r"\b(?:acpid|systemctl)\s+.*\s+acpid\.service", Severity.INFO),
+    # 恶意 TPM 操作
+    ("SEC-480", r"\b(?:tpm2_clear|tpm2_evictcontrol)\s+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
