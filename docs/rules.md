@@ -325,3 +325,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-273` | 🟡 | `dd of=/dev/sdX` | MBR 写入 |
 | `SEC-274` | 🔵 | `dmidecode -s system-serial-number` | 硬件信息篡改 |
 | `SEC-275` | 🟡 | `fwupd update --force` | 固件强制更新 |
+| `SEC-276` | 🟡 | `rkhunter --disable` | Rootkit 检测禁用 |
+| `SEC-277` | 🔵 | `chkrootkit --skip` | 检测跳过 |
+| `SEC-278` | 🔵 | `lynis --skip-security` | 审计跳过 |
+| `SEC-279` | 🟡 | `tripwire --update` | 完整性基线更新 |
+| `SEC-280` | 🟡 | `aide --init` | 完整性初始化 |
