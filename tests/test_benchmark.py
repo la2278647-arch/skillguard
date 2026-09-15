@@ -55,6 +55,19 @@ class TestBenchmarkRunner:
         with pytest.raises(RuntimeError):
             runner.run()
 
+    def test_clone_timeout(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        import subprocess
+
+        import skillguard.benchmark as bench_mod
+
+        def _boom(*args, **kwargs):
+            raise subprocess.TimeoutExpired(cmd="git", timeout=5)
+
+        monkeypatch.setattr(bench_mod.subprocess, "run", _boom)
+        runner = BenchmarkRunner(repo_url="https://example.com/repo.git")
+        with pytest.raises(RuntimeError):
+            runner.clone(tmp_path / "x")
+
     def test_empty_repo(self, tmp_path: Path) -> None:
         empty = tmp_path / "empty"
         empty.mkdir()
@@ -62,6 +75,11 @@ class TestBenchmarkRunner:
         summary = runner.run(keep_dir=empty)
         assert summary.skill_count == 0
         assert summary.avg_score == 0.0
+
+    def test_max_skills_truncates(self, local_repo: Path) -> None:
+        runner = BenchmarkRunner(repo_url=str(local_repo), max_skills=1)
+        summary = runner.run(keep_dir=local_repo)
+        assert len(summary.skills) <= 1
 
 
 class TestBenchmarkCLI:
