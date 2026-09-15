@@ -63,7 +63,17 @@ skillguard check path/to/skill --format html -o report.html
 skillguard check path/to/skill --ci
 ```
 
-### 3. 作为 Python 库使用
+### 3. 批量扫描目录中的全部 Skills
+
+```bash
+# 扫描当前目录树中的全部 Skill，按质量分排行
+skillguard scan .
+
+# 限制深度、只看 Top 10
+skillguard scan ./skills --depth 2 --top 10
+```
+
+### 4. 作为 Python 库使用
 
 ```python
 from skillguard import SkillGuard, Config
@@ -73,6 +83,10 @@ report = guard.run()          # 完整评估
 print(report.overall_score)   # 综合评分
 print(report.to_json())       # JSON 报告
 guard.export(report, "report.html")
+
+# 批量扫描
+for item in guard.scan_directory("./skills"):
+    print(item["name"], item["score"], item["passed"])
 ```
 
 ## 📚 文档
