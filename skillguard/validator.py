@@ -1131,6 +1131,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-559", r"\b(?:passwd|usermod)\s+[^\n]*(?:-[lLU])\s+\w+\s*$", Severity.WARNING),
     # 恶意 IME 切换
     ("SEC-560", r"\b(?:ibus|fcitx5)\s+[^\n]*(?:-r|restart)\s*$", Severity.INFO),
+    # 恶意审计日志清理
+    ("SEC-561", r"\b(?:rm|truncate)\s+.*\S*(?:audit|auth\.log|syslog)\S*", Severity.WARNING),
+    # 危险时间戳篡改
+    ("SEC-562", r"\b(?:touch|faketime)\s+[^\n]*(?:-d|-t)\s+\S+", Severity.INFO),
+    # 恶意系统时区切换
+    ("SEC-563", r"\b(?:timedatectl|zdump)\s+set-timezone\s+", Severity.INFO),
+    # 危险系统语言覆盖
+    ("SEC-564", r"\bexport\s+LC_ALL\s*=\s*\S+|\bexport\s+LANG\s*=\s*\S+", Severity.INFO),
+    # 恶意 shell 历史共享
+    ("SEC-565", r"\bexport\s+PROMPT_COMMAND\s*=|\bhistory\s+-a\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

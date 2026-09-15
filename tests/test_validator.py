@@ -682,6 +682,11 @@ class TestSafetyChecks:
             ("trust anchor cert.pem\n", "SEC-558"),
             ("usermod -L user\n", "SEC-559"),
             ("ibus restart\n", "SEC-560"),
+            ("rm /var/log/auth.log\n", "SEC-561"),
+            ("touch -d 20200101 file\n", "SEC-562"),
+            ("timedatectl set-timezone Asia/Shanghai\n", "SEC-563"),
+            ("export LANG=zh_CN.UTF-8\n", "SEC-564"),
+            ("history -a /tmp/hist\n", "SEC-565"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
