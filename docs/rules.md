@@ -235,3 +235,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-183` | 🟡 | `alembic downgrade` | 迁移降级 |
 | `SEC-184` | 🟡 | `migrate zero` | 迁移重置 |
 | `SEC-185` | 🟡 | `prisma migrate reset` | 迁移重置 |
+| `SEC-186` | 🟡 | `sequelize sync --force` | 强制同步 |
+| `SEC-187` | 🔵 | `typeorm schema:sync` | 模式同步 |
+| `SEC-188` | 🔵 | `knex migrate:rollback` | 迁移回滚 |
+| `SEC-189` | 🟡 | `drizzle-kit push --force` | 强制推送 |
+| `SEC-190` | 🟡 | `migrate-mongo reset` | 迁移重置 |
