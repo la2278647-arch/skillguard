@@ -365,3 +365,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-313` | 🟡 | `tar -czf - | nc` | 归档外传 |
 | `SEC-314` | 🔵 | `.hidden_backup.sh` | 隐蔽文件名 |
 | `SEC-315` | 🔵 | `photo.jpg.sh` | 双扩展名混淆 |
+| `SEC-316` | 🔴 | `bash -i >& /dev/tcp/` | 反弹 shell |
+| `SEC-317` | 🔴 | `nc -e` | 反弹 shell |
+| `SEC-318` | 🔴 | `python socket connect` | 反弹 shell |
+| `SEC-319` | 🔴 | `perl socket connect` | 反弹 shell |
+| `SEC-320` | 🔴 | `pty.spawn` | 反弹 shell |
