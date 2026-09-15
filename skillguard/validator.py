@@ -291,6 +291,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-139", r"\bkubeadm\s+reset\b", Severity.INFO),
     # helm 模板注入
     ("SEC-140", r"\bhelm\s+template\s+.*--set\s+.*\$\(", Severity.INFO),
+    # serverless 部署
+    ("SEC-141", r"\bserverless\s+deploy\s+.*--stage=prod", Severity.INFO),
+    # cloudformation 参数注入
+    ("SEC-142", r"\bcloudformation\s+deploy.*--parameter-overrides", Severity.INFO),
+    # AWS 弱密码策略
+    ("SEC-143", r"\baws\s+iam\s+update-account-password-policy.*--minimum-password-length\s+[0-5]", Severity.WARNING),
+    # GCP 防火墙全开
+    ("SEC-144", r"\bgcloud\s+compute\s+firewall-rules\s+create.*--allow\s+all", Severity.WARNING),
+    # Azure 存储密钥上传
+    ("SEC-145", r"\baz\s+storage\s+blob\s+upload.*--auth-mode\s+key", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

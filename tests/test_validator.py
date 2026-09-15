@@ -262,6 +262,11 @@ class TestSafetyChecks:
             ("ctr images import image.tar\n", "SEC-138"),
             ("kubeadm reset\n", "SEC-139"),
             ("helm template --set x=$( $val) chart\n", "SEC-140"),
+            ("serverless deploy --stage=prod\n", "SEC-141"),
+            ("cloudformation deploy --parameter-overrides Key=Value\n", "SEC-142"),
+            ("aws iam update-account-password-policy --minimum-password-length 4\n", "SEC-143"),
+            ("gcloud compute firewall-rules create open --allow all\n", "SEC-144"),
+            ("az storage blob upload --auth-mode key\n", "SEC-145"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
