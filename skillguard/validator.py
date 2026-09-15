@@ -151,6 +151,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-069", r"git\s+clone\s+\S+\s*&&\s*(?:cd|bash|sh)", Severity.WARNING),
     # 源码编译安装（隐藏恶意）
     ("SEC-070", r"(?:./configure\s*&&\s*make|make\s+install)", Severity.INFO),
+    # telnet 明文连接
+    ("SEC-071", r"\btelnet\s+", Severity.INFO),
+    # rc 文件远程下载覆盖
+    ("SEC-072", r"(?:curl|wget)\s+.*\s+-o\s+~?/\.(?:bashrc|zshrc|profile)", Severity.WARNING),
+    # dbus 系统调用
+    ("SEC-073", r"\bdbus-send\b", Severity.INFO),
+    # mount 覆盖系统目录
+    ("SEC-074", r"\bmount\s+.*\s/(?:etc|usr|bin|lib)\b", Severity.WARNING),
+    # ulimit 移除限制
+    ("SEC-075", r"\bulimit\s+-c\s+0\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

