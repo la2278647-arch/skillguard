@@ -6,7 +6,7 @@ from pathlib import Path
 
 from click.testing import CliRunner
 
-from skillguard.cli import check, init, main
+from skillguard.cli import check, init, main, scan
 
 
 class TestMain:
@@ -97,3 +97,24 @@ class TestInitCommand:
         result = runner.invoke(init, [str(target)])
         assert result.exit_code == 0
         assert "已存在" in result.output
+
+
+class TestScanCommand:
+    def test_scan_finds_skills(self, tmp_path: Path) -> None:
+        for name in ("a", "b"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\n---\n# {name}\n", encoding="utf-8"
+            )
+        runner = CliRunner()
+        result = runner.invoke(scan, [str(tmp_path)])
+        assert result.exit_code == 0
+        assert "扫描完成" in result.output
+        assert "2 个 Skill" in result.output
+
+    def test_scan_empty(self, tmp_path: Path) -> None:
+        runner = CliRunner()
+        result = runner.invoke(scan, [str(tmp_path)])
+        assert result.exit_code == 0
+        assert "未在目录树中发现" in result.output

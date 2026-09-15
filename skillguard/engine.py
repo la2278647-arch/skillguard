@@ -78,6 +78,86 @@ class SkillGuard:
         return report
 
     # ------------------------------------------------------------------
+    # 批量扫描
+    # ------------------------------------------------------------------
+    def scan_directory(self, root: str | Path, max_depth: int = 3) -> list[dict]:
+        """扫描目录树中的全部 Skill 目录，返回评估摘要列表。
+
+        每个元素：
+        {
+            "path": str,          # Skill 目录相对路径
+            "name": str,          # Skill 名称
+            "score": float,       # 综合评分
+            "passed": bool,       # 是否通过门禁
+            "errors": int,        # ERROR 级检查数
+            "warnings": int,      # WARNING 级检查数
+            "tests": int,         # 测试数
+            "tests_passed": int,  # 通过的测试数
+        }
+        """
+        root_path = Path(root).resolve()
+        results: list[dict] = []
+        if not root_path.is_dir():
+            raise ValueError(f"目录不存在: {root_path}")
+
+        # BFS 限制深度
+        from collections import deque
+
+        queue: deque[Path] = deque([root_path])
+        seen: set[Path] = set()
+        depth_map: dict[Path, int] = {root_path: 0}
+
+        while queue:
+            current = queue.popleft()
+            depth = depth_map.get(current, 0)
+            if current in seen or depth > max_depth:
+                continue
+            seen.add(current)
+
+            if current.is_dir() and not _is_skipped_dir(current):
+                skill = load_skill(current)
+                if skill is not None:
+                    # 该目录本身是 Skill，不深入子目录
+                    report = self._evaluate_lite(current, skill)
+                    results.append(report)
+                    continue
+                if depth < max_depth:
+                    for child in sorted(current.iterdir()):
+                        if child.is_dir() and child not in seen:
+                            depth_map[child] = depth + 1
+                            queue.append(child)
+
+        results.sort(key=lambda r: r["score"], reverse=True)
+        return results
+
+    def _evaluate_lite(self, skill_dir: Path, skill) -> dict:
+        """轻量评估（不跑测试，仅静态 + 评分），用于批量扫描。"""
+        checks = run_static_checks(skill_dir, skill, skip_safety=self.config.skip_safety)
+        breakdown, overall = score_skill(skill, checks, [])
+        from .models import QualityReport as _QR
+
+        lite = _QR(
+            skill=skill,
+            version=__version__,
+            timestamp=now_iso(),
+            checks=checks,
+            score=breakdown,
+            overall_score=overall,
+            passed=False,
+        )
+        lite.passed = lite.error_count() == 0 and overall >= self.config.threshold
+        return {
+            "path": str(skill_dir),
+            "name": skill.name,
+            "score": overall,
+            "passed": lite.passed,
+            "errors": lite.error_count(),
+            "warnings": lite.warning_count(),
+            "tests": 0,
+            "tests_passed": 0,
+        }
+
+    # ------------------------------------------------------------------
     # 输出
     # ------------------------------------------------------------------
     def render(self, report: QualityReport, fmt: str | None = None) -> str:
@@ -94,3 +174,9 @@ class SkillGuard:
             fmt = "md"
         fmt_alias = {"md": "markdown"}
         return write_report(report, out, fmt_alias.get(fmt, fmt))
+
+
+def _is_skipped_dir(path: Path) -> bool:
+    """批量扫描时跳过的目录。"""
+    name = path.name
+    return name in {".git", ".hg", ".svn", "__pycache__", "node_modules", ".venv", "venv", "site", "htmlcov", ".pytest_cache", ".ruff_cache", ".mypy_cache"} or name.startswith(".")

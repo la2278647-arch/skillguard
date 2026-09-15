@@ -134,3 +134,70 @@ class TestSkillGuard:
         out = tmp_path / "report.txt"
         guard.export(report, out)
         assert "# SkillGuard" in out.read_text(encoding="utf-8")
+
+
+class TestScanDirectory:
+    def _make_tree(self, tmp_path: Path) -> tuple[Path, Path]:
+        """构造 3 个 Skill 的目录树。"""
+        good = tmp_path / "skills" / "good-skill"
+        bad = tmp_path / "skills" / "bad-skill"
+        nested = tmp_path / "skills" / "collection" / "nested-skill"
+        for d in (good, bad, nested):
+            d.mkdir(parents=True)
+            (d / "SKILL.md").write_text(
+                f"---\nname: {d.name}\ndescription: desc\nversion: 1.0.0\n---\n# {d.name}\n",
+                encoding="utf-8",
+            )
+        # 坏 Skill 加入危险模式
+        (bad / "nuke.sh").write_text("rm -rf /important\n", encoding="utf-8")
+        return tmp_path, bad
+
+    def test_finds_all_skills(self, tmp_path: Path) -> None:
+        tree, _bad = self._make_tree(tmp_path)
+        guard = SkillGuard(Config(skill_dir=str(tree)))
+        results = guard.scan_directory(tree)
+        assert len(results) == 3
+        names = {r["name"] for r in results}
+        assert names == {"good-skill", "bad-skill", "nested-skill"}
+
+    def test_sorted_by_score(self, tmp_path: Path) -> None:
+        tree, _ = self._make_tree(tmp_path)
+        guard = SkillGuard(Config(skill_dir=str(tree)))
+        results = guard.scan_directory(tree)
+        scores = [r["score"] for r in results]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_bad_skill_flags_errors(self, tmp_path: Path) -> None:
+        tree, _bad = self._make_tree(tmp_path)
+        guard = SkillGuard(Config(skill_dir=str(tree)))
+        results = guard.scan_directory(tree)
+        bad_entry = next(r for r in results if r["name"] == "bad-skill")
+        assert bad_entry["errors"] >= 1
+        assert bad_entry["passed"] is False
+
+    def test_depth_limit(self, tmp_path: Path) -> None:
+        tree, _ = self._make_tree(tmp_path)
+        guard = SkillGuard(Config(skill_dir=str(tree)))
+        results = guard.scan_directory(tree, max_depth=2)
+        # depth=2 时到达 skills/* 层：找到 good-skill 和 bad-skill，找不到 collection/nested-skill
+        names = {r["name"] for r in results}
+        assert "good-skill" in names
+        assert "bad-skill" in names
+        assert "nested-skill" not in names
+
+    def test_skips_vcs_dirs(self, tmp_path: Path) -> None:
+        tree, _ = self._make_tree(tmp_path)
+        (tree / "skills" / ".git").mkdir()
+        guard = SkillGuard(Config(skill_dir=str(tree)))
+        results = guard.scan_directory(tree)
+        assert len(results) == 3  # .git 被跳过，不产生干扰
+
+    def test_empty_dir(self, tmp_path: Path) -> None:
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        results = guard.scan_directory(tmp_path)
+        assert results == []
+
+    def test_nonexistent_dir(self, tmp_path: Path) -> None:
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        with pytest.raises(ValueError):
+            guard.scan_directory(tmp_path / "missing")

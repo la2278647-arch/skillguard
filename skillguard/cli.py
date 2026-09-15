@@ -82,6 +82,47 @@ def check(
         sys.exit(1)
 
 
+@main.command("scan")
+@click.argument("root_dir", type=click.Path(exists=True), default=".")
+@click.option("--depth", type=int, default=3, show_default=True, help="扫描深度")
+@click.option("--threshold", type=float, default=60.0, show_default=True, help="质量门禁分数")
+@click.option("--skip-safety", is_flag=True, help="跳过安全模式扫描")
+@click.option("--top", type=int, default=20, show_default=True, help="只显示前 N 个")
+def scan(root_dir: str, depth: int, threshold: float, skip_safety: bool, top: int) -> None:
+    """扫描目录树中的全部 Skill 目录并输出质量排行。"""
+    try:
+        config = Config(skill_dir=root_dir, threshold=threshold, skip_safety=skip_safety, run_tests=False)
+    except ValueError as exc:
+        click.echo(f"❌ 配置错误: {exc}", err=True)
+        sys.exit(2)
+
+    guard = SkillGuard(config)
+    try:
+        results = guard.scan_directory(root_dir, max_depth=depth)
+    except ValueError as exc:
+        click.echo(f"❌ {exc}", err=True)
+        sys.exit(2)
+
+    if not results:
+        click.echo("未在目录树中发现任何 Skill（需要 SKILL.md 或 skill.md）")
+        return
+
+    click.echo(f"\n🔍 扫描完成: 发现 {len(results)} 个 Skill（目录: {root_dir}）\n")
+    header = f"{'#':>3}  {'分数':>5}  {'状态':<4}  {'🔴':>3} {'🟡':>3}  {'名称':<30} 路径"
+    click.echo(header)
+    click.echo("-" * len(header))
+    for idx, r in enumerate(results[:top], 1):
+        status = "✅" if r["passed"] else "❌"
+        click.echo(
+            f"{idx:>3}  {r['score']:>5.1f}  {status:<4}  {r['errors']:>3} {r['warnings']:>3}  "
+            f"{r['name']:<30} {r['path']}"
+        )
+    if len(results) > top:
+        click.echo(f"... 其余 {len(results) - top} 个略过（--top 调整）")
+    click.echo(f"\n平均分: {sum(r['score'] for r in results) / len(results):.1f}")
+    click.echo(f"通过率: {sum(1 for r in results if r['passed']) / len(results) * 100:.0f}%")
+
+
 @main.command("init")
 @click.argument("skill_dir", type=click.Path(), default=".")
 @click.option("--name", default=None, help="Skill 名称（默认取目录名）")
