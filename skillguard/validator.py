@@ -461,6 +461,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-224", r"\bcargo\s+install\s+--force\b", Severity.INFO),
     # go get 最新版
     ("SEC-225", r"\bgo\s+get\s+-u\s+.*@latest", Severity.INFO),
+    # crontab 注入
+    ("SEC-226", r"\bcrontab\s+-e\b|echo\s+.*\s*\|\s*crontab", Severity.WARNING),
+    # at 定时任务
+    ("SEC-227", r"\bat\s+\d+[:.]\d+", Severity.INFO),
+    # systemd timer 验证
+    ("SEC-228", r"\bsystemd-analyze\s+verify", Severity.INFO),
+    # init.d 脚本注入
+    ("SEC-229", r"\bupdate-rc.d\s+.*defaults", Severity.INFO),
+    # launchd 加载
+    ("SEC-230", r"\blaunchctl\s+load\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

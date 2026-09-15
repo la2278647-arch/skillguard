@@ -347,6 +347,11 @@ class TestSafetyChecks:
             ("gem install --force pkg\n", "SEC-223"),
             ("cargo install --force pkg\n", "SEC-224"),
             ("go get -u github.com/x@latest\n", "SEC-225"),
+            ("echo * * * * * cmd | crontab\n", "SEC-226"),
+            ("at 09:30 command\n", "SEC-227"),
+            ("systemd-analyze verify service\n", "SEC-228"),
+            ("update-rc.d service defaults\n", "SEC-229"),
+            ("launchctl load plist\n", "SEC-230"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
