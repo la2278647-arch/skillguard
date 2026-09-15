@@ -400,3 +400,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-348` | 🟡 | `cat client.ovpn` | VPN 凭据 |
 | `SEC-349` | 🔴 | `cat .pgpass` | 数据库凭据 |
 | `SEC-350` | 🔴 | `cat ~/.gnupg/private-keys-v1.d/` | GPG 私钥 |
+| `SEC-351` | 🔵 | `aws s3 ls s3://` | S3 桶列举 |
+| `SEC-352` | 🔵 | `aws s3 sync s3://` | S3 数据下载 |
+| `SEC-353` | 🔵 | `gsutil cp gs://` | GCS 访问 |
+| `SEC-354` | 🔵 | `az blob download` | Azure 下载 |
+| `SEC-355` | 🔴 | `curl 169.254.169.254` | 云元数据窃取 |
