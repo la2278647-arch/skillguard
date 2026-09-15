@@ -630,3 +630,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-578` | 🟡 | `export SSL_CERT_FILE=` | 证书覆盖 |
 | `SEC-579` | 🔵 | `Set-ExecutionPolicy` | 脚本策略 |
 | `SEC-580` | 🟡 | `alias pip=` | 包管理器别名 |
+| `SEC-581` | 🟡 | `cp evil /usr/local/bin/` | 负载持久化 |
+| `SEC-582` | 🔴 | `mv evil /bin/ls` | 系统命令替换 |
+| `SEC-583` | 🔵 | `ulimit -c` | 核心转储利用 |
+| `SEC-584` | 🟡 | `bwrap --share-net` | 沙箱网络逃逸 |
+| `SEC-585` | 🟡 | `strace -S` | 系统调用替换 |
