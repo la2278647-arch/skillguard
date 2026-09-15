@@ -771,6 +771,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-379", r"\bgrep\s+-i\s+.*(?:password|token)\s+/var/log", Severity.WARNING),
     # 临时文件侦察
     ("SEC-380", r"\bls\s+-la\s+/tmp|\bls\s+-la\s+/var/tmp", Severity.INFO),
+    # 命令行历史转储
+    ("SEC-381", r"\bcat\s+~?/\.bash_history\s*\|\s*base64", Severity.WARNING),
+    # 凭据管道外传
+    ("SEC-382", r"\bcat\s+/etc/shadow\s*\|\s*(?:nc|curl|scp)", Severity.ERROR),
+    # 数据库凭据转储
+    ("SEC-383", r"\bmysqldump\s+.*-p\S+|\bpg_dump\s+.*--password", Severity.WARNING),
+    # 压缩源码外传
+    ("SEC-384", r"\bzip2\s+-r\s+.*\s*\|\s*base64|\btar\s+-czf\s+.*\.git\s*\|\s*nc", Severity.WARNING),
+    # 配置文件批量外传
+    ("SEC-385", r"\b(?:tar|zip)\s+.*/etc\s*\|\s*(?:nc|curl|base64)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

