@@ -587,6 +587,11 @@ class TestSafetyChecks:
             ("cp evil.so /usr/lib/\n", "SEC-463"),
             ("cat /proc/1234/environ\n", "SEC-464"),
             ("rm -f ~/.bash_history\n", "SEC-465"),
+            ("cat ~/.msmtprc\n", "SEC-466"),
+            ("cat ~/.config/google-chrome/Login\n", "SEC-467"),
+            ("aws configure export\n", "SEC-468"),
+            ("cat ~/.bash_sessions/session\n", "SEC-469"),
+            ("gpg --export-secret-keys key1\n", "SEC-470"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

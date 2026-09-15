@@ -941,6 +941,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-464", r"\bcat\s+/proc/\d+/environ", Severity.WARNING),
     # 恶意命令历史清理
     ("SEC-465", r"\brm\s+-f\s+~?/\.(?:bash_history|zsh_history)", Severity.INFO),
+    # 恶意邮件客户端配置
+    ("SEC-466", r"\bcat\s+~?/\.msmtprc|\bcat\s+~?/\.mailrc", Severity.WARNING),
+    # 浏览器自动填充窃取
+    ("SEC-467", r"\bcat\s+~?/\.config/google-chrome/.*(?:Login|Web Data)", Severity.ERROR),
+    # 恶意云配置导出
+    ("SEC-468", r"\b(?:aws|az)\s+configure\s+[^\n]*(?:export|json|text)\s*$", Severity.INFO),
+    # 危险会话文件窃取
+    ("SEC-469", r"\bcat\s+~?/\.(?:bash_sessions|zsh_sessions)/", Severity.WARNING),
+    # 恶意密钥环导出
+    ("SEC-470", r"\bgpg\s+--export-secret-keys\s+\S+", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
