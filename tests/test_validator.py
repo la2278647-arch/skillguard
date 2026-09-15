@@ -317,6 +317,11 @@ class TestSafetyChecks:
             ("atlas migrate reset\n", "SEC-193"),
             ("supabase db reset\n", "SEC-194"),
             ("firebase firestore:delete --all\n", "SEC-195"),
+            ("heroku apps:destroy myapp\n", "SEC-196"),
+            ("vercel rm myproject\n", "SEC-197"),
+            ("netlify sites:delete\n", "SEC-198"),
+            ("wrangler routes delete\n", "SEC-199"),
+            ("glab project delete\n", "SEC-200"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

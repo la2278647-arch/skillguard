@@ -401,6 +401,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-194", r"\bsupabase\s+db\s+reset", Severity.WARNING),
     # firebase 清空
     ("SEC-195", r"\bfirebase\s+firestore:delete", Severity.WARNING),
+    # heroku 应用删除
+    ("SEC-196", r"\bheroku\s+apps:destroy", Severity.WARNING),
+    # vercel 项目删除
+    ("SEC-197", r"\bvercel\s+rm\s+", Severity.WARNING),
+    # netlify 站点删除
+    ("SEC-198", r"\bnetlify\s+sites:delete", Severity.WARNING),
+    # cloudflare 域名删除
+    ("SEC-199", r"\bwrangler\s+routes\s+delete|\bcloudflare\s+delete\s+zone", Severity.WARNING),
+    # gitlab 项目删除
+    ("SEC-200", r"\bglab\s+project\s+delete|\bgitlab\s+project\s+remove", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
