@@ -123,6 +123,55 @@ def scan(root_dir: str, depth: int, threshold: float, skip_safety: bool, top: in
     click.echo(f"通过率: {sum(1 for r in results if r['passed']) / len(results) * 100:.0f}%")
 
 
+@main.command("bench")
+@click.argument("repo_url")
+@click.option("--depth", type=int, default=2, show_default=True, help="扫描深度")
+@click.option("--max-skills", type=int, default=200, show_default=True, help="最多扫描的 Skill 数")
+@click.option("--threshold", type=float, default=60.0, show_default=True, help="质量门禁分数")
+@click.option("--top", type=int, default=10, show_default=True, help="排行榜显示条数")
+@click.option("--json", "json_out", type=click.Path(), default=None, help="JSON 报告输出路径")
+def bench(repo_url: str, depth: int, max_skills: int, threshold: float, top: int, json_out: str | None) -> None:
+    """对远程 GitHub 仓库执行生态质量基准扫描。"""
+    from .benchmark import BenchmarkRunner
+
+    click.echo(f"🔍 正在克隆并扫描: {repo_url} (depth={depth}, max_skills={max_skills})")
+    try:
+        summary = BenchmarkRunner(
+            repo_url=repo_url, depth=depth, max_skills=max_skills, threshold=threshold
+        ).run()
+    except RuntimeError as exc:
+        click.echo(f"❌ {exc}", err=True)
+        sys.exit(2)
+
+    _print_bench_summary(summary, top)
+
+    if json_out:
+        import json as json_lib
+
+        Path(json_out).parent.mkdir(parents=True, exist_ok=True)
+        Path(json_out).write_text(
+            json_lib.dumps(summary.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        click.echo(f"📄 JSON 报告已写入: {json_out}")
+
+
+def _print_bench_summary(summary, top: int) -> None:
+    """打印生态基准扫描摘要。"""
+    s = summary
+    click.echo(f"\n📊 生态质量报告: {s.repo_url}")
+    click.echo(f"  扫描到 {s.skill_count} 个 Skill | 平均分 {s.avg_score:.1f} | 通过率 {s.pass_rate * 100:.0f}%")
+    click.echo(f"  累计问题: 🔴 {s.total_errors} error / 🟡 {s.total_warnings} warning")
+    if s.score_distribution:
+        click.echo("  评分分布: " + "  ".join(f"{k}:{v}" for k, v in s.score_distribution.items()))
+    if s.skills:
+        click.echo(f"\n  Top {min(top, len(s.skills))} 排行:")
+        for idx, r in enumerate(s.skills[:top], 1):
+            status = "✅" if r["passed"] else "❌"
+            click.echo(f"    {idx:>2}. [{r['score']:>5.1f}] {status} {r['name']:<28} (errors:{r['errors']})")
+    else:
+        click.echo("\n  未发现任何 Skill（需要 SKILL.md / skill.md）")
+
+
 @main.command("init")
 @click.argument("skill_dir", type=click.Path(), default=".")
 @click.option("--name", default=None, help="Skill 名称（默认取目录名）")
