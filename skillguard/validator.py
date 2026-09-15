@@ -1021,6 +1021,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-504", r"\bchroot\s+\S+\s+/bin/sh|\bchroot\s+\S+\s+/bin/bash", Severity.ERROR),
     # 恶意环境清理
     ("SEC-505", r"\benv\s+-i\s+|\bexec\s+env\s+-i\s+", Severity.INFO),
+    # 恶意 AI 模型数据投毒
+    ("SEC-506", r"\b(?:pip|conda)\s+install\s+.*\S*(?:torch|tensorflow|transformers)\S*\s*$", Severity.WARNING),
+    # 危险 ML 凭据
+    ("SEC-507", r"\bexport\s+(?:HF_TOKEN|OPENAI_API_KEY|WANDB_API_KEY)\s*=", Severity.ERROR),
+    # 恶意向量库操作
+    ("SEC-508", r"\b(?:chroma|qdrant|weaviate)\s+[^\n]*delete\s+", Severity.WARNING),
+    # 危险训练数据窃取
+    ("SEC-509", r"\b(?:cat|tar)\s+.*\S*(?:dataset|train|labels)\S*\.(?:jsonl|csv|parquet)\s*$", Severity.WARNING),
+    # 恶意推理缓存投毒
+    ("SEC-510", r"\b(?:rm|mv)\s+.*\S*(?:cache|prompt_cache|kv_cache)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

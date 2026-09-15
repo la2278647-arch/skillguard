@@ -627,6 +627,11 @@ class TestSafetyChecks:
             ("echo alias evil=rm >> ~/.bashrc\n", "SEC-503"),
             ("chroot /mnt /bin/sh\n", "SEC-504"),
             ("env -i /bin/sh\n", "SEC-505"),
+            ("pip install torch\n", "SEC-506"),
+            ("export OPENAI_API_KEY=sk-xxx\n", "SEC-507"),
+            ("chroma delete collection\n", "SEC-508"),
+            ("cat dataset.jsonl\n", "SEC-509"),
+            ("rm -rf cache\n", "SEC-510"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
