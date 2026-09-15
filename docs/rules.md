@@ -360,3 +360,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-308` | 🟡 | `ping -p hex` | ICMP 隧道 |
 | `SEC-309` | 🔵 | `nc host 53` | DNS 端口通道 |
 | `SEC-310` | 🔵 | `socat dns:` | DNS 通道 |
+| `SEC-311` | 🟡 | `bzip2 -c | nc` | 压缩管道外传 |
+| `SEC-312` | 🟡 | `base64 -w0 | curl` | 编码外传 |
+| `SEC-313` | 🟡 | `tar -czf - | nc` | 归档外传 |
+| `SEC-314` | 🔵 | `.hidden_backup.sh` | 隐蔽文件名 |
+| `SEC-315` | 🔵 | `photo.jpg.sh` | 双扩展名混淆 |
