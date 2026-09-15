@@ -6,6 +6,8 @@
 
 **Agent Skills 质量保障与测试框架** — 为 Claude Code / Codex / Cursor 等 AI 编码代理的 Skills 提供静态校验、沙箱测试、质量评分与 CI 集成。
 
+[![English](https://img.shields.io/badge/README-English-blue)](README.en.md) [![中文](https://img.shields.io/badge/README-中文-red)](README.md)
+
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Coverage](https://img.shields.io/badge/coverage-95.2%25-brightgreen)](https://github.com/la2278647-arch/skillguard)
