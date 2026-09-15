@@ -565,3 +565,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-513` | 🔵 | `xdotool key` | GUI 自动化 |
 | `SEC-514` | 🟡 | `xclip -o | while` | 剪贴板监控 |
 | `SEC-515` | 🔵 | `espeak | nc` | 辅助技术利用 |
+| `SEC-516` | 🟡 | `arecord -d` | 音频窃取 |
+| `SEC-517` | 🔵 | `geoiplookup` | 位置追踪 |
+| `SEC-518` | 🟡 | `beef-xss` | 钓鱼工具 |
+| `SEC-519` | 🔵 | `vncserver` | 远程控制 |
+| `SEC-520` | 🔵 | `foremost /dev/sd` | 数据恢复滥用 |
