@@ -128,3 +128,12 @@ class TestReportCLI:
         result = CliRunner().invoke(report_cmd, [str(tmp_path)])
         assert result.exit_code == 0
         assert "未在目录树中发现" in result.output
+
+    def test_report_with_workers(self, tmp_path: Path) -> None:
+        """--workers 参数应正常传递并工作。"""
+        tree = self._make_tree(tmp_path)
+        out = tmp_path / "agg.json"
+        result = CliRunner().invoke(report_cmd, [str(tree), "--workers", "2", "--format", "json", "-o", str(out)])
+        assert result.exit_code == 0
+        assert out.exists()
+        assert '"skill_count": 2' in out.read_text(encoding="utf-8")

@@ -262,6 +262,64 @@ class TestFullScanDirectory:
         with pytest.raises(ValueError):
             guard.full_scan_directory(tmp_path / "missing")
 
+    def test_full_scan_concurrent_same_results(self, tmp_path: Path) -> None:
+        """并发 full_scan 与串行结果一致。"""
+        for name in ("a", "b", "c", "d"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\nversion: 1.0.0\n---\n# {name}\n",
+                encoding="utf-8",
+            )
+            if name in ("b", "d"):
+                (d / "x.sh").write_text("rm -rf /\n", encoding="utf-8")
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        serial = guard.full_scan_directory(tmp_path, workers=1)
+        concurrent = guard.full_scan_directory(tmp_path, workers=4)
+        assert [(i["name"], i["score"], i["passed"]) for i in serial] == [
+            (i["name"], i["score"], i["passed"]) for i in concurrent
+        ]
+
+    def test_full_scan_concurrent_with_tests(self, tmp_path: Path) -> None:
+        """并发模式下含沙箱测试的完整评估正常。"""
+        for name in ("a", "b"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\nversion: 1.0.0\n---\n# {name}\n",
+                encoding="utf-8",
+            )
+            (d / "tests").mkdir()
+            (d / "tests" / "ok.sh").write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8")
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=True))
+        items = guard.full_scan_directory(tmp_path, workers=2)
+        assert len(items) == 2
+        assert all(i["tests"] == 1 and i["tests_passed"] == 1 for i in items)
+
+    def test_full_scan_workers_one(self, tmp_path: Path) -> None:
+        """workers=1 显式串行模式。"""
+        d = tmp_path / "s"
+        d.mkdir()
+        (d / "SKILL.md").write_text(
+            "---\nname: s\ndescription: d\nversion: 1.0.0\n---\n# s\n", encoding="utf-8"
+        )
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        items = guard.full_scan_directory(tmp_path, workers=1)
+        assert len(items) == 1
+
+    def test_scan_directory_unchanged(self, tmp_path: Path) -> None:
+        """scan_directory（轻量）不受并发改动影响，仍为串行 API。"""
+        for name in ("a", "b"):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\nversion: 1.0.0\n---\n# {name}\n",
+                encoding="utf-8",
+            )
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        results = guard.scan_directory(tmp_path)
+        assert len(results) == 2
+
     def test_full_scan_skips_broken_dirs(self, tmp_path: Path) -> None:
         """含无效 Skill 的目录应被跳过而非中断。"""
         good = tmp_path / "skills" / "good"

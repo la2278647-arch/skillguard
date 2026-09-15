@@ -316,7 +316,9 @@ def config_cmd(init_flag: bool, show_flag: bool, skill_dir: str) -> None:
               show_default=True, help="报告格式")
 @click.option("--output", "-o", type=click.Path(), default=None, help="报告输出路径")
 @click.option("--no-tests", is_flag=True, help="跳过测试执行（加速）")
-def report_cmd(root_dir: str, depth: int, fmt: str, output: str | None, no_tests: bool) -> None:
+@click.option("--workers", type=int, default=0, show_default=True,
+              help="并发 Worker 数（0=自动：min(8, CPU核数*2)）")
+def report_cmd(root_dir: str, depth: int, fmt: str, output: str | None, no_tests: bool, workers: int) -> None:
     """生成多 Skill 聚合质量报告（团队/仓库级总览）。"""
     from .reporting import render_aggregate
 
@@ -328,7 +330,7 @@ def report_cmd(root_dir: str, depth: int, fmt: str, output: str | None, no_tests
 
     guard = SkillGuard(config)
     try:
-        items = guard.full_scan_directory(root_dir, max_depth=depth)
+        items = guard.full_scan_directory(root_dir, max_depth=depth, workers=workers)
     except ValueError as exc:
         click.echo(f"❌ {exc}", err=True)
         sys.exit(2)

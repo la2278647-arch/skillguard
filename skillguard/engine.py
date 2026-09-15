@@ -157,11 +157,19 @@ class SkillGuard:
             "tests_passed": 0,
         }
 
-    def full_scan_directory(self, root: str | Path, max_depth: int = 3) -> list[dict]:
+    def full_scan_directory(
+        self,
+        root: str | Path,
+        max_depth: int = 3,
+        workers: int = 0,
+    ) -> list[dict]:
         """扫描目录树中的全部 Skill 并执行**完整评估**（含沙箱测试）。
 
         与 scan_directory 的轻量评估不同，本方法对每个 Skill 调用 run()，
         包含测试执行，适合生成团队/仓库级聚合质量报告。
+
+        每个 Skill 的评估相互独立，默认并发执行（workers=0 时自动选择
+        min(8, CPU 核数 * 2)），沙箱测试场景下可显著提速。
 
         Returns:
             [{path, name, score, passed, errors, warnings, tests, tests_passed, report}]
@@ -173,24 +181,41 @@ class SkillGuard:
 
         # 复用 scan_directory 的目录发现逻辑
         lite_results = self.scan_directory(root_path, max_depth=max_depth)
-        for item in lite_results:
+
+        def evaluate(item: dict) -> dict | None:
             try:
                 report = self._run_on_dir(Path(item["path"]))
-                results.append(
-                    {
-                        "path": item["path"],
-                        "name": item["name"],
-                        "score": report.overall_score,
-                        "passed": report.passed,
-                        "errors": report.error_count(),
-                        "warnings": report.warning_count(),
-                        "tests": len(report.tests),
-                        "tests_passed": report.passed_tests(),
-                        "report": report.to_dict(),
-                    }
-                )
+                return {
+                    "path": item["path"],
+                    "name": item["name"],
+                    "score": report.overall_score,
+                    "passed": report.passed,
+                    "errors": report.error_count(),
+                    "warnings": report.warning_count(),
+                    "tests": len(report.tests),
+                    "tests_passed": report.passed_tests(),
+                    "report": report.to_dict(),
+                }
             except (ValueError, OSError):
-                continue  # 跳过无法评估的目录
+                return None  # 跳过无法评估的目录
+
+        if workers == 0:
+            import os
+
+            workers = min(8, max(1, (os.cpu_count() or 2) * 2))
+
+        if len(lite_results) <= 1 or workers <= 1:
+            for item in lite_results:
+                result = evaluate(item)
+                if result is not None:
+                    results.append(result)
+        else:
+            from concurrent.futures import ThreadPoolExecutor
+
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                for result in pool.map(evaluate, lite_results):
+                    if result is not None:
+                        results.append(result)
 
         results.sort(key=lambda r: r["score"], reverse=True)
         return results
