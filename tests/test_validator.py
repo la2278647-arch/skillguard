@@ -687,6 +687,11 @@ class TestSafetyChecks:
             ("timedatectl set-timezone Asia/Shanghai\n", "SEC-563"),
             ("export LANG=zh_CN.UTF-8\n", "SEC-564"),
             ("history -a /tmp/hist\n", "SEC-565"),
+            ("mysqldump db\n", "SEC-566"),
+            ("mount -o remount,rw /\n", "SEC-567"),
+            ("lsblk -o NAME,SIZE\n", "SEC-568"),
+            ("iptables -F\n", "SEC-569"),
+            ("ip addr add 10.0.0.1/24 dev eth0\n", "SEC-570"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
