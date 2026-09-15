@@ -309,6 +309,46 @@ def config_cmd(init_flag: bool, show_flag: bool, skill_dir: str) -> None:
     sys.exit(2)
 
 
+@main.command("report")
+@click.argument("root_dir", type=click.Path(exists=True), default=".")
+@click.option("--depth", type=int, default=3, show_default=True, help="扫描深度")
+@click.option("--format", "fmt", type=click.Choice(["json", "markdown", "html"]), default="markdown",
+              show_default=True, help="报告格式")
+@click.option("--output", "-o", type=click.Path(), default=None, help="报告输出路径")
+@click.option("--no-tests", is_flag=True, help="跳过测试执行（加速）")
+def report_cmd(root_dir: str, depth: int, fmt: str, output: str | None, no_tests: bool) -> None:
+    """生成多 Skill 聚合质量报告（团队/仓库级总览）。"""
+    from .reporting import render_aggregate
+
+    try:
+        config = Config(skill_dir=root_dir, run_tests=not no_tests, report_format=fmt)
+    except ValueError as exc:
+        click.echo(f"❌ 配置错误: {exc}", err=True)
+        sys.exit(2)
+
+    guard = SkillGuard(config)
+    try:
+        items = guard.full_scan_directory(root_dir, max_depth=depth)
+    except ValueError as exc:
+        click.echo(f"❌ {exc}", err=True)
+        sys.exit(2)
+
+    if not items:
+        click.echo("未在目录树中发现任何 Skill")
+        return
+
+    content = render_aggregate(items, fmt)
+    click.echo(f"📊 聚合报告: {len(items)} 个 Skill | 平均分 "
+               f"{sum(i['score'] for i in items) / len(items):.1f}")
+    if output:
+        out = Path(output)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(content, encoding="utf-8")
+        click.echo(f"📄 报告已写入: {out}")
+    else:
+        click.echo(content[:3000])
+
+
 @main.command("mcp")
 def mcp_cmd() -> None:
     """启动 MCP 服务器（stdio），供 AI 代理调用 SkillGuard 工具。"""

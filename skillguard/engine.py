@@ -157,6 +157,67 @@ class SkillGuard:
             "tests_passed": 0,
         }
 
+    def full_scan_directory(self, root: str | Path, max_depth: int = 3) -> list[dict]:
+        """扫描目录树中的全部 Skill 并执行**完整评估**（含沙箱测试）。
+
+        与 scan_directory 的轻量评估不同，本方法对每个 Skill 调用 run()，
+        包含测试执行，适合生成团队/仓库级聚合质量报告。
+
+        Returns:
+            [{path, name, score, passed, errors, warnings, tests, tests_passed, report}]
+        """
+        root_path = Path(root).resolve()
+        results: list[dict] = []
+        if not root_path.is_dir():
+            raise ValueError(f"目录不存在: {root_path}")
+
+        # 复用 scan_directory 的目录发现逻辑
+        lite_results = self.scan_directory(root_path, max_depth=max_depth)
+        for item in lite_results:
+            try:
+                report = self._run_on_dir(Path(item["path"]))
+                results.append(
+                    {
+                        "path": item["path"],
+                        "name": item["name"],
+                        "score": report.overall_score,
+                        "passed": report.passed,
+                        "errors": report.error_count(),
+                        "warnings": report.warning_count(),
+                        "tests": len(report.tests),
+                        "tests_passed": report.passed_tests(),
+                        "report": report.to_dict(),
+                    }
+                )
+            except (ValueError, OSError):
+                continue  # 跳过无法评估的目录
+
+        results.sort(key=lambda r: r["score"], reverse=True)
+        return results
+
+    def _run_on_dir(self, skill_dir: Path) -> QualityReport:
+        """在指定目录上执行完整 run()（复用 run 逻辑）。"""
+        skill = load_skill(skill_dir)
+        if skill is None:
+            raise ValueError(f"未在 {skill_dir} 找到有效的 Skill 目录")
+        checks = run_static_checks(skill_dir, skill, skip_safety=self.config.skip_safety)
+        tests = []
+        if self.config.run_tests:
+            tests = run_test_scripts(skill_dir, [], timeout=self.config.test_timeout)
+        score_breakdown, overall = score_skill(skill, checks, tests)
+        report = QualityReport(
+            skill=skill,
+            version=__version__,
+            timestamp=now_iso(),
+            checks=checks,
+            tests=tests,
+            score=score_breakdown,
+            overall_score=overall,
+            passed=False,
+        )
+        report.passed = evaluate_passed(report, self.config.threshold)
+        return report
+
     # ------------------------------------------------------------------
     # 输出
     # ------------------------------------------------------------------

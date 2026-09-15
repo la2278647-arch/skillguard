@@ -257,3 +257,140 @@ def _render_html(report: QualityReport) -> str:
 </body>
 </html>
 """
+
+
+# ----------------------------------------------------------------------
+# 聚合报告（多 Skill 质量总览）
+# ----------------------------------------------------------------------
+
+
+def aggregate_summary(items: list[dict]) -> dict:
+    """从 full_scan_directory 的结果计算聚合统计。"""
+    count = len(items)
+    if count == 0:
+        return {
+            "skill_count": 0,
+            "avg_score": 0.0,
+            "pass_rate": 0.0,
+            "total_errors": 0,
+            "total_warnings": 0,
+            "total_tests": 0,
+            "score_distribution": {"90-100": 0, "75-89": 0, "60-74": 0, "40-59": 0, "0-39": 0},
+        }
+    avg = sum(i["score"] for i in items) / count
+    passed = sum(1 for i in items if i["passed"])
+    dist = {"90-100": 0, "75-89": 0, "60-74": 0, "40-59": 0, "0-39": 0}
+    for i in items:
+        s = i["score"]
+        if s >= 90:
+            dist["90-100"] += 1
+        elif s >= 75:
+            dist["75-89"] += 1
+        elif s >= 60:
+            dist["60-74"] += 1
+        elif s >= 40:
+            dist["40-59"] += 1
+        else:
+            dist["0-39"] += 1
+    return {
+        "skill_count": count,
+        "avg_score": round(avg, 2),
+        "pass_rate": round(passed / count, 2),
+        "total_errors": sum(i["errors"] for i in items),
+        "total_warnings": sum(i["warnings"] for i in items),
+        "total_tests": sum(i["tests"] for i in items),
+        "score_distribution": dist,
+    }
+
+
+def render_aggregate(items: list[dict], fmt: str, title: str = "SkillGuard 聚合报告") -> str:
+    """渲染多 Skill 聚合报告。fmt: json / markdown / html"""
+    summary = aggregate_summary(items)
+    if fmt == "json":
+        import json as json_lib
+
+        return json_lib.dumps(
+            {"summary": summary, "skills": items}, ensure_ascii=False, indent=2
+        )
+    if fmt == "markdown":
+        return _render_aggregate_md(items, summary, title)
+    if fmt == "html":
+        return _render_aggregate_html(items, summary, title)
+    raise ValueError(f"不支持的格式: {fmt}")
+
+
+def _render_aggregate_md(items: list[dict], summary: dict, title: str) -> str:
+    lines = [
+        f"# {title}",
+        "",
+        f"- **Skill 数量**: {summary['skill_count']}",
+        f"- **平均分**: {summary['avg_score']}",
+        f"- **通过率**: {summary['pass_rate'] * 100:.0f}%",
+        f"- **累计问题**: 🔴 {summary['total_errors']} / 🟡 {summary['total_warnings']}",
+        "",
+        "## 评分分布",
+        "",
+        "| 区间 | 数量 |",
+        "|------|------|",
+    ]
+    for k, v in summary["score_distribution"].items():
+        lines.append(f"| {k} | {v} |")
+    lines += ["", "## Skill 明细", "", "| 分数 | 状态 | Skill | 🔴 | 🟡 | 测试 |", "|------|------|-------|----|----|------|"]
+    for i in items:
+        status = "✅" if i["passed"] else "❌"
+        lines.append(
+            f"| {i['score']:.1f} | {status} | {i['name']} | {i['errors']} | {i['warnings']} | {i['tests_passed']}/{i['tests']} |"
+        )
+    lines += ["", "---", f"_由 SkillGuard 生成_{''}"]
+    return "\n".join(lines)
+
+
+def _render_aggregate_html(items: list[dict], summary: dict, title: str) -> str:
+    rows = "".join(
+        f"<tr><td><b>{i['score']:.1f}</b></td><td>{'✅' if i['passed'] else '❌'}</td>"
+        f"<td>{html_lib.escape(i['name'])}</td><td>{i['errors']}</td><td>{i['warnings']}</td>"
+        f"<td>{i['tests_passed']}/{i['tests']}</td></tr>"
+        for i in items
+    )
+    dist_rows = "".join(
+        f"<tr><td>{k}</td><td>{v}</td></tr>" for k, v in summary["score_distribution"].items()
+    )
+    return f"""<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html_lib.escape(title)}</title>
+<style>
+  body {{ font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif; margin: 0; padding: 24px; background: #0f172a; color: #e2e8f0; }}
+  .wrap {{ max-width: 900px; margin: 0 auto; }}
+  h1 {{ font-size: 1.4rem; }}
+  h2 {{ font-size: 1.1rem; margin-top: 28px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }}
+  .stats {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }}
+  .card {{ background: #1e293b; border-radius: 10px; padding: 14px; }}
+  .card .label {{ color: #94a3b8; font-size: .8rem; }}
+  .card .value {{ font-size: 1.4rem; font-weight: 600; }}
+  table {{ width: 100%; border-collapse: collapse; font-size: .9rem; }}
+  th, td {{ text-align: left; padding: 8px 10px; border-bottom: 1px solid #1e293b; }}
+  th {{ background: #1e293b; color: #94a3b8; }}
+  code {{ background: #1e293b; padding: 1px 6px; border-radius: 4px; }}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>{html_lib.escape(title)}</h1>
+  <div class="stats">
+    <div class="card"><div class="label">Skill 数量</div><div class="value">{summary['skill_count']}</div></div>
+    <div class="card"><div class="label">平均分</div><div class="value">{summary['avg_score']}</div></div>
+    <div class="card"><div class="label">通过率</div><div class="value">{summary['pass_rate'] * 100:.0f}%</div></div>
+    <div class="card"><div class="label">累计问题</div><div class="value">🔴 {summary['total_errors']} 🟡 {summary['total_warnings']}</div></div>
+  </div>
+  <h2>评分分布</h2>
+  <table><thead><tr><th>区间</th><th>数量</th></tr></thead><tbody>{dist_rows}</tbody></table>
+  <h2>Skill 明细（{len(items)}）</h2>
+  <table><thead><tr><th>分数</th><th>状态</th><th>Skill</th><th>🔴</th><th>🟡</th><th>测试</th></tr></thead><tbody>{rows or '<tr><td colspan=6>无</td></tr>'}</tbody></table>
+  <div class="meta" style="margin-top:30px;color:#94a3b8">Generated by <a href="https://github.com/skillguard/skillguard" style="color:#60a5fa">SkillGuard</a></div>
+</div>
+</body>
+</html>
+"""

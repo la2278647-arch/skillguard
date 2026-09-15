@@ -213,3 +213,70 @@ class TestScanDirectory:
         guard = SkillGuard(Config(skill_dir=str(tmp_path)))
         with pytest.raises(ValueError):
             guard.scan_directory(tmp_path / "missing")
+
+
+class TestFullScanDirectory:
+    def test_full_scan_includes_tests(self, tmp_path: Path) -> None:
+        """完整评估应包含测试执行结果。"""
+        d = tmp_path / "skills" / "good"
+        d.mkdir(parents=True)
+        (d / "SKILL.md").write_text(
+            "---\nname: good\ndescription: d\nversion: 1.0.0\n---\n# good\n", encoding="utf-8"
+        )
+        (d / "tests").mkdir()
+        (d / "tests" / "ok.sh").write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8")
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=True))
+        items = guard.full_scan_directory(tmp_path)
+        assert len(items) == 1
+        assert items[0]["tests"] == 1
+        assert items[0]["tests_passed"] == 1
+        assert "report" in items[0]
+
+    def test_full_scan_sorted(self, tmp_path: Path) -> None:
+        for name, bad in (("a", False), ("b", True)):
+            d = tmp_path / name
+            d.mkdir()
+            (d / "SKILL.md").write_text(
+                f"---\nname: {name}\ndescription: d\nversion: 1.0.0\n---\n# {name}\n",
+                encoding="utf-8",
+            )
+            if bad:
+                (d / "x.sh").write_text("rm -rf /\n", encoding="utf-8")
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        items = guard.full_scan_directory(tmp_path)
+        scores = [i["score"] for i in items]
+        assert scores == sorted(scores, reverse=True)
+
+    def test_full_scan_no_tests_when_disabled(self, tmp_path: Path) -> None:
+        d = tmp_path / "s"
+        d.mkdir()
+        (d / "SKILL.md").write_text(
+            "---\nname: s\ndescription: d\nversion: 1.0.0\n---\n# s\n", encoding="utf-8"
+        )
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        items = guard.full_scan_directory(tmp_path)
+        assert items[0]["tests"] == 0
+
+    def test_full_scan_nonexistent(self, tmp_path: Path) -> None:
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        with pytest.raises(ValueError):
+            guard.full_scan_directory(tmp_path / "missing")
+
+    def test_full_scan_skips_broken_dirs(self, tmp_path: Path) -> None:
+        """含无效 Skill 的目录应被跳过而非中断。"""
+        good = tmp_path / "skills" / "good"
+        good.mkdir(parents=True)
+        (good / "SKILL.md").write_text(
+            "---\nname: good\ndescription: d\nversion: 1.0.0\n---\n# good\n", encoding="utf-8"
+        )
+        # 无 SKILL.md 的目录
+        (tmp_path / "skills" / "not-a-skill").mkdir()
+        guard = SkillGuard(Config(skill_dir=str(tmp_path), run_tests=False))
+        items = guard.full_scan_directory(tmp_path)
+        names = {i["name"] for i in items}
+        assert names == {"good"}
+
+    def test_run_on_dir_invalid(self, tmp_path: Path) -> None:
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        with pytest.raises(ValueError):
+            guard._run_on_dir(tmp_path)
