@@ -460,3 +460,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-408` | 🟡 | `kubectl get secrets -o json` | 密钥导出 |
 | `SEC-409` | 🟡 | `helm install --repo evil` | 恶意 chart |
 | `SEC-410` | 🟡 | `kubectl --as=cluster-admin` | 权限提升 |
+| `SEC-411` | 🟡 | `serverless deploy backdoor` | 恶意函数 |
+| `SEC-412` | 🔴 | `export AWS_SECRET=` | 云凭据泄露 |
+| `SEC-413` | 🟡 | `aws s3 delete` | 云资源删除 |
+| `SEC-414` | 🟡 | `aws ... 0.0.0.0/0` | 安全组放开 |
+| `SEC-415` | 🟡 | `s3api put-bucket-acl public-read` | 存储公开 |
