@@ -145,3 +145,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-093` | 🟡 | `ssh -R` | SSH 反向转发 |
 | `SEC-094` | 🟡 | `find | xargs rm` | 批量删除 |
 | `SEC-095` | 🔵 | `tar -C /` | 绝对路径覆盖 |
+| `SEC-096` | 🔴 | `curl | sudo sh` | 高危管道执行 |
+| `SEC-097` | 🟡 | `pickle.loads(exec)` | 反序列化执行 |
+| `SEC-098` | 🔵 | `git submodule --recursive` | 递归子模块 |
+| `SEC-099` | 🟡 | `chmod u+s` | suid 后门 |
+| `SEC-100` | 🟡 | `shutdown/reboot/halt` | 系统关机重启 |
