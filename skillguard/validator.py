@@ -881,6 +881,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-434", r"\b(?:echo|printf)\s+.*\x1b\[", Severity.INFO),
     # 恶意 trap
     ("SEC-435", r"\btrap\s+(?:rm|shutdown|curl|wget)", Severity.WARNING),
+    # 恶意数据编码混淆
+    ("SEC-436", r"\b(?:base64|xxd|hexdump)\s+-d\s+.*\|\s*(?:bash|sh)", Severity.WARNING),
+    # 危险多行管道
+    ("SEC-437", r"\b(?:cat|tail|head)\s+/etc/(?:passwd|shadow)\s*\|\s*(?:curl|nc)", Severity.ERROR),
+    # 凭据云同步外传
+    ("SEC-438", r"\b(?:aws|gcloud|az)\s+[^\n]*(?:s3|gs|blob)\s+cp\s+\S*(?:shadow|passwd|credential)", Severity.ERROR),
+    # 恶意调试器
+    ("SEC-439", r"\b(?:gdb|lldb)\s+[^\n]*-batch[^\n]*-c\s+[^\n]*(?:dump|attach)", Severity.WARNING),
+    # 隐蔽网络扫描
+    ("SEC-440", r"\b(?:nc|nmap)\s+[^\n]*(?:-sS|--scan-delay)\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
