@@ -240,3 +240,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-188` | 🔵 | `knex migrate:rollback` | 迁移回滚 |
 | `SEC-189` | 🟡 | `drizzle-kit push --force` | 强制推送 |
 | `SEC-190` | 🟡 | `migrate-mongo reset` | 迁移重置 |
+| `SEC-191` | 🟡 | `migrate -path ... drop` | 迁移删除 |
+| `SEC-192` | 🔵 | `dbmate rollback` | 迁移回滚 |
+| `SEC-193` | 🟡 | `atlas migrate reset` | 迁移重置 |
+| `SEC-194` | 🟡 | `supabase db reset` | 数据库重置 |
+| `SEC-195` | 🟡 | `firebase firestore:delete` | 数据清空 |
