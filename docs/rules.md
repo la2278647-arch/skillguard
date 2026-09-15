@@ -600,3 +600,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-548` | 🟡 | `aircrack-ng` | 无线渗透 |
 | `SEC-549` | 🔵 | `adb shell` | 移动设备交互 |
 | `SEC-550` | 🟡 | `binwalk -e` | 固件提取 |
+| `SEC-551` | 🟡 | `firejail --noprofile` | 沙箱逃逸 |
+| `SEC-552` | 🟡 | `docker commit` | 镜像替换 |
+| `SEC-553` | 🟡 | `pip install malicious` | 依赖伪装 |
+| `SEC-554` | 🔵 | `git checkout -- config` | 配置回滚 |
+| `SEC-555` | 🟡 | `at now +` | 定时注入 |
