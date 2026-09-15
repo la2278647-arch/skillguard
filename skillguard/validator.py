@@ -641,6 +641,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-314", r"\.(?:hidden|secret|private|backup|tmp)[\w_-]*\.(?:sh|py|txt)\b", Severity.INFO),
     # 双扩展名混淆
     ("SEC-315", r"\b\w+\.[A-Za-z0-9_]{2,5}\.(?:sh|py|exe|bat|cmd)\b", Severity.INFO),
+    # bash /dev/tcp 反弹 shell
+    ("SEC-316", r"bash -i >& /dev/tcp/|sh -i >& /dev/tcp/", Severity.ERROR),
+    # nc -e 反弹 shell
+    ("SEC-317", r"\bnc\s+\S+\s+\d+\s+-e\s+\S+", Severity.ERROR),
+    # python 反弹 shell
+    ("SEC-318", r"python(?:3)?\s+-c\s+.*socket.*connect", Severity.ERROR),
+    # perl 反弹 shell
+    ("SEC-319", r"\bperl\s+-e\s+.*socket.*connect", Severity.ERROR),
+    # pty 反弹 shell
+    ("SEC-320", r"python.*-c\s+import\s+pty.*spawn", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
