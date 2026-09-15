@@ -851,6 +851,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-419", r"\b(?:curl|wget)\s+.*\s>>\s*\S+\.(?:py|js|sh|rb)", Severity.WARNING),
     # 依赖锁定绕过
     ("SEC-420", r"\b(?:npm|pip)\s+install\s+[^\n]*(?:--no-lockfile|--ignore-package-lock)", Severity.INFO),
+    # 恶意脚本混淆执行
+    ("SEC-421", r"\b(?:bash|sh)\s+-c\s+.*(?:base64|\\x[0-9a-f]{2})", Severity.WARNING),
+    # 凭据文件 chmod
+    ("SEC-422", r"\bchmod\s+777\s+~?/\.(?:ssh|aws|docker|gnupg)", Severity.WARNING),
+    # 恶意安装脚本
+    ("SEC-423", r"\b(?:curl|wget)\s+.*\|\s*sudo\s+(?:bash|sh|python)", Severity.ERROR),
+    # 权限提升滥用
+    ("SEC-424", r"\bsudo\s+(?:bash|sh|python|perl)\s+-c\s+", Severity.WARNING),
+    # 隐蔽进程替换
+    ("SEC-425", r"\bmv\s+\S+\s+/usr/bin/|\bcp\s+\S+\s+/usr/local/bin/", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
