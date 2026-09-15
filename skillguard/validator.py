@@ -391,6 +391,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-189", r"\bdrizzle-kit\s+push.*--force", Severity.WARNING),
     # migrate-mongo 重置
     ("SEC-190", r"\bmigrate-mongo\s+reset", Severity.WARNING),
+    # golang-migrate 删除
+    ("SEC-191", r"\bmigrate\s+-path.*\sdrop", Severity.WARNING),
+    # dbmate 回滚
+    ("SEC-192", r"\bdbmate\s+rollback\b", Severity.INFO),
+    # atlas 迁移重置
+    ("SEC-193", r"\batlas\s+migrate\s+reset", Severity.WARNING),
+    # supabase 重置
+    ("SEC-194", r"\bsupabase\s+db\s+reset", Severity.WARNING),
+    # firebase 清空
+    ("SEC-195", r"\bfirebase\s+firestore:delete", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

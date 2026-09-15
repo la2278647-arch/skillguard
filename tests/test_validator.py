@@ -312,6 +312,11 @@ class TestSafetyChecks:
             ("knex migrate:rollback\n", "SEC-188"),
             ("drizzle-kit push --force\n", "SEC-189"),
             ("migrate-mongo reset\n", "SEC-190"),
+            ("migrate -path ./migrations drop\n", "SEC-191"),
+            ("dbmate rollback\n", "SEC-192"),
+            ("atlas migrate reset\n", "SEC-193"),
+            ("supabase db reset\n", "SEC-194"),
+            ("firebase firestore:delete --all\n", "SEC-195"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
