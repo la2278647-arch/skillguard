@@ -435,3 +435,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-383` | 🟡 | `mysqldump -p` | 数据库转储 |
 | `SEC-384` | 🟡 | `tar .git | nc` | 源码外传 |
 | `SEC-385` | 🟡 | `tar /etc | nc` | 配置外传 |
+| `SEC-386` | 🔴 | `curl -o && bash` | 下载执行链 |
+| `SEC-387` | 🟡 | `sshpass -p ... ssh` | 凭据复用 |
+| `SEC-388` | 🟡 | `ssh -R` | 反向隧道 |
+| `SEC-389` | 🟡 | `nohup ... &` | 隐蔽持久化 |
+| `SEC-390` | 🟡 | `apt install netcat` | 恶意工具安装 |
