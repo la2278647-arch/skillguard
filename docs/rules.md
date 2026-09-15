@@ -200,3 +200,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-148` | 🔵 | `consul kv put --token` | 配置篡改 |
 | `SEC-149` | 🟡 | `zkCli deleteall /` | 数据删除 |
 | `SEC-150` | 🟡 | `redis-cli CONFIG SET dir` | 配置修改 |
+| `SEC-151` | 🔴 | `mongo db.dropDatabase()` | 删除数据库 |
+| `SEC-152` | 🔴 | `psql DROP TABLE` | 删除表 |
+| `SEC-153` | 🔴 | `mysql DROP DATABASE` | 删除库 |
+| `SEC-154` | 🟡 | `sqlite3 DELETE FROM` | 清空数据 |
+| `SEC-155` | 🟡 | `curl -X DELETE _all` | 删除索引 |
