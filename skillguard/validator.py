@@ -901,6 +901,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-444", r"\bshred\s+.*(?:/dev/sd|/etc)|\bwipefs\s+.*/dev/sd", Severity.ERROR),
     # 恶意固件写入
     ("SEC-445", r"\bflashrom\s+-w\s+|\bdd\s+if=\S+\s+of=/dev/mtd", Severity.ERROR),
+    # 恶意数据外发压缩
+    ("SEC-446", r"\b(?:tar|zip|7z)\s+.*(?:/etc|/root|/home)\s*\|\s*(?:base64|nc|curl)", Severity.WARNING),
+    # 凭据批量导出
+    ("SEC-447", r"\b(?:cp|cat)\s+~?/\.(?:aws|ssh|docker)\S*\s+(?:/tmp|/var/tmp)", Severity.WARNING),
+    # 恶意数据库复制
+    ("SEC-448", r"\b(?:cp|rsync)\s+\S*\.(?:sqlite|db|sql)\s+\S+", Severity.INFO),
+    # 危险凭据解密
+    ("SEC-449", r"\b(?:openssl|gpg)\s+.*(?:-d|-decrypt)\s+.*\S+\.(?:key|pem|gpg)", Severity.WARNING),
+    # 恶意文件传输链
+    ("SEC-450", r"\b(?:curl|wget)\s+[^\n]*-O\s+\S+\s*&&\s*(?:nc|scp|ssh)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

