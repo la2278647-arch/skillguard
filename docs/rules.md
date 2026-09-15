@@ -375,3 +375,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-323` | 🟡 | `ssh -L` | 本地端口转发 |
 | `SEC-324` | 🟡 | `ssh -D` | SOCKS 动态转发 |
 | `SEC-325` | 🔵 | `x2goclient --session` | 远程桌面连接 |
+| `SEC-326` | 🟡 | `nmap 内网段` | 内网扫描 |
+| `SEC-327` | 🟡 | `masscan -p` | 端口扫描 |
+| `SEC-328` | 🟡 | `arpspoof` | ARP 欺骗 |
+| `SEC-329` | 🟡 | `mitmproxy` | MITM 攻击 |
+| `SEC-330` | 🔵 | `tshark -i -w` | 流量抓包 |
