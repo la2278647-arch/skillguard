@@ -605,3 +605,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-553` | 🟡 | `pip install malicious` | 依赖伪装 |
 | `SEC-554` | 🔵 | `git checkout -- config` | 配置回滚 |
 | `SEC-555` | 🟡 | `at now +` | 定时注入 |
+| `SEC-556` | 🟡 | `echo >> ~/.bashrc` | 环境文件注入 |
+| `SEC-557` | 🔴 | `echo >> /etc/sudoers` | sudo 持久化 |
+| `SEC-558` | 🟡 | `trust anchor` | 证书安装 |
+| `SEC-559` | 🟡 | `usermod -L` | 账户锁定 |
+| `SEC-560` | 🔵 | `ibus restart` | IME 切换 |
