@@ -195,3 +195,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-143` | 🟡 | `aws ... --minimum-password-length 0-5` | 弱密码策略 |
 | `SEC-144` | 🟡 | `gcloud firewall-rules --allow all` | 防火墙全开 |
 | `SEC-145` | 🔵 | `az storage blob upload --auth-mode key` | 密钥上传 |
+| `SEC-146` | 🟡 | `etcdctl get /registry/secrets` | 密钥访问 |
+| `SEC-147` | 🟡 | `vault seal disable` | 密封禁用 |
+| `SEC-148` | 🔵 | `consul kv put --token` | 配置篡改 |
+| `SEC-149` | 🟡 | `zkCli deleteall /` | 数据删除 |
+| `SEC-150` | 🟡 | `redis-cli CONFIG SET dir` | 配置修改 |
