@@ -1081,6 +1081,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-534", r"\bmount\s+[^\n]*(?:-o|--options)\s+\S*rw\S*\s+\S+\s+/\S+", Severity.INFO),
     # 恶意性能工具滥用
     ("SEC-535", r"\b(?:perf|bpftrace)\s+[^\n]*(?:-e|--event)\s+\S+\s+[^\n]*--(?:timeout|duration)", Severity.INFO),
+    # 恶意数据压缩投毒
+    ("SEC-536", r"\b(?:zip|7z|rar)\s+[^\n]*(?:-e|-p)\s+\S+", Severity.WARNING),
+    # 危险网络命名空间
+    ("SEC-537", r"\bip\s+netns\s+exec\s+\S+\s+(?:ip|ifconfig)", Severity.INFO),
+    # 恶意文件系统扫描
+    ("SEC-538", r"\b(?:find|locate)\s+.*\S*(?:password|credential|secret)\S*\s*$", Severity.WARNING),
+    # 危险模块签名绕过
+    ("SEC-539", r"\b(?:modprobe|insmod)\s+[^\n]*--(?:force|unsafe)", Severity.WARNING),
+    # 恶意系统快照窃取
+    ("SEC-540", r"\b(?:timeshift|snapper)\s+create\s+[^\n]*(?:-d|--description)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -657,6 +657,11 @@ class TestSafetyChecks:
             ("openocd -c command\n", "SEC-533"),
             ("mount -o rw /dev/sdb1 /mnt\n", "SEC-534"),
             ("perf -e cycles --timeout 1000\n", "SEC-535"),
+            ("zip -e archive.zip file\n", "SEC-536"),
+            ("ip netns exec ns1 ip addr\n", "SEC-537"),
+            ("find / -name password.txt\n", "SEC-538"),
+            ("insmod --force evil.ko\n", "SEC-539"),
+            ("timeshift create -d backup\n", "SEC-540"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
