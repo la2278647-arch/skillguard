@@ -301,6 +301,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-144", r"\bgcloud\s+compute\s+firewall-rules\s+create.*--allow\s+all", Severity.WARNING),
     # Azure 存储密钥上传
     ("SEC-145", r"\baz\s+storage\s+blob\s+upload.*--auth-mode\s+key", Severity.INFO),
+    # etcd 密钥访问
+    ("SEC-146", r"\betcdctl\s+get\s+/registry/secrets", Severity.WARNING),
+    # vault 密封禁用
+    ("SEC-147", r"\bvault\s+seal\s+disable", Severity.WARNING),
+    # consul 配置篡改
+    ("SEC-148", r"\bconsul\s+kv\s+put\s+.*--token", Severity.INFO),
+    # zookeeper 数据删除
+    ("SEC-149", r"\bzkCli\s+deleteall\s+/", Severity.WARNING),
+    # redis 配置修改
+    ("SEC-150", r"\bredis-cli\s+CONFIG\s+SET\s+(?:dir|dbfilename)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -267,6 +267,11 @@ class TestSafetyChecks:
             ("aws iam update-account-password-policy --minimum-password-length 4\n", "SEC-143"),
             ("gcloud compute firewall-rules create open --allow all\n", "SEC-144"),
             ("az storage blob upload --auth-mode key\n", "SEC-145"),
+            ("etcdctl get /registry/secrets\n", "SEC-146"),
+            ("vault seal disable\n", "SEC-147"),
+            ("consul kv put --token config/key value\n", "SEC-148"),
+            ("zkCli deleteall /\n", "SEC-149"),
+            ("redis-cli CONFIG SET dir /tmp\n", "SEC-150"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
