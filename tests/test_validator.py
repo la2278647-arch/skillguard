@@ -607,6 +607,11 @@ class TestSafetyChecks:
             ("mdadm --stop /dev/md0\n", "SEC-483"),
             ("strings /dev/sda\n", "SEC-484"),
             ("restic restore latest\n", "SEC-485"),
+            ("grub set root=(hd0,1)\n", "SEC-486"),
+            ("efibootmgr --uninstall 0001\n", "SEC-487"),
+            ("grubby --add-kernel /vmlinuz\n", "SEC-488"),
+            ("dracut -f\n", "SEC-489"),
+            ("kexec -l /boot/vmlinuz\n", "SEC-490"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

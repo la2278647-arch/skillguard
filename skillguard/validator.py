@@ -981,6 +981,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-484", r"\bstrings\s+/dev/|\bcat\s+/proc/swaps", Severity.INFO),
     # 恶意系统还原
     ("SEC-485", r"\b(?:restic|borg|timeshift)\s+restore\s+", Severity.INFO),
+    # 恶意引导修复绕过
+    ("SEC-486", r"\bgrub\s+set\s+root|\bgrub\s+insmod\s+", Severity.WARNING),
+    # 危险 UEFI 安全启动禁用
+    ("SEC-487", r"\b(?:efibootmgr|sbctl)\s+[^\n]*(?:--uninstall|--disable|remove)", Severity.WARNING),
+    # 恶意内核命令行
+    ("SEC-488", r"\b(?:grubby|kernel-install)\s+[^\n]*(?:--add-kernel|--args)", Severity.WARNING),
+    # 危险 dracut 重建
+    ("SEC-489", r"\bdracut\s+[^\n]*-f\b|\binitramfs\s+-u\b", Severity.INFO),
+    # 恶意 kexec 加载
+    ("SEC-490", r"\bkexec\s+-l\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
