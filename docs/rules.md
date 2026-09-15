@@ -380,3 +380,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-328` | 🟡 | `arpspoof` | ARP 欺骗 |
 | `SEC-329` | 🟡 | `mitmproxy` | MITM 攻击 |
 | `SEC-330` | 🔵 | `tshark -i -w` | 流量抓包 |
+| `SEC-331` | 🟡 | `searchsploit` | 漏洞利用搜索 |
+| `SEC-332` | 🟡 | `linpeas` / `linenum` | 提权枚举 |
+| `SEC-333` | 🟡 | `john --wordlist` / `hashcat` | 密码破解 |
+| `SEC-334` | 🟡 | `responder -I` | 流量嗅探 |
+| `SEC-335` | 🟡 | `chisel client` | 远程隧道 |
