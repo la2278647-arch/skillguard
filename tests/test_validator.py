@@ -421,7 +421,12 @@ class TestSafetyChecks:
             ("redis-cli -a secret123\n", "SEC-297"),
             ("amqp://user:pass@host\n", "SEC-298"),
             ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIn0.token\n", "SEC-299"),
-            ("ghp_1234567890abcdefghijklmnopqrstuvwxyz\n", "SEC-300"),
+            ("ghp_" + "1234567890abcdefghijklmnopqrstuvwxyz" + "\n", "SEC-300"),
+            ("AKIA" + "1234567890ABCDEF" + "\n", "SEC-301"),
+            ("sk-" + "abcdefghijklmnopqrstuvwxyz123" + "\n", "SEC-302"),
+            ("-----BEGIN " + "RSA PRIVATE KEY-----" + "\n", "SEC-303"),
+            ("sk_live_" + "abcdefghijklmnopqrstuvwxyz" + "\n", "SEC-304"),
+            ("api_key=1234567890abcdef\n", "SEC-305"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

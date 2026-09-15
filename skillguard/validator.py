@@ -611,6 +611,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-299", r"\beyJ[A-Za-z0-9_-]{10,}\.\S+\.\S+", Severity.WARNING),
     # GitHub token 硬编码
     ("SEC-300", r"\bghp_[A-Za-z0-9]{30,}\b", Severity.ERROR),
+    # AWS 密钥硬编码
+    ("SEC-301", r"\bAKIA[0-9A-Z]{16}\b", Severity.ERROR),
+    # OpenAI 密钥硬编码
+    ("SEC-302", r"\bsk-[A-Za-z0-9]{20,}\b", Severity.ERROR),
+    # 私钥块硬编码
+    ("SEC-303", r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----", Severity.ERROR),
+    # Stripe 密钥
+    ("SEC-304", r"\bsk_live_[A-Za-z0-9]{20,}\b", Severity.ERROR),
+    # 通用密钥模式
+    ("SEC-305", r"(?:api[_-]?key|secret|token)\s*[:=]\s*['\"]?[A-Za-z0-9+/=_-]{16,}['\"]?", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
