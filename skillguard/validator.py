@@ -861,6 +861,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-424", r"\bsudo\s+(?:bash|sh|python|perl)\s+-c\s+", Severity.WARNING),
     # 隐蔽进程替换
     ("SEC-425", r"\bmv\s+\S+\s+/usr/bin/|\bcp\s+\S+\s+/usr/local/bin/", Severity.WARNING),
+    # 恶意符号链接
+    ("SEC-426", r"\bln\s+-s\s+/etc/passwd|\bln\s+-s\s+/etc/shadow", Severity.ERROR),
+    # 隐蔽文件属性
+    ("SEC-427", r"\bchattr\s+\+i\s+|\bchattr\s+\+a\s+", Severity.INFO),
+    # 内核参数篡改
+    ("SEC-428", r"\bsysctl\s+-w\s+.*(?:kernel|net)\.", Severity.INFO),
+    # 服务配置替换
+    ("SEC-429", r"\b(?:cp|mv)\s+\S+\s+/etc/systemd/system/", Severity.WARNING),
+    # 用户添加后门
+    ("SEC-430", r"\buseradd\s+.*-o\b|\buseradd\s+.*-u\s+0\b", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
