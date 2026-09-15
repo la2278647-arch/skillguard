@@ -232,6 +232,11 @@ class TestSafetyChecks:
             ("ip link set eth0 address 00:11:22:33:44:55\n", "SEC-108"),
             ("sshpass -p password ssh user@host\n", "SEC-109"),
             ("expect send password\n", "SEC-110"),
+            ("ProxyCommand bash -c nc host 22\n", "SEC-111"),
+            ("LD_PRELOAD=/tmp/evil.so\n", "SEC-112"),
+            ("PYTHONPATH=/tmp/evil\n", "SEC-113"),
+            ("NODE_OPTIONS=--require /tmp/evil.js\n", "SEC-114"),
+            ("JAVA_TOOL_OPTIONS=-javaagent:/tmp/evil.jar\n", "SEC-115"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

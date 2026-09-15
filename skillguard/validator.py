@@ -231,6 +231,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-109", r"\bsshpass\s+-p\s+", Severity.ERROR),
     # expect 密码脚本
     ("SEC-110", r"\bexpect\s+.*send.*password", Severity.WARNING),
+    # SSH ProxyCommand 注入
+    ("SEC-111", r"ProxyCommand\s+.*\b(?:bash|sh|nc|socat)", Severity.WARNING),
+    # LD_PRELOAD 注入
+    ("SEC-112", r"\bLD_PRELOAD=", Severity.WARNING),
+    # PYTHONPATH 劫持
+    ("SEC-113", r"\bPYTHONPATH=", Severity.INFO),
+    # NODE_OPTIONS 注入
+    ("SEC-114", r"\bNODE_OPTIONS=", Severity.INFO),
+    # JAVA_TOOL_OPTIONS 注入
+    ("SEC-115", r"\bJAVA_TOOL_OPTIONS=", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
