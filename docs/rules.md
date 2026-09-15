@@ -570,3 +570,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-518` | 🟡 | `beef-xss` | 钓鱼工具 |
 | `SEC-519` | 🔵 | `vncserver` | 远程控制 |
 | `SEC-520` | 🔵 | `foremost /dev/sd` | 数据恢复滥用 |
+| `SEC-521` | 🟡 | `patch /usr/src` | 内核补丁 |
+| `SEC-522` | 🟡 | `chkrootkit --skip` | 安全工具绕过 |
+| `SEC-523` | 🟡 | `nuclei -u` | 漏洞扫描器 |
+| `SEC-524` | 🟡 | `hydra -l` | 凭据爆破 |
+| `SEC-525` | 🟡 | `iptables -t nat PREROUTING` | 流量重定向 |
