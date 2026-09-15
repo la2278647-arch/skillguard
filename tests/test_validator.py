@@ -617,6 +617,11 @@ class TestSafetyChecks:
             ("chcon -t httpd_sys_script_t file\n", "SEC-493"),
             ("ip netns delete ns1\n", "SEC-494"),
             ("renice -n -20 -p 1\n", "SEC-495"),
+            ("mosquitto_pub -t topic -m payload\n", "SEC-496"),
+            ("ip link set eth0 down\n", "SEC-497"),
+            ("avahi-browse -a\n", "SEC-498"),
+            ("cat </dev/ttyS0\n", "SEC-499"),
+            ("lsusb | grep usb\n", "SEC-500"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -1001,6 +1001,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-494", r"\bip\s+netns\s+delete|\bunshare\s+--user\b", Severity.WARNING),
     # 恶意 CPU 限制绕过
     ("SEC-495", r"\bschedtool\s+.*\s-R\b|\brenice\s+-n\s+-20\b", Severity.INFO),
+    # 恶意 IoT 设备控制
+    ("SEC-496", r"\b(?:mosquitto_pub|mqtt)\s+[^\n]*-t\s+\S+\s+-m\s+", Severity.INFO),
+    # 危险网络设备配置
+    ("SEC-497", r"\b(?:ip|tc)\s+link\s+set\s+\S+\s+(?:down|up)\b", Severity.INFO),
+    # 恶意多播发现
+    ("SEC-498", r"\b(?:avahi-browse|mdns-scan|zmap)\s+", Severity.WARNING),
+    # 危险串口操作
+    ("SEC-499", r"\b(?:stty|screen)\s+.*\s/dev/tty\S*|\bcat\s+</dev/ttyS0", Severity.WARNING),
+    # 恶意 USB 设备操作
+    ("SEC-500", r"\b(?:dmesg|lsusb)\s+[^\n]*\|\s*grep\s+.*usb|\busbhid\s+-d\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
