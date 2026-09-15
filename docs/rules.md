@@ -415,3 +415,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-363` | 🟡 | `cat ~/.bash_history` | 历史读取 |
 | `SEC-364` | 🔵 | `ls ~/.ssh/` | SSH 配置收集 |
 | `SEC-365` | 🟡 | `find / -name *secret*` | 密钥搜索 |
+| `SEC-366` | 🔵 | `systemctl list-units` | 服务枚举 |
+| `SEC-367` | 🔵 | `crontab -l` / `atq` | 计划任务枚举 |
+| `SEC-368` | 🔵 | `mount -l` / `fstab` | 挂载侦察 |
+| `SEC-369` | 🟡 | `sudo -l` | 权限侦察 |
+| `SEC-370` | 🔵 | `find / -type f` | 文件系统遍历 |
