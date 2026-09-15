@@ -701,6 +701,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-344", r"\bgcore\b[^\n]*-k\s+\d+", Severity.WARNING),
     # 加密钱包文件
     ("SEC-345", r"\b(?:scp|nc|curl)\s+\S*wallet\.dat|wallet\.dat.*\s(?:scp|nc|curl)", Severity.WARNING),
+    # 邮件凭据读取
+    ("SEC-346", r"\bcat\s+~?/\.msmtprc|\bcat\s+~?/\.netrc", Severity.ERROR),
+    # 浏览器密码存储
+    ("SEC-347", r"\b(?:cp|scp|curl)\s+\S*(?:key4\.db|logins\.json)|(?:key4\.db|logins\.json).*\s(?:cp|scp|curl)", Severity.ERROR),
+    # VPN 配置凭据
+    ("SEC-348", r"\bcat\s+.*\.ovpn|\bcat\s+.*wireguard.*conf", Severity.WARNING),
+    # 数据库凭据文件
+    ("SEC-349", r"\bcat\s+.*\.(?:pgpass|my\.cnf)", Severity.ERROR),
+    # GPG 私钥目录
+    ("SEC-350", r"\bcat\s+~?/\.gnupg/private-keys-v1\.d/", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
