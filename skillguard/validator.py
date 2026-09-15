@@ -1151,6 +1151,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-569", r"\b(?:iptables|nft)\s+[^\n]*(?:-F|-X|flush)\b", Severity.WARNING),
     # 恶意网络接口配置
     ("SEC-570", r"\b(?:ip|ifconfig)\s+.*\s(?:add|addr)\s+\S+\s+dev\s+\S+", Severity.INFO),
+    # 恶意系统调用注入
+    ("SEC-571", r"\b(?:strace|ltrace)\s+[^\n]*(?:-e|--trace)\s+\S+", Severity.WARNING),
+    # 危险安全策略覆盖
+    ("SEC-572", r"\b(?:setsebool|semanage)\s+[^\n]*(?:-P|-m)\s+", Severity.WARNING),
+    # 恶意文件监控
+    ("SEC-573", r"\b(?:inotifywait|auditctl)\s+[^\n]*(?:-m|-w)\s+\S+", Severity.WARNING),
+    # 危险网络流量镜像
+    ("SEC-574", r"\b(?:tc|ip)\s+.*\s(?:mirred|tunnel)\s+", Severity.WARNING),
+    # 恶意系统密码导出
+    ("SEC-575", r"\b(?:pwgen|openssl)\s+[^\n]*(?:passwd|password)\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -692,6 +692,11 @@ class TestSafetyChecks:
             ("lsblk -o NAME,SIZE\n", "SEC-568"),
             ("iptables -F\n", "SEC-569"),
             ("ip addr add 10.0.0.1/24 dev eth0\n", "SEC-570"),
+            ("strace -e openat ls\n", "SEC-571"),
+            ("setsebool -P httpd_can_network_connect on\n", "SEC-572"),
+            ("inotifywait -m /etc/passwd\n", "SEC-573"),
+            ("tc filter add dev eth0 mirred egress mirror dev eth1\n", "SEC-574"),
+            ("openssl passwd -6 secret\n", "SEC-575"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
