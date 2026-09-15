@@ -821,6 +821,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-404", r"\bdocker\s+network\s+connect\s+\S+\s+\S+", Severity.INFO),
     # 恶意注册表配置
     ("SEC-405", r"\bdocker\s+login\s+[^\n]*-p\s+\S+", Severity.WARNING),
+    # Kubernetes 恶意部署
+    ("SEC-406", r"\bkubectl\s+run\s+\S+\s+--image=\S+(?:backdoor|evil|malware)", Severity.WARNING),
+    # K8s 特权容器
+    ("SEC-407", r"\bkubectl\s+apply\s+[^\n]*privileged: true", Severity.WARNING),
+    # K8s 密钥导出
+    ("SEC-408", r"\bkubectl\s+get\s+secrets?\s+[^\n]*-o\s+(?:json|yaml)", Severity.WARNING),
+    # Helm 恶意 chart
+    ("SEC-409", r"\bhelm\s+install\s+\S+\s+\S+\s+--repo\s+\S*(?:evil|malware)\S*", Severity.WARNING),
+    # K8s 权限提升
+    ("SEC-410", r"\bkubectl\s+.*--as=cluster-admin|\bkubectl\s+.*--as=system:masters", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
