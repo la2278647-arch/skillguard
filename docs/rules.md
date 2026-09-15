@@ -130,3 +130,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-073` | 🔵 | `dbus-send` | 系统调用 |
 | `SEC-074` | 🟡 | `mount ... /etc` | 覆盖系统目录 |
 | `SEC-075` | 🔵 | `ulimit -c 0` | 移除限制 |
+| `SEC-076` | 🟡 | `gdb -p` | 附加进程 |
+| `SEC-077` | 🔵 | `strace -p` | 进程跟踪 |
+| `SEC-078` | 🔵 | `lsof /etc/shadow` | 敏感文件查看 |
+| `SEC-079` | 🟡 | `hexdump /dev/mem` | 内存转储 |
+| `SEC-080` | 🟡 | `iptables -F` | 清空防火墙 |

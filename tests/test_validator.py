@@ -202,6 +202,11 @@ class TestSafetyChecks:
             ("lsof /etc/shadow\n", "SEC-078"),
             ("hexdump /dev/mem\n", "SEC-079"),
             ("iptables -F\n", "SEC-080"),
+            ("nmap -p 1-65535 192.168.1.1\n", "SEC-081"),
+            ("msfconsole -q\n", "SEC-082"),
+            ("sqlmap -u http://target.com?id=1\n", "SEC-083"),
+            ("hydra -l admin -P pass.txt ssh://host\n", "SEC-084"),
+            ("aircrack-ng capture.cap\n", "SEC-085"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

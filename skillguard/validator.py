@@ -171,6 +171,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-079", r"\bhexdump\s+/dev/(?:mem|kmem)", Severity.WARNING),
     # iptables 清空
     ("SEC-080", r"\biptables\s+-F\b|\biptables\s+--flush\b", Severity.WARNING),
+    # nmap 全端口扫描
+    ("SEC-081", r"\bnmap\s+.*-p\s+1-65535", Severity.INFO),
+    # metasploit 框架
+    ("SEC-082", r"\bmsfconsole\b|\bmsfvenom\b", Severity.WARNING),
+    # sqlmap 注入
+    ("SEC-083", r"\bsqlmap\s+-u\s+", Severity.WARNING),
+    # hydra 爆破
+    ("SEC-084", r"\bhydra\s+-l\b|\bhydra\s+-L\b", Severity.WARNING),
+    # wifi 破解
+    ("SEC-085", r"\bwifite\b|\baircrack-ng\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
