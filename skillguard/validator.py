@@ -261,6 +261,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-124", r"\bbitsadmin\s+/transfer\b", Severity.WARNING),
     # mshta 执行
     ("SEC-125", r"\bmshta\s+(?:http|javascript)", Severity.ERROR),
+    # curl 下载到启动目录
+    ("SEC-126", r"\bcurl\b[^\n]*-o\s+/etc/init.d/", Severity.WARNING),
+    # apt 绕过证书校验
+    ("SEC-127", r"\bapt\s+.*--no-check-certificate", Severity.WARNING),
+    # gradle 动态执行
+    ("SEC-128", r"\bgradle\s+.*-e\b|\bgradle\s+.*--init-script", Severity.INFO),
+    # maven 远程仓库
+    ("SEC-129", r"\bmvn\s+.*-Dmaven.repo.remote", Severity.INFO),
+    # npm 脚本执行
+    ("SEC-130", r"\bnpm\s+exec\s+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
