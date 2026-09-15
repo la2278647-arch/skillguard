@@ -150,3 +150,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-098` | 🔵 | `git submodule --recursive` | 递归子模块 |
 | `SEC-099` | 🟡 | `chmod u+s` | suid 后门 |
 | `SEC-100` | 🟡 | `shutdown/reboot/halt` | 系统关机重启 |
+| `SEC-101` | 🔵 | `curl -F file=@` | 文件上传外传 |
+| `SEC-102` | 🟡 | `wget ... | bash` | 管道执行 |
+| `SEC-103` | 🔵 | `ssh-keygen -f` | 生成密钥后门 |
+| `SEC-104` | 🔴 | `nc -e` | 远程 shell |
+| `SEC-105` | 🟡 | `/dev/tcp/` | TCP 后门 |
