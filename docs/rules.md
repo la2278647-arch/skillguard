@@ -470,3 +470,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-418` | 🟡 | `npm publish --unsafe-perm` | 构建投毒 |
 | `SEC-419` | 🟡 | `curl x.py >> app.py` | 代码注入 |
 | `SEC-420` | 🔵 | `npm install --no-lockfile` | 锁定绕过 |
+| `SEC-421` | 🟡 | `bash -c ... base64` | 脚本混淆 |
+| `SEC-422` | 🟡 | `chmod 777 ~/.ssh` | 凭据权限放宽 |
+| `SEC-423` | 🔴 | `curl | sudo bash` | 特权管道执行 |
+| `SEC-424` | 🟡 | `sudo python -c` | 提权滥用 |
+| `SEC-425` | 🟡 | `cp evil /usr/local/bin/` | 进程替换 |
