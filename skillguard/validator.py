@@ -681,6 +681,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-334", r"\bdnschef\b|\bresponder\b.*\s-I\s+", Severity.WARNING),
     # 远程控制工具
     ("SEC-335", r"\b(?:chisel|ligolo-ng|nps)\b.*\sclient", Severity.WARNING),
+    # 浏览器凭据窃取
+    ("SEC-336", r"\b(?:login_data|Cookies)\.sqlite|\bchrome\s+.*--headless.*--dump-dom", Severity.WARNING),
+    # 剪贴板窃取
+    ("SEC-337", r"\b(?:xclip|xsel)\s+-o\s+\|\s+(?:curl|nc)", Severity.WARNING),
+    # 键盘记录
+    ("SEC-338", r"\b(?:keylog|xinput)\s+test\s+", Severity.INFO),
+    # 屏幕截图
+    ("SEC-339", r"\b(?:import|scrot|gnome-screenshot)\s+.*-(?:w|window)\s+", Severity.INFO),
+    # 摄像头访问
+    ("SEC-340", r"\b(?:fswebcam|ffmpeg)\s+.*/dev/video0", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

