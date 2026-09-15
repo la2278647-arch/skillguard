@@ -485,3 +485,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-433` | 🟡 | `cd() { ... }` | 函数覆盖 |
 | `SEC-434` | 🔵 | `echo \x1b[` | 终端注入 |
 | `SEC-435` | 🟡 | `trap rm EXIT` | 恶意 trap |
+| `SEC-436` | 🟡 | `base64 -d | bash` | 解码执行 |
+| `SEC-437` | 🔴 | `cat /etc/shadow | nc` | 凭据管道外传 |
+| `SEC-438` | 🔴 | `aws s3 cp shadow` | 云同步外传 |
+| `SEC-439` | 🟡 | `gdb -batch -c dump` | 调试器滥用 |
+| `SEC-440` | 🟡 | `nmap -sS` | 隐蔽扫描 |
