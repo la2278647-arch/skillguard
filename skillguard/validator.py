@@ -221,6 +221,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-104", r"\bnc\s+-e\s+\S+\s+\d+", Severity.ERROR),
     # /dev/tcp 后门
     ("SEC-105", r"/dev/tcp/[\d.]+/\d+", Severity.WARNING),
+    # cryptsetup 加密覆盖
+    ("SEC-106", r"\bcryptsetup\s+luksFormat\b", Severity.INFO),
+    # zerotier 远程组网
+    ("SEC-107", r"\bzerotier-cli\s+join\b", Severity.INFO),
+    # ip 伪造 MAC
+    ("SEC-108", r"\bip\s+link\s+set\s+.*address", Severity.INFO),
+    # sshpass 明文密码
+    ("SEC-109", r"\bsshpass\s+-p\s+", Severity.ERROR),
+    # expect 密码脚本
+    ("SEC-110", r"\bexpect\s+.*send.*password", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
