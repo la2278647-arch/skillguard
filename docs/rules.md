@@ -525,3 +525,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-473` | 🟡 | `tc filter add egress` | eBPF 劫持 |
 | `SEC-474` | 🟡 | `crictl exec --privileged` | 运行时提权 |
 | `SEC-475` | 🟡 | `docker build --network=host` | 镜像投毒 |
+| `SEC-476` | 🔵 | `curl pkg-amd64.tar.gz` | 多架构下载 |
+| `SEC-477` | 🟡 | `modprobe -f` | 强制模块加载 |
+| `SEC-478` | 🟡 | `fwupdmgr downgrade` | 固件回滚 |
+| `SEC-479` | 🔵 | `systemctl acpid` | ACPI 操作 |
+| `SEC-480` | 🟡 | `tpm2_clear` | TPM 操作 |
