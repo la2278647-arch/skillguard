@@ -126,6 +126,45 @@ skillguard bench https://github.com/obra/superpowers.git --max-skills 50 --json 
 
 ---
 
+## 命令：`completion`
+
+输出指定 shell 的自动补全脚本。
+
+```bash
+skillguard completion bash      # bash
+skillguard completion zsh       # zsh
+skillguard completion fish      # fish
+skillguard completion powershell # PowerShell
+```
+
+### 示例（bash）
+
+```bash
+skillguard completion bash > /etc/bash_completion.d/skillguard
+source /etc/bash_completion.d/skillguard
+```
+
+## 命令：`doctor`
+
+检查 SkillGuard 运行环境是否健康（bash/git/python 检测）。
+
+```bash
+skillguard doctor
+```
+
+输出示例：
+
+```
+🏥 SkillGuard Doctor — v0.2.0
+  系统: Windows 10
+  Python: 3.10.11
+  Shell: C:\WINDOWS\system32\bash.EXE
+  Git: /usr/bin/git
+  ✅ 环境健康
+```
+
+---
+
 ## 命令：`init`
 
 初始化一个 SkillGuard 兼容的 Skill 项目骨架。
