@@ -410,3 +410,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-358` | 🔵 | `ip addr` / `ifconfig` | 网络侦察 |
 | `SEC-359` | 🔵 | `cat /etc/passwd` | 用户枚举 |
 | `SEC-360` | 🔵 | `ps aux` / `ps -ef` | 进程侦察 |
+| `SEC-361` | 🔵 | `env` / `printenv` | 环境变量收集 |
+| `SEC-362` | 🟡 | `grep -r password /etc` | 凭据搜索 |
+| `SEC-363` | 🟡 | `cat ~/.bash_history` | 历史读取 |
+| `SEC-364` | 🔵 | `ls ~/.ssh/` | SSH 配置收集 |
+| `SEC-365` | 🟡 | `find / -name *secret*` | 密钥搜索 |
