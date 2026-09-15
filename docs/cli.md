@@ -185,6 +185,37 @@ skillguard schema report.json
 
 ---
 
+## 命令：`config`
+
+管理 SkillGuard 配置文件（YAML/TOML）。
+
+```bash
+# 生成配置模板
+skillguard config --init
+
+# 显示当前生效配置
+skillguard config --show [--skill-dir DIR]
+```
+
+### 配置文件支持
+
+`check` 命令支持通过 `--config` 指定配置文件，或自动发现（当前目录及父目录中的 `skillguard.yml` / `skillguard.yaml` / `skillguard.toml`）。
+
+```yaml
+# skillguard.yml 示例
+threshold: 70        # 质量门禁分数
+test_timeout: 60     # 测试超时（秒）
+skip_safety: false   # 是否跳过安全扫描
+run_tests: true      # 是否运行测试
+report_format: json  # 报告格式
+rules:               # 启用规则（默认全部）
+  - SEC-001
+```
+
+优先级：`--config` 显式指定 > 自动发现 > 命令行默认值。
+
+---
+
 ## 命令：`init`
 
 初始化一个 SkillGuard 兼容的 Skill 项目骨架。
