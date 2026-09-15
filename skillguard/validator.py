@@ -601,6 +601,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-294", r"\bkubectl\s+get\s+secret.*-o\s+yaml", Severity.WARNING),
     # vault 读取
     ("SEC-295", r"\bvault\s+read\s+secret", Severity.WARNING),
+    # 数据库连接字符串凭据
+    ("SEC-296", r"(?:mysql|postgres|mongodb)://\w+:\w+@", Severity.ERROR),
+    # redis 密码明文
+    ("SEC-297", r"\bredis-cli\s+-a\s+\S+", Severity.ERROR),
+    # amqp 凭据
+    ("SEC-298", r"(?:amqp|amqps)://\w+:\w+@", Severity.ERROR),
+    # JWT 硬编码
+    ("SEC-299", r"\beyJ[A-Za-z0-9_-]{10,}\.\S+\.\S+", Severity.WARNING),
+    # GitHub token 硬编码
+    ("SEC-300", r"\bghp_[A-Za-z0-9]{30,}\b", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

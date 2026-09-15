@@ -417,6 +417,11 @@ class TestSafetyChecks:
             ("cat terraform.tfstate\n", "SEC-293"),
             ("kubectl get secret my-secret -o yaml\n", "SEC-294"),
             ("vault read secret/data\n", "SEC-295"),
+            ("mysql://user:pass@host/db\n", "SEC-296"),
+            ("redis-cli -a secret123\n", "SEC-297"),
+            ("amqp://user:pass@host\n", "SEC-298"),
+            ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIn0.token\n", "SEC-299"),
+            ("ghp_1234567890abcdefghijklmnopqrstuvwxyz\n", "SEC-300"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
