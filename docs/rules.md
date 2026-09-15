@@ -250,3 +250,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-198` | 🟡 | `netlify sites:delete` | 站点删除 |
 | `SEC-199` | 🟡 | `wrangler routes delete` | 域名删除 |
 | `SEC-200` | 🟡 | `glab project delete` | 项目删除 |
+| `SEC-201` | 🟡 | `gh repo delete` | 仓库删除 |
+| `SEC-202` | 🟡 | `gh repo clone && rm -rf .git` | 内容删除 |
+| `SEC-203` | 🟡 | `glab ci variable delete` | 变量删除 |
+| `SEC-204` | 🟡 | `gh secret delete` | 密钥删除 |
+| `SEC-205` | 🟡 | `bitbucket repo delete` | 仓库删除 |
