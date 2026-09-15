@@ -172,6 +172,36 @@ def _print_bench_summary(summary, top: int) -> None:
         click.echo("\n  未发现任何 Skill（需要 SKILL.md / skill.md）")
 
 
+@main.command("badge")
+@click.argument("skill_dir", type=click.Path(exists=True), default=".")
+@click.option("--output", "-o", type=click.Path(), default="skillguard-badge.svg", show_default=True,
+              help="徽章输出路径")
+@click.option("--markdown", is_flag=True, help="同时输出 README 嵌入片段")
+@click.option("--repo-url", default="", help="徽章链接指向的仓库 URL")
+def badge(skill_dir: str, output: str, markdown: bool, repo_url: str) -> None:
+    """生成 Skill 的评分徽章（SVG，可嵌入 README）。"""
+    from .badge import badge_markdown, write_badge
+
+    try:
+        config = Config(skill_dir=skill_dir, run_tests=False)
+    except ValueError as exc:
+        click.echo(f"❌ 配置错误: {exc}", err=True)
+        sys.exit(2)
+
+    guard = SkillGuard(config)
+    try:
+        report = guard.validate()
+    except ValueError as exc:
+        click.echo(f"❌ {exc}", err=True)
+        sys.exit(2)
+
+    path = write_badge(report, output)
+    click.echo(f"🛡️  徽章已生成: {path} (评分 {report.overall_score:.0f}/100)")
+    if markdown:
+        click.echo("\nREADME 嵌入片段：")
+        click.echo(badge_markdown(output, repo_url))
+
+
 @main.command("init")
 @click.argument("skill_dir", type=click.Path(), default=".")
 @click.option("--name", default=None, help="Skill 名称（默认取目录名）")
