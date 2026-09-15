@@ -290,3 +290,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-238` | 🟡 | `>> config.fish` | fish 注入 |
 | `SEC-239` | 🔵 | `>> ~/.bash_logout` | 注销脚本注入 |
 | `SEC-240` | 🔴 | `>> ~/.ssh/authorized_keys` | SSH 后门 |
+| `SEC-241` | 🟡 | `>> ~/.ssh/config` | SSH 配置篡改 |
+| `SEC-242` | 🔴 | `>> /etc/sudoers` | 权限提升 |
+| `SEC-243` | 🔴 | `chpasswd` / `>> /etc/passwd` | 凭据篡改 |
+| `SEC-244` | 🟡 | `>> /etc/crontab` | 系统定时任务 |
+| `SEC-245` | 🟡 | `>> /etc/systemd/system/*.service` | 服务创建 |
