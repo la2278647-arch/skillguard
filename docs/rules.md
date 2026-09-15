@@ -260,3 +260,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-208` | 🔵 | `docker push --all-tags` | 全标签推送 |
 | `SEC-209` | 🔵 | `helm repo remove` | 仓库移除 |
 | `SEC-210` | 🟡 | `cargo publish --allow-dirty` | 脏发布 |
+| `SEC-211` | 🔵 | `goreleaser --skip-publish` | 跳过发布 |
+| `SEC-212` | 🔵 | `sbt publish` | 发布 |
+| `SEC-213` | 🔵 | `gradle publish` | 发布 |
+| `SEC-214` | 🟡 | `mvn deploy -DskipTests` | 跳过测试部署 |
+| `SEC-215` | 🔵 | `dotnet nuget --skip-duplicate` | 跳过重复推送 |
