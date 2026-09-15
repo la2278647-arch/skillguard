@@ -351,6 +351,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-169", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/jaeger", Severity.INFO),
     # kibana 删索引模式
     ("SEC-170", r"\bcurl\b[^\n]*-X\s+DELETE\s+.*/kibana", Severity.WARNING),
+    # consul 服务注销
+    ("SEC-171", r"\bconsul\s+services\s+deregister", Severity.WARNING),
+    # etcd 成员移除
+    ("SEC-172", r"\betcdctl\s+member\s+remove", Severity.WARNING),
+    # nomad 作业停止
+    ("SEC-173", r"\bnomad\s+job\s+stop", Severity.INFO),
+    # vault 密钥删除
+    ("SEC-174", r"\bvault\s+delete\s+secret", Severity.WARNING),
+    # keycloak 领域删除
+    ("SEC-175", r"\bkcadm\s+delete\s+realms", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

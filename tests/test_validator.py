@@ -292,6 +292,11 @@ class TestSafetyChecks:
             ("curl -X DELETE http://loki:3100/loki/api\n", "SEC-168"),
             ("curl -X DELETE http://jaeger:16686/jaeger/api\n", "SEC-169"),
             ("curl -X DELETE http://kibana:5601/kibana/api\n", "SEC-170"),
+            ("consul services deregister svc\n", "SEC-171"),
+            ("etcdctl member remove abc\n", "SEC-172"),
+            ("nomad job stop job1\n", "SEC-173"),
+            ("vault delete secret/data\n", "SEC-174"),
+            ("kcadm delete realms/master\n", "SEC-175"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
