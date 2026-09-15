@@ -185,3 +185,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-133` | 🔵 | `terraform destroy` | 基础设施破坏 |
 | `SEC-134` | 🔵 | `ansible --skip-tags=security` | 跳过安全 |
 | `SEC-135` | 🟡 | `systemctl stop firewalld` | 禁用防火墙 |
+| `SEC-136` | 🔵 | `docker load -i` | 镜像加载 |
+| `SEC-137` | 🟡 | `docker exec chroot` | 容器逃逸 |
+| `SEC-138` | 🔵 | `ctr images import` | containerd 导入 |
+| `SEC-139` | 🔵 | `kubeadm reset` | 集群重置 |
+| `SEC-140` | 🔵 | `helm template --set $(...)` | 模板命令注入 |
