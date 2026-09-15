@@ -541,6 +541,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-264", r"\bptrace\s+attach\b", Severity.INFO),
     # mprotect 执行
     ("SEC-265", r"\bmprotect\s+PROT_EXEC", Severity.INFO),
+    # /proc 内存读取
+    ("SEC-266", r"\bcat\s+/proc/\d+/mem|\bdd\s+if=/proc/\d+/mem", Severity.WARNING),
+    # /dev 磁盘访问
+    ("SEC-267", r"\bcat\s+/dev/sda\b|\bdd\s+if=/dev/sda\b", Severity.WARNING),
+    # debugfs 挂载
+    ("SEC-268", r"\bmount\s+-t\s+debugfs", Severity.INFO),
+    # sysfs 写入
+    ("SEC-269", r">\s*/sys/|echo\s+.*\s*\|\s*tee\s+/sys/", Severity.WARNING),
+    # grub 修改
+    ("SEC-270", r"\bupdate-grub\b|\bgrub-install\s+.*--force", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -387,6 +387,11 @@ class TestSafetyChecks:
             ("capsh --caps=cap_sys_admin+eip\n", "SEC-263"),
             ("ptrace attach 1234\n", "SEC-264"),
             ("mprotect PROT_EXEC\n", "SEC-265"),
+            ("cat /proc/1234/mem\n", "SEC-266"),
+            ("dd if=/dev/sda of=/tmp/disk\n", "SEC-267"),
+            ("mount -t debugfs none /sys/kernel/debug\n", "SEC-268"),
+            ("echo 1 > /sys/kernel/security\n", "SEC-269"),
+            ("grub-install --force\n", "SEC-270"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
