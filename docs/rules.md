@@ -175,3 +175,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-123` | 🟡 | `powershell -enc` / `IEX()` | 编码执行 |
 | `SEC-124` | 🟡 | `bitsadmin /transfer` | 传输工具 |
 | `SEC-125` | 🔴 | `mshta http/javascript` | 脚本执行 |
+| `SEC-126` | 🟡 | `curl -o /etc/init.d/` | 下载到启动目录 |
+| `SEC-127` | 🟡 | `apt --no-check-certificate` | 绕过证书校验 |
+| `SEC-128` | 🔵 | `gradle -e/--init-script` | 动态执行 |
+| `SEC-129` | 🔵 | `mvn -Dmaven.repo.remote` | 远程仓库 |
+| `SEC-130` | 🟡 | `npm exec` | 脚本执行 |
