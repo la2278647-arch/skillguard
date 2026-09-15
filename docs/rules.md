@@ -115,3 +115,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-058` | 🔵 | `base64 -d > file` | 解码写文件 |
 | `SEC-059` | 🔴 | `dd of=/dev/sd` | 覆盖分区 |
 | `SEC-060` | 🔵 | `history -c` | 清除命令历史 |
+| `SEC-061` | 🔵 | `umask 000` | 权限放宽 |
+| `SEC-062` | 🔵 | `ftp -p` | 明文凭据 |
+| `SEC-063` | 🔵 | `scp user@host:` | 不可信主机 |
+| `SEC-064` | 🟡 | `tee -a /etc/` | 追加系统文件 |
+| `SEC-065` | 🟡 | `rmdir /` | 删除根目录 |
