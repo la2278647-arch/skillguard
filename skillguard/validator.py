@@ -121,6 +121,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-054", r"\b(?:curl|wget)\b[^\n]*(?:-d|--data)[^\n]*(?:https?://)", Severity.INFO),
     # openssl 弱加密
     ("SEC-055", r"openssl\s+.*-(?:des|rc4|md5)\d*\b", Severity.WARNING),
+    # nc/ncat 端口监听（后门）
+    ("SEC-056", r"\bnc\s+-l|\bncat\s+-l", Severity.WARNING),
+    # socat 端口转发
+    ("SEC-057", r"\bsocat\s+TCP-LISTEN", Severity.WARNING),
+    # base64 解码写文件
+    ("SEC-058", r"base64\s+-d.*\s*>\s*\.?/?[A-Za-z0-9_]+", Severity.INFO),
+    # dd 覆盖分区
+    ("SEC-059", r"\bdd\s+if=\S+\s+of=/dev/sd", Severity.ERROR),
+    # 历史命令清除（掩盖操作）
+    ("SEC-060", r"history\s+-c|unset\s+HISTFILE", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

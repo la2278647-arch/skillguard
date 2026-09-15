@@ -177,6 +177,11 @@ class TestSafetyChecks:
             ("export PATH=/tmp/evil:$PATH\n", "SEC-053"),
             ("curl -d data=http://evil.com/c https://api.example.com\n", "SEC-054"),
             ("openssl enc -des3 -in file.txt\n", "SEC-055"),
+            ("nc -l -p 4444\n", "SEC-056"),
+            ("socat TCP-LISTEN:8080,reuseaddr,fork\n", "SEC-057"),
+            ("echo aGVsbG8= | base64 -d > payload.bin\n", "SEC-058"),
+            ("dd if=/dev/zero of=/dev/sda\n", "SEC-059"),
+            ("history -c\n", "SEC-060"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
