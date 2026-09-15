@@ -385,3 +385,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-333` | 🟡 | `john --wordlist` / `hashcat` | 密码破解 |
 | `SEC-334` | 🟡 | `responder -I` | 流量嗅探 |
 | `SEC-335` | 🟡 | `chisel client` | 远程隧道 |
+| `SEC-336` | 🟡 | `Cookies.sqlite` | 浏览器凭据窃取 |
+| `SEC-337` | 🟡 | `xclip -o | curl` | 剪贴板窃取 |
+| `SEC-338` | 🔵 | `xinput test` | 键盘记录 |
+| `SEC-339` | 🔵 | `import -window` | 屏幕截图 |
+| `SEC-340` | 🟡 | `fswebcam /dev/video0` | 摄像头访问 |
