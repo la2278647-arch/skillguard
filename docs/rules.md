@@ -330,3 +330,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-278` | 🔵 | `lynis --skip-security` | 审计跳过 |
 | `SEC-279` | 🟡 | `tripwire --update` | 完整性基线更新 |
 | `SEC-280` | 🟡 | `aide --init` | 完整性初始化 |
+| `SEC-281` | 🔴 | `cat /etc/shadow` | 密码哈希读取 |
+| `SEC-282` | 🔴 | `cat /etc/gshadow` | 组密码读取 |
+| `SEC-283` | 🔴 | `cat ~/.ssh/id_rsa` | SSH 私钥读取 |
+| `SEC-284` | 🔴 | `export API_KEY/TOKEN=` | 凭据导出 |
+| `SEC-285` | 🔵 | `history | grep pass/token` | 历史凭据搜索 |
