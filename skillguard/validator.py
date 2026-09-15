@@ -131,6 +131,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-059", r"\bdd\s+if=\S+\s+of=/dev/sd", Severity.ERROR),
     # 历史命令清除（掩盖操作）
     ("SEC-060", r"history\s+-c|unset\s+HISTFILE", Severity.INFO),
+    # umask 放宽权限
+    ("SEC-061", r"\bumask\s+(?:0|0[0-7][0-7])\b", Severity.INFO),
+    # FTP 明文凭据
+    ("SEC-062", r"\bftp\s+.*-p\b|\buser\s+[\w.-]+\s+[\w.-]+\s*\n.*\bftp", Severity.INFO),
+    # SCP 从不可信主机
+    ("SEC-063", r"\bscp\s+.*@(?:[\w.-]+:)", Severity.INFO),
+    # tee 追加系统文件
+    ("SEC-064", r"\btee\s+-a\s+/etc/", Severity.WARNING),
+    # rmdir 根目录
+    ("SEC-065", r"\brmdir\s+/", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

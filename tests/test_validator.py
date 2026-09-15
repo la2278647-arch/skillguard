@@ -182,6 +182,11 @@ class TestSafetyChecks:
             ("echo aGVsbG8= | base64 -d > payload.bin\n", "SEC-058"),
             ("dd if=/dev/zero of=/dev/sda\n", "SEC-059"),
             ("history -c\n", "SEC-060"),
+            ("umask 000\n", "SEC-061"),
+            ("ftp -p 192.168.1.1\n", "SEC-062"),
+            ("scp user@host:/tmp/file .\n", "SEC-063"),
+            ("tee -a /etc/hosts\n", "SEC-064"),
+            ("rmdir /\n", "SEC-065"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
