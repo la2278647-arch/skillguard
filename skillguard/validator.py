@@ -801,6 +801,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-394", r"\b(?:eval|exec|source)\s+.*\$(?:[a-zA-Z0-9_]+|[^\s]+)", Severity.WARNING),
     # 日志清理
     ("SEC-395", r"\brm\s+-rf\s+(?:/var/log|\S*\.log)|\btruncate\s+-s\s+0\s+/var/log", Severity.WARNING),
+    # 恶意代理设置
+    ("SEC-396", r"\bexport\s+(?:http|https|all)_proxy\s*=\s*\S+@\S+", Severity.WARNING),
+    # 供应链依赖替换
+    ("SEC-397", r"\b(?:npm|pip|gem)\s+(?:install|add)\s+.*\s*--(?:registry|index-url)\s+\S+", Severity.WARNING),
+    # 环境篡改检测
+    ("SEC-398", r"\bexport\s+(?:LD_PRELOAD|LD_LIBRARY_PATH|PYTHONPATH|NODE_OPTIONS)\s*=", Severity.WARNING),
+    # 恶意定时回连
+    ("SEC-399", r"\b(?:crontab|at)\s+.*(?:curl|wget|nc)\s+\S+\s+\d+", Severity.WARNING),
+    # 启动项注入
+    ("SEC-400", r">>\s*/etc/rc.d/rc.local|>>\s*/etc/rc.local", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

