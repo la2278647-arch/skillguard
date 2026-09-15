@@ -490,3 +490,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-438` | 🔴 | `aws s3 cp shadow` | 云同步外传 |
 | `SEC-439` | 🟡 | `gdb -batch -c dump` | 调试器滥用 |
 | `SEC-440` | 🟡 | `nmap -sS` | 隐蔽扫描 |
+| `SEC-441` | 🔴 | `rm -rf /` | 根目录删除 |
+| `SEC-442` | 🟡 | `mount --bind` | 挂载覆盖 |
+| `SEC-443` | 🔵 | `sysctl kernel.hidepid` | 内核隐藏参数 |
+| `SEC-444` | 🔴 | `shred /dev/sda` | 磁盘擦除 |
+| `SEC-445` | 🔴 | `flashrom -w` | 固件写入 |
