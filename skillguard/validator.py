@@ -721,6 +721,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-354", r"\baz\s+storage\s+blob\s+download", Severity.INFO),
     # 云实例元数据访问
     ("SEC-355", r"curl\s+.*169\.254\.169\.254|curl\s+.*metadata\.google\.internal", Severity.ERROR),
+    # 环境变量命令执行
+    ("SEC-356", r"\b(?:system|exec|popen)\(\s*[A-Za-z_]*\$\{?\w+\}?", Severity.WARNING),
+    # 系统信息泄露收集
+    ("SEC-357", r"\buname\s+-a\b|\bcat\s+/etc/os-release", Severity.INFO),
+    # 网络信息收集
+    ("SEC-358", r"\bip\s+addr\b|\bifconfig\s+\S*eth\d", Severity.INFO),
+    # 用户枚举
+    ("SEC-359", r"\bcat\s+/etc/passwd|\bgetent\s+passwd", Severity.INFO),
+    # 进程枚举
+    ("SEC-360", r"\bps\s+aux\b|\bps\s+-ef\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

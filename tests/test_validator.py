@@ -477,6 +477,11 @@ class TestSafetyChecks:
             ("gsutil cp gs://bucket/file .\n", "SEC-353"),
             ("az storage blob download -c c -n b\n", "SEC-354"),
             ("curl http://169.254.169.254/latest/meta-data\n", "SEC-355"),
+            ("system(${CMD})\n", "SEC-356"),
+            ("uname -a\n", "SEC-357"),
+            ("ip addr show\n", "SEC-358"),
+            ("cat /etc/passwd\n", "SEC-359"),
+            ("ps aux\n", "SEC-360"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
