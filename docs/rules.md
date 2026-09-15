@@ -95,3 +95,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-038` | 🟡 | `find -delete` | 批量删除 |
 | `SEC-039` | 🔵 | `nohup ... &` | 后台隐藏执行 |
 | `SEC-040` | 🟡 | `>> ~/.bashrc` | Shell RC 注入持久化 |
+| `SEC-041` | 🔵 | `git submodule add` | 子模块远程代码 |
+| `SEC-042` | 🟡 | `chmod 4xxx/2xxx` | setuid/setgid 权限位 |
+| `SEC-043` | 🟡 | `awk system()` | awk 内命令执行 |
+| `SEC-044` | 🟡 | `tee /etc/` | 写系统文件 |
+| `SEC-045` | 🔵 | `ln lib` | 覆盖系统库 |
