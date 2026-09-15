@@ -515,3 +515,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-463` | 🟡 | `cp evil.so /usr/lib/` | 库注入 |
 | `SEC-464` | 🟡 | `cat /proc/*/environ` | 进程环境泄露 |
 | `SEC-465` | 🔵 | `rm -f ~/.bash_history` | 历史清理 |
+| `SEC-466` | 🟡 | `cat ~/.msmtprc` | 邮件凭据 |
+| `SEC-467` | 🔴 | `cat chrome/Login` | 自动填充窃取 |
+| `SEC-468` | 🔵 | `aws configure export` | 云配置导出 |
+| `SEC-469` | 🟡 | `cat bash_sessions/` | 会话窃取 |
+| `SEC-470` | 🔴 | `gpg --export-secret-keys` | 私钥导出 |
