@@ -455,3 +455,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-403` | 🟡 | `docker pull evil/backdoor` | 恶意镜像 |
 | `SEC-404` | 🔵 | `docker network connect` | 网络劫持 |
 | `SEC-405` | 🟡 | `docker login -p` | 明文凭据 |
+| `SEC-406` | 🟡 | `kubectl run --image=evil` | 恶意部署 |
+| `SEC-407` | 🟡 | `kubectl apply privileged: true` | 特权容器 |
+| `SEC-408` | 🟡 | `kubectl get secrets -o json` | 密钥导出 |
+| `SEC-409` | 🟡 | `helm install --repo evil` | 恶意 chart |
+| `SEC-410` | 🟡 | `kubectl --as=cluster-admin` | 权限提升 |
