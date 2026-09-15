@@ -355,3 +355,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-303` | 🔴 | `BEGIN PRIVATE KEY` | 私钥块 |
 | `SEC-304` | 🔴 | `sk_live_...` | Stripe 密钥 |
 | `SEC-305` | 🔴 | `api_key=...` | 通用密钥模式 |
+| `SEC-306` | 🔵 | `curl -X POST ... -d` | 数据外传 |
+| `SEC-307` | 🟡 | `dig | base64 | bash` | DNS 隧道 |
+| `SEC-308` | 🟡 | `ping -p hex` | ICMP 隧道 |
+| `SEC-309` | 🔵 | `nc host 53` | DNS 端口通道 |
+| `SEC-310` | 🔵 | `socat dns:` | DNS 通道 |
