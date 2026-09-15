@@ -245,6 +245,32 @@ results = rs.run_all(skill_dir, skill)
 
 自定义规则（`CUS-` 前缀）默认归入**可维护性**维度参与评分。
 
+### 完整示例
+
+项目提供可直接运行的**自定义规则示例**（3 条实战规则）：
+
+```bash
+# 查看示例
+cat examples/custom_rules.py
+
+# 直接运行演示（注册规则 + 检查当前目录）
+python examples/custom_rules.py
+```
+
+示例包含：
+- **CUS-001**：TODO/FIXME 遗留检测（带行号定位）
+- **CUS-002**：必备文档章节检查（团队约定）
+- **CUS-003**：脚本缺少 `set -e` 错误处理检测
+
+注册方式：
+
+```python
+from custom_rules import register_custom_rules
+register_custom_rules()   # 幂等注册
+```
+
+全部测试见 `tests/test_custom_rules_example.py`。
+
 ---
 
 ## 错误处理
