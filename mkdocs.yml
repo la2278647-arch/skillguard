@@ -29,6 +29,7 @@ nav:
   - 架构说明: architecture.md
   - 质量规则: rules.md
   - CI 集成: ci.md
+  - MCP 集成: mcp.md
   - 生态基准报告: ecosystem-report.md
 
 markdown_extensions:
@@ -36,3 +37,4 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - tables
+
