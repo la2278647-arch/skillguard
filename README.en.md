@@ -31,7 +31,7 @@ The Agent Skills ecosystem is exploding (superpowers ⭐286k, anthropics/skills 
 
 | Feature | Description |
 |---------|-------------|
-| 🧹 **Static validation** | Structure, reference integrity, 115 security patterns (SEC-001..015) |
+| 🧹 **Static validation** | Structure, reference integrity, 120 security patterns (SEC-001..015) |
 | 🏜️ **Sandbox tests** | Whole skill dir copied to temp dir; scripts can't touch your source; forced timeouts; sanitized env |
 | 🔢 **Quality scoring** | 5 dimensions (structure/docs/safety/maintainability/usability), configurable CI threshold |
 | 📄 **Multi-format reports** | JSON (CI consumption), Markdown (PR comments), HTML (shareable page) |

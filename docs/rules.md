@@ -165,3 +165,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-113` | 🔵 | `PYTHONPATH=` | Python 路径劫持 |
 | `SEC-114` | 🔵 | `NODE_OPTIONS=` | Node 注入 |
 | `SEC-115` | 🔵 | `JAVA_TOOL_OPTIONS=` | Java 注入 |
+| `SEC-116` | 🟡 | `LD_LIBRARY_PATH=` | 库路径劫持 |
+| `SEC-117` | 🔵 | `GODEBUG/GOGC=` | Go 运行时注入 |
+| `SEC-118` | 🔵 | `py_compile.compile()` | 字节码注入 |
+| `SEC-119` | 🟡 | `require($env/process.env)` | 动态加载 |
+| `SEC-120` | 🟡 | `yaml.load FullLoader` | 不安全反序列化 |
