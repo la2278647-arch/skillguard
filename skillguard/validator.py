@@ -411,6 +411,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-199", r"\bwrangler\s+routes\s+delete|\bcloudflare\s+delete\s+zone", Severity.WARNING),
     # gitlab 项目删除
     ("SEC-200", r"\bglab\s+project\s+delete|\bgitlab\s+project\s+remove", Severity.WARNING),
+    # gh repo 删除
+    ("SEC-201", r"\bgh\s+repo\s+delete\b", Severity.WARNING),
+    # gh 全部内容删除
+    ("SEC-202", r"\bgh\s+repo\s+clone.*&&\s+rm\s+-rf.*\.git", Severity.WARNING),
+    # glab 变量删除
+    ("SEC-203", r"\bglab\s+ci\s+variable\s+delete", Severity.WARNING),
+    # gh secret 删除
+    ("SEC-204", r"\bgh\s+secret\s+delete\b", Severity.WARNING),
+    # bitbucket 仓库删除
+    ("SEC-205", r"\bbitbucket\s+repo\s+delete\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

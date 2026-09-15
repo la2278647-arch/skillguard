@@ -322,6 +322,11 @@ class TestSafetyChecks:
             ("netlify sites:delete\n", "SEC-198"),
             ("wrangler routes delete\n", "SEC-199"),
             ("glab project delete\n", "SEC-200"),
+            ("gh repo delete myrepo\n", "SEC-201"),
+            ("gh repo clone repo && rm -rf .git\n", "SEC-202"),
+            ("glab ci variable delete VAR\n", "SEC-203"),
+            ("gh secret delete MY_SECRET\n", "SEC-204"),
+            ("bitbucket repo delete myrepo\n", "SEC-205"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
