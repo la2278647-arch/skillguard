@@ -871,6 +871,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-429", r"\b(?:cp|mv)\s+\S+\s+/etc/systemd/system/", Severity.WARNING),
     # 用户添加后门
     ("SEC-430", r"\buseradd\s+.*-o\b|\buseradd\s+.*-u\s+0\b", Severity.ERROR),
+    # 恶意别名注入
+    ("SEC-431", r"\balias\s+\w+\s*=\s*(?:rm|shutdown|reboot|curl|wget)", Severity.WARNING),
+    # 危险 PATH 前置
+    ("SEC-432", r"\bPATH=\.:\$PATH|\bPATH=/tmp:\$PATH", Severity.WARNING),
+    # 恶意函数覆盖
+    ("SEC-433", r"\b(?:cd|ls|rm|cp|mv)\(\)\s*\{", Severity.WARNING),
+    # 终端注入
+    ("SEC-434", r"\b(?:echo|printf)\s+.*\x1b\[", Severity.INFO),
+    # 恶意 trap
+    ("SEC-435", r"\btrap\s+(?:rm|shutdown|curl|wget)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
