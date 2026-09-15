@@ -241,6 +241,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-114", r"\bNODE_OPTIONS=", Severity.INFO),
     # JAVA_TOOL_OPTIONS 注入
     ("SEC-115", r"\bJAVA_TOOL_OPTIONS=", Severity.INFO),
+    # LD_LIBRARY_PATH 劫持
+    ("SEC-116", r"\bLD_LIBRARY_PATH=", Severity.WARNING),
+    # GODEBUG/GOGC 运行时注入
+    ("SEC-117", r"\b(?:GODEBUG|GOGC)=", Severity.INFO),
+    # py_compile 字节码注入
+    ("SEC-118", r"\bpy_compile\.compile\(", Severity.INFO),
+    # node require 动态加载
+    ("SEC-119", r"\brequire\([^)]*(?:\$(?:env|process)|process\.env)", Severity.WARNING),
+    # yaml 不安全反序列化
+    ("SEC-120", r"yaml\.load\([^)]*Loader=[^)]*(?:Full|Unsafe)Loader", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

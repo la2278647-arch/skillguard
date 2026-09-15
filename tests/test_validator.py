@@ -237,6 +237,11 @@ class TestSafetyChecks:
             ("PYTHONPATH=/tmp/evil\n", "SEC-113"),
             ("NODE_OPTIONS=--require /tmp/evil.js\n", "SEC-114"),
             ("JAVA_TOOL_OPTIONS=-javaagent:/tmp/evil.jar\n", "SEC-115"),
+            ("LD_LIBRARY_PATH=/tmp/evil:$LD_LIBRARY_PATH\n", "SEC-116"),
+            ("GODEBUG=netdns=go\n", "SEC-117"),
+            ("py_compile.compile(source)\n", "SEC-118"),
+            ("require(process.env.MODULE)\n", "SEC-119"),
+            ("yaml.load(data, Loader=FullLoader)\n", "SEC-120"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
