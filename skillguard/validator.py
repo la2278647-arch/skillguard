@@ -81,6 +81,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-034", r"pickle\.loads?\(|yaml\.load\(.*Loader=[^)]*UnsafeLoader", Severity.WARNING),
     # Bash IFS 劫持
     ("SEC-035", r"\bIFS\s*=|\bunset\s+IFS\b", Severity.INFO),
+    # 递归 chown/chmod 777（权限滥用）
+    ("SEC-036", r"\bchown\s+-R\b|\bchmod\s+-R\s+777\b", Severity.WARNING),
+    # systemd 单元远程下载
+    ("SEC-037", r"\bcurl.*/etc/systemd/system|\bwget.*/etc/systemd/system", Severity.WARNING),
+    # find -delete 批量删除
+    ("SEC-038", r"\bfind\s+.*\s+-delete\b", Severity.WARNING),
+    # nohup 后台隐藏执行
+    ("SEC-039", r"\bnohup\s+.*&\s*$", Severity.INFO),
+    # Shell RC 注入持久化
+    ("SEC-040", r"echo\s+.*>>\s*(?:~?/)?\.(?:bashrc|zshrc|profile)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
