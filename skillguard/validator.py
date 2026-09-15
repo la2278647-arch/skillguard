@@ -781,6 +781,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-384", r"\bzip2\s+-r\s+.*\s*\|\s*base64|\btar\s+-czf\s+.*\.git\s*\|\s*nc", Severity.WARNING),
     # 配置文件批量外传
     ("SEC-385", r"\b(?:tar|zip)\s+.*/etc\s*\|\s*(?:nc|curl|base64)", Severity.WARNING),
+    # 恶意下载执行链
+    ("SEC-386", r"\b(?:curl|wget)\s+.*\s*-o\s+\S+\s*&&\s*(?:bash|sh|chmod\s+\+x)", Severity.ERROR),
+    # 凭据复用检测
+    ("SEC-387", r"\bsshpass\s+-p\s+\S+\s+ssh|\bmysql\s+-u\s+root\s+-p\S+", Severity.WARNING),
+    # 反向隧道建立
+    ("SEC-388", r"\bssh\s+-R\s+\d+\s+\S+@\S+|\bssh\s+-NR\s+\d+", Severity.WARNING),
+    # 隐蔽持久化
+    ("SEC-389", r"\b(?:at|cron)\s+.*\s+2>/dev/null|\b(?:nohup|setsid)\s+.*\s+&\s*$", Severity.WARNING),
+    # 恶意软件安装
+    ("SEC-390", r"\b(?:apt|yum|dnf)\s+install\s+.*(?:netcat|ncat|socat|chisel)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
