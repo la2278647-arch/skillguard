@@ -425,3 +425,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-373` | 🔵 | `route -n` | 路由收集 |
 | `SEC-374` | 🔵 | `ss -tlnp` | 端口枚举 |
 | `SEC-375` | 🔵 | `iptables -L` | 防火墙规则 |
+| `SEC-376` | 🔵 | `cat /etc/resolv.conf` | DNS 侦察 |
+| `SEC-377` | 🔵 | `arp -a` | ARP 缓存 |
+| `SEC-378` | 🔵 | `hostname` | 主机信息 |
+| `SEC-379` | 🟡 | `grep password /var/log` | 日志敏感信息 |
+| `SEC-380` | 🔵 | `ls -la /tmp` | 临时文件侦察 |
