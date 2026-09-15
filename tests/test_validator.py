@@ -412,6 +412,11 @@ class TestSafetyChecks:
             ("cat ~/.aws/credentials\n", "SEC-288"),
             ("cat ~/.config/gcloud/credentials.db\n", "SEC-289"),
             ("cat ~/.npmrc\n", "SEC-290"),
+            ("cat ~/.git-credentials\n", "SEC-291"),
+            ("cat ~/.kube/config\n", "SEC-292"),
+            ("cat terraform.tfstate\n", "SEC-293"),
+            ("kubectl get secret my-secret -o yaml\n", "SEC-294"),
+            ("vault read secret/data\n", "SEC-295"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

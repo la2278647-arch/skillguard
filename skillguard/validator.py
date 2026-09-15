@@ -591,6 +591,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-289", r"\bcat\s+~?/\.config/gcloud/credentials.db", Severity.ERROR),
     # npm 凭据读取
     ("SEC-290", r"\bcat\s+~?/\.npmrc", Severity.ERROR),
+    # git 凭据读取
+    ("SEC-291", r"\bcat\s+~?/\.git-credentials", Severity.ERROR),
+    # kubeconfig 读取
+    ("SEC-292", r"\bcat\s+~?/\.kube/config", Severity.ERROR),
+    # terraform 状态读取
+    ("SEC-293", r"\bcat\s+.*terraform.tfstate", Severity.WARNING),
+    # kubectl secret 获取
+    ("SEC-294", r"\bkubectl\s+get\s+secret.*-o\s+yaml", Severity.WARNING),
+    # vault 读取
+    ("SEC-295", r"\bvault\s+read\s+secret", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
