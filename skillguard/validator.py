@@ -251,6 +251,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-119", r"\brequire\([^)]*(?:\$(?:env|process)|process\.env)", Severity.WARNING),
     # yaml 不安全反序列化
     ("SEC-120", r"yaml\.load\([^)]*Loader=[^)]*(?:Full|Unsafe)Loader", Severity.WARNING),
+    # openssl pkcs12 私钥导出
+    ("SEC-121", r"\bopenssl\b[^\n]*\bpkcs12\b[^\n]*-export", Severity.INFO),
+    # certutil 下载执行
+    ("SEC-122", r"\bcertutil\s+-urlcache\b", Severity.WARNING),
+    # powershell 编码执行
+    ("SEC-123", r"\bpowershell\s+.*-enc\b|\bIEX\(New-Object Net\.WebClient\)", Severity.WARNING),
+    # bitsadmin 传输
+    ("SEC-124", r"\bbitsadmin\s+/transfer\b", Severity.WARNING),
+    # mshta 执行
+    ("SEC-125", r"\bmshta\s+(?:http|javascript)", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
