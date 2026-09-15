@@ -431,6 +431,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-209", r"\bhelm\s+repo\s+remove\b", Severity.INFO),
     # cargo 脏发布
     ("SEC-210", r"\bcargo\s+publish\s+--allow-dirty", Severity.WARNING),
+    # goreleaser 发布
+    ("SEC-211", r"\bgoreleaser\s+release\s+--skip-publish", Severity.INFO),
+    # sbt 发布
+    ("SEC-212", r"\bsbt\s+publish\b", Severity.INFO),
+    # gradle 发布
+    ("SEC-213", r"\bgradle\s+publish\b", Severity.INFO),
+    # maven 跳过测试部署
+    ("SEC-214", r"\bmvn\s+deploy\s+-DskipTests", Severity.WARNING),
+    # nuget 跳过重复推送
+    ("SEC-215", r"\bdotnet\s+nuget\s+push\s+.*--skip-duplicate", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -332,6 +332,11 @@ class TestSafetyChecks:
             ("docker push repo/image --all-tags\n", "SEC-208"),
             ("helm repo remove repo1\n", "SEC-209"),
             ("cargo publish --allow-dirty\n", "SEC-210"),
+            ("goreleaser release --skip-publish\n", "SEC-211"),
+            ("sbt publish\n", "SEC-212"),
+            ("gradle publish\n", "SEC-213"),
+            ("mvn deploy -DskipTests\n", "SEC-214"),
+            ("dotnet nuget push pkg.nupkg --skip-duplicate\n", "SEC-215"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
