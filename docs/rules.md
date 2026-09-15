@@ -420,3 +420,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-368` | 🔵 | `mount -l` / `fstab` | 挂载侦察 |
 | `SEC-369` | 🟡 | `sudo -l` | 权限侦察 |
 | `SEC-370` | 🔵 | `find / -type f` | 文件系统遍历 |
+| `SEC-371` | 🔵 | `cat /proc/version` | 内核信息 |
+| `SEC-372` | 🔵 | `lsmod` | 模块枚举 |
+| `SEC-373` | 🔵 | `route -n` | 路由收集 |
+| `SEC-374` | 🔵 | `ss -tlnp` | 端口枚举 |
+| `SEC-375` | 🔵 | `iptables -L` | 防火墙规则 |
