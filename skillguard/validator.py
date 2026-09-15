@@ -271,6 +271,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-129", r"\bmvn\s+.*-Dmaven.repo.remote", Severity.INFO),
     # npm 脚本执行
     ("SEC-130", r"\bnpm\s+exec\s+", Severity.WARNING),
+    # Docker 逃逸（pid/net=host）
+    ("SEC-131", r"docker\s+run.*--pid=host|docker\s+run.*--net=host", Severity.WARNING),
+    # kubectl 提权
+    ("SEC-132", r"\bkubectl\s+.*\s--as=system:admin", Severity.WARNING),
+    # terraform 破坏
+    ("SEC-133", r"\bterraform\s+destroy\b", Severity.INFO),
+    # ansible 跳过安全标签
+    ("SEC-134", r"\bansible-playbook\s+.*--skip-tags=.*security", Severity.INFO),
+    # systemctl 禁用防火墙
+    ("SEC-135", r"\bsystemctl\s+(?:disable|stop)\s+(?:firewalld|ufw)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

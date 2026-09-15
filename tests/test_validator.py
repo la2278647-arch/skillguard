@@ -252,6 +252,11 @@ class TestSafetyChecks:
             ("gradle -e build.gradle\n", "SEC-128"),
             ("mvn -Dmaven.repo.remote=evil\n", "SEC-129"),
             ("npm exec -- package\n", "SEC-130"),
+            ("docker run --pid=host image\n", "SEC-131"),
+            ("kubectl get secrets --as=system:admin\n", "SEC-132"),
+            ("terraform destroy\n", "SEC-133"),
+            ("ansible-playbook --skip-tags=security play.yml\n", "SEC-134"),
+            ("systemctl stop firewalld\n", "SEC-135"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
