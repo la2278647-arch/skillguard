@@ -841,6 +841,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-414", r"\baws\s+ec2\s+authorize-security-group-ingress\s+[^\n]*0\.0\.0\.0/0", Severity.WARNING),
     # 云存储公开
     ("SEC-415", r"\baws\s+s3api\s+put-bucket-acl\s+[^\n]*public-read", Severity.WARNING),
+    # 恶意 CI 脚本注入
+    ("SEC-416", r">>\s*(?:\.github/workflows/|\S*\.gitlab-ci\.yml|\S*\.circleci/config\.yml)", Severity.WARNING),
+    # CI 凭据外传
+    ("SEC-417", r"\b(?:curl|wget)\s+.*(?:\$|\$\{)(?:TOKEN|SECRET|PASSWORD)\b", Severity.WARNING),
+    # 构建产物投毒
+    ("SEC-418", r"\b(?:npm|pip|gem)\s+publish\s+[^\n]*-\s*(?:unsafe-perm|ignore-scripts)", Severity.WARNING),
+    # 恶意代码注入源
+    ("SEC-419", r"\b(?:curl|wget)\s+.*\s>>\s*\S+\.(?:py|js|sh|rb)", Severity.WARNING),
+    # 依赖锁定绕过
+    ("SEC-420", r"\b(?:npm|pip)\s+install\s+[^\n]*(?:--no-lockfile|--ignore-package-lock)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
