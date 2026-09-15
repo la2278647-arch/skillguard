@@ -1,6 +1,6 @@
 # SkillGuard CLI 参考
 
-> 版本：0.1.0
+> 版本：0.7.0
 
 ## 全局选项
 
@@ -8,6 +8,43 @@
 |------|------|
 | `--version` | 显示版本号 |
 | `--help` | 显示帮助 |
+
+## 命令：`report`
+
+生成**多 Skill 聚合质量报告**（团队/仓库级总览）——对目录树中全部 Skill 执行完整评估（含沙箱测试），输出聚合统计与明细。
+
+```bash
+skillguard report ROOT_DIR
+```
+
+### 选项
+
+| 选项 | 默认值 | 说明 |
+|------|--------|------|
+| `--depth INT` | `3` | 扫描深度 |
+| `--format [json\|markdown\|html]` | `markdown` | 报告格式 |
+| `--output PATH` | `-o` | 报告输出路径 |
+| `--no-tests` | 关闭 | 跳过测试执行（加速） |
+
+### 聚合统计
+
+- Skill 数量 / 平均分 / 通过率
+- 累计问题（error/warning 总数）
+- 评分分布（90-100 / 75-89 / 60-74 / 40-59 / 0-39）
+- 每个 Skill 的分数/状态/问题数/测试结果明细
+
+### 示例
+
+```bash
+# Markdown 聚合报告（默认）
+skillguard report ./skills
+
+# HTML 报告（适合分享）
+skillguard report . --format html -o report.html
+
+# JSON（供 CI 消费）
+skillguard report . --format json -o report.json --no-tests
+```
 
 ## 命令：`check`
 
