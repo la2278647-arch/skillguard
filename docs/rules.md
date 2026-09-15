@@ -170,3 +170,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-118` | 🔵 | `py_compile.compile()` | 字节码注入 |
 | `SEC-119` | 🟡 | `require($env/process.env)` | 动态加载 |
 | `SEC-120` | 🟡 | `yaml.load FullLoader` | 不安全反序列化 |
+| `SEC-121` | 🔵 | `openssl pkcs12 -export` | 私钥导出 |
+| `SEC-122` | 🟡 | `certutil -urlcache` | 下载执行 |
+| `SEC-123` | 🟡 | `powershell -enc` / `IEX()` | 编码执行 |
+| `SEC-124` | 🟡 | `bitsadmin /transfer` | 传输工具 |
+| `SEC-125` | 🔴 | `mshta http/javascript` | 脚本执行 |
