@@ -382,6 +382,11 @@ class TestSafetyChecks:
             ("mount -t cgroup cgroup /cgroup\n", "SEC-258"),
             ("unshare --mount --pid\n", "SEC-259"),
             ("io_uring test\n", "SEC-260"),
+            ("keyctl add user key val\n", "SEC-261"),
+            ("prctl PR_SET_SECCOMP 0\n", "SEC-262"),
+            ("capsh --caps=cap_sys_admin+eip\n", "SEC-263"),
+            ("ptrace attach 1234\n", "SEC-264"),
+            ("mprotect PROT_EXEC\n", "SEC-265"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

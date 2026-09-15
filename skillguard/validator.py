@@ -531,6 +531,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-259", r"\bunshare\s+--mount\b|\bunshare\s+--pid\b", Severity.WARNING),
     # io_uring
     ("SEC-260", r"\bio_uring\s+", Severity.INFO),
+    # keyring 密钥操作
+    ("SEC-261", r"\bkeyctl\s+add\b|\bkeyctl\s+unlink\b", Severity.WARNING),
+    # seccomp 禁用
+    ("SEC-262", r"\bprctl\s+PR_SET_SECCOMP\s+0", Severity.WARNING),
+    # capability 提升
+    ("SEC-263", r"\bcapsh\s+--caps=\S*cap_sys_admin", Severity.WARNING),
+    # ptrace 注入
+    ("SEC-264", r"\bptrace\s+attach\b", Severity.INFO),
+    # mprotect 执行
+    ("SEC-265", r"\bmprotect\s+PROT_EXEC", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
