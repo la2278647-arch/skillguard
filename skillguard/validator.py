@@ -62,6 +62,7 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-024", r"\bgit\s+(?:reset\s+--hard|checkout\s+\.)\b", Severity.WARNING),
     # 上传用户数据到公开服务（curl/wget POST/PUT 带文件）
     ("SEC-025", r"\b(?:curl|wget)\s+.*?-(?:X\s*)?(?:POST|PUT)\s+.*?(?:@[\w./-]+|-F\s)", Severity.INFO),
+    ("SEC-026", r"\b(?:system|exec|popen)\(\s*['\"]\$?\{\w+\}", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
