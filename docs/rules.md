@@ -395,3 +395,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-343` | 🟡 | `secret-tool` | 密钥环转储 |
 | `SEC-344` | 🟡 | `gcore -k` | 进程内存转储 |
 | `SEC-345` | 🟡 | `scp wallet.dat` | 加密钱包窃取 |
+| `SEC-346` | 🔴 | `cat ~/.netrc` | 邮件凭据 |
+| `SEC-347` | 🔴 | `cp key4.db` | 浏览器密码 |
+| `SEC-348` | 🟡 | `cat client.ovpn` | VPN 凭据 |
+| `SEC-349` | 🔴 | `cat .pgpass` | 数据库凭据 |
+| `SEC-350` | 🔴 | `cat ~/.gnupg/private-keys-v1.d/` | GPG 私钥 |
