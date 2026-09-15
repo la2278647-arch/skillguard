@@ -340,3 +340,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-288` | 🔴 | `cat ~/.aws/credentials` | AWS 凭据 |
 | `SEC-289` | 🔴 | `cat gcloud credentials.db` | GCP 凭据 |
 | `SEC-290` | 🔴 | `cat ~/.npmrc` | npm 凭据 |
+| `SEC-291` | 🔴 | `cat ~/.git-credentials` | Git 凭据 |
+| `SEC-292` | 🔴 | `cat ~/.kube/config` | K8s 配置 |
+| `SEC-293` | 🟡 | `cat terraform.tfstate` | IaC 状态 |
+| `SEC-294` | 🟡 | `kubectl get secret -o yaml` | 密钥导出 |
+| `SEC-295` | 🟡 | `vault read secret` | 密钥读取 |
