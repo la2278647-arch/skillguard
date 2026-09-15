@@ -1171,6 +1171,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-579", r"\bSet-ExecutionPolicy\s+\S+|\bchmod\s+\+x\s+\S+\.\S*", Severity.INFO),
     # 恶意包管理器别名
     ("SEC-580", r"\balias\s+(?:pip|npm|apt|yum|dnf)\s*=", Severity.WARNING),
+    # 恶意负载持久化
+    ("SEC-581", r"\b(?:cp|mv)\s+\S+\s+/usr/(?:local/)?bin/\S+", Severity.WARNING),
+    # 危险系统命令替换
+    ("SEC-582", r"\b(?:ln|cp|mv)\s+\S+\s+/bin/(?:ls|ps|top|bash|sh)\s*$", Severity.ERROR),
+    # 恶意核心转储利用
+    ("SEC-583", r"\b(?:ulimit|prlimit)\s+[^\n]*(?:-c|--core)\s+\S+", Severity.INFO),
+    # 危险沙箱网络逃逸
+    ("SEC-584", r"\b(?:bwrap|firejail)\s+[^\n]*(?:--share-net|--net=host)", Severity.WARNING),
+    # 恶意系统调用替换
+    ("SEC-585", r"\b(?:auditctl|strace)\s+[^\n]*(?:-S|--syscall)\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

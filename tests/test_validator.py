@@ -702,6 +702,11 @@ class TestSafetyChecks:
             ("export SSL_CERT_FILE=/tmp/evil.pem\n", "SEC-578"),
             ("Set-ExecutionPolicy Unrestricted\n", "SEC-579"),
             ("alias pip=evil\n", "SEC-580"),
+            ("cp evil.sh /usr/local/bin/app\n", "SEC-581"),
+            ("mv evil /bin/ls\n", "SEC-582"),
+            ("ulimit -c unlimited\n", "SEC-583"),
+            ("bwrap --share-net cmd\n", "SEC-584"),
+            ("strace -S openat ls\n", "SEC-585"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
