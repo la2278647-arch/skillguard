@@ -211,6 +211,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-099", r"\bchmod\s+u\+s\b|\bchmod\s+g\+s\b", Severity.WARNING),
     # 系统关机重启
     ("SEC-100", r"\b(?:shutdown|reboot|halt|poweroff)\s+-?(?:h|r|f|now)?\b", Severity.WARNING),
+    # curl 文件上传外传
+    ("SEC-101", r"\bcurl\b[^\n]*-F\s+file=@", Severity.INFO),
+    # wget 管道执行
+    ("SEC-102", r"\bwget\s+.*\|\s*(?:bash|sh)", Severity.WARNING),
+    # ssh-keygen 生成后门密钥
+    ("SEC-103", r"\bssh-keygen\s+-t\s+rsa.*-f", Severity.INFO),
+    # nc -e 远程 shell
+    ("SEC-104", r"\bnc\s+-e\s+\S+\s+\d+", Severity.ERROR),
+    # /dev/tcp 后门
+    ("SEC-105", r"/dev/tcp/[\d.]+/\d+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
