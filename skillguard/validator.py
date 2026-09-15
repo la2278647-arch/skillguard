@@ -63,6 +63,14 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     # 上传用户数据到公开服务（curl/wget POST/PUT 带文件）
     ("SEC-025", r"\b(?:curl|wget)\s+.*?-(?:X\s*)?(?:POST|PUT)\s+.*?(?:@[\w./-]+|-F\s)", Severity.INFO),
     ("SEC-026", r"\b(?:system|exec|popen)\(\s*['\"]\$?\{\w+\}", Severity.WARNING),
+    # cron 远程下载执行
+    ("SEC-027", r"\bcron\b.*(?:curl|wget)", Severity.WARNING),
+    # 混淆数据解码
+    ("SEC-028", r"(?:echo|printf)\s+['\"][0-9a-fA-F]{40,}['\"]\s*\|\s*(?:xxd|hexdump)", Severity.INFO),
+    # sed 就地破坏性编辑
+    ("SEC-029", r"\bsed\s+-i\b.*\bd\b|\bsed\s+-i\b.*\bc\b", Severity.INFO),
+    # ln 强制符号链接覆盖
+    ("SEC-030", r"\bln\s+-sf\b|\bln\s+--symbolic\s+--force\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

