@@ -555,3 +555,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-503` | 🟡 | `echo alias >> ~/.bashrc` | 别名持久化 |
 | `SEC-504` | 🔴 | `chroot /bin/sh` | chroot 逃逸 |
 | `SEC-505` | 🔵 | `env -i` | 环境清理 |
+| `SEC-506` | 🟡 | `pip install torch` | AI 依赖投毒 |
+| `SEC-507` | 🔴 | `export OPENAI_API_KEY=` | ML 凭据泄露 |
+| `SEC-508` | 🟡 | `chroma delete` | 向量库删除 |
+| `SEC-509` | 🟡 | `cat dataset.jsonl` | 训练数据窃取 |
+| `SEC-510` | 🟡 | `rm -rf cache` | 推理缓存投毒 |
