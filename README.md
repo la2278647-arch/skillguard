@@ -41,6 +41,8 @@ Agent Skills 生态正在爆发式增长（superpowers 28.6万★、anthropics/s
 | 🔢 **质量评分** | 五维评分模型（0-100），可配置阈值 |
 | 📄 **多格式报告** | JSON（CI 消费）/ Markdown（PR 评论）/ HTML（自包含分享页） |
 | 🤖 **CI 集成** | `--ci` 模式，不通过时退出码 1，一行接入 GitHub Actions |
+| 🔌 **MCP 服务器** | `skillguard mcp` — AI 代理（Claude/Cursor/Codex）直接调用质量检测 |
+| 📊 **聚合报告** | `skillguard report` — 团队/仓库级多 Skill 质量总览 |
 | 🚀 **零依赖启动** | `skillguard init` 秒建项目骨架 + 冒烟测试 |
 
 ## 🚀 快速开始
