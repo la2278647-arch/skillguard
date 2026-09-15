@@ -205,3 +205,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-153` | 🔴 | `mysql DROP DATABASE` | 删除库 |
 | `SEC-154` | 🟡 | `sqlite3 DELETE FROM` | 清空数据 |
 | `SEC-155` | 🟡 | `curl -X DELETE _all` | 删除索引 |
+| `SEC-156` | 🟡 | `hive DROP TABLE` | 删除表 |
+| `SEC-157` | 🔴 | `cqlsh DROP KEYSPACE` | 删除键空间 |
+| `SEC-158` | 🟡 | `neo4j MATCH DELETE` | 清空图库 |
+| `SEC-159` | 🟡 | `influx delete --measurement` | 删除测量 |
+| `SEC-160` | 🟡 | `clickhouse DROP TABLE` | 删除表 |
