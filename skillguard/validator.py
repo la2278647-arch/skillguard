@@ -971,6 +971,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-479", r"\b(?:acpid|systemctl)\s+.*\s+acpid\.service", Severity.INFO),
     # 恶意 TPM 操作
     ("SEC-480", r"\b(?:tpm2_clear|tpm2_evictcontrol)\s+", Severity.WARNING),
+    # 恶意系统备份外传
+    ("SEC-481", r"\b(?:tar|zip|rsync)\s+[^\n]*(?:/etc|/home|/root)\s+[^\n]*(?:nc|curl|scp)", Severity.WARNING),
+    # 危险 LVM 操作
+    ("SEC-482", r"\b(?:lvremove|lvcreate)\s+[^\n]*/dev/\S*vg\S*/", Severity.ERROR),
+    # 恶意 RAID 破坏
+    ("SEC-483", r"\bmdadm\s+--(?:stop|zero-superblock|fail)\s+", Severity.ERROR),
+    # 危险交换分区泄露
+    ("SEC-484", r"\bstrings\s+/dev/|\bcat\s+/proc/swaps", Severity.INFO),
+    # 恶意系统还原
+    ("SEC-485", r"\b(?:restic|borg|timeshift)\s+restore\s+", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
