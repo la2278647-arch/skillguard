@@ -105,3 +105,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-048` | 🔵 | `mktemp /tmp/fixed` | 固定临时路径 |
 | `SEC-049` | 🔵 | `git config user/core/alias` | git 配置篡改 |
 | `SEC-050` | 🟡 | `>> /etc/hosts` | hosts 文件修改 |
+| `SEC-051` | 🟡 | `curl -o /tmp/x.sh` | 下载到 /tmp 后执行 |
+| `SEC-052` | 🟡 | `pip install git+https://` | URL 安装依赖 |
+| `SEC-053` | 🔵 | `export PATH=...` | PATH 环境变量覆盖 |
+| `SEC-054` | 🔵 | `curl -d ... http://` | 数据外传 |
+| `SEC-055` | 🟡 | `openssl -des/rc4/md5` | 弱加密 |
