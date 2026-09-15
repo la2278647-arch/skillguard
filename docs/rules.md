@@ -510,3 +510,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-458` | 🟡 | `tar /etc | base64` | 压缩外发 |
 | `SEC-459` | 🔴 | `mkfs /dev/sd` | 磁盘格式化 |
 | `SEC-460` | 🟡 | `insmod evil.ko` | 恶意模块加载 |
+| `SEC-461` | 🟡 | `npm install browser-extension` | 恶意扩展 |
+| `SEC-462` | 🟡 | `screen -x` | 会话窃取 |
+| `SEC-463` | 🟡 | `cp evil.so /usr/lib/` | 库注入 |
+| `SEC-464` | 🟡 | `cat /proc/*/environ` | 进程环境泄露 |
+| `SEC-465` | 🔵 | `rm -f ~/.bash_history` | 历史清理 |
