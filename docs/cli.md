@@ -165,6 +165,26 @@ skillguard doctor
 
 ---
 
+## 命令：`schema`
+
+输出 QualityReport 的 JSON Schema，或校验报告文件是否符合 Schema。
+
+```bash
+# 输出 Schema（供 CI / 工具链集成）
+skillguard schema
+
+# 校验报告文件
+skillguard schema report.json
+```
+
+输出示例（校验模式）：
+
+```
+✅ report.json 符合 SkillGuard JSON Schema
+```
+
+---
+
 ## 命令：`init`
 
 初始化一个 SkillGuard 兼容的 Skill 项目骨架。
