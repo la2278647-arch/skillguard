@@ -307,6 +307,11 @@ class TestSafetyChecks:
             ("alembic downgrade base\n", "SEC-183"),
             ("migrate zero\n", "SEC-184"),
             ("prisma migrate reset\n", "SEC-185"),
+            ("sequelize sync --force\n", "SEC-186"),
+            ("typeorm schema:sync\n", "SEC-187"),
+            ("knex migrate:rollback\n", "SEC-188"),
+            ("drizzle-kit push --force\n", "SEC-189"),
+            ("migrate-mongo reset\n", "SEC-190"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

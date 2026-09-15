@@ -381,6 +381,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-184", r"\bmigrate\s+zero\b", Severity.WARNING),
     # prisma 重置
     ("SEC-185", r"\bprisma\s+migrate\s+reset\b", Severity.WARNING),
+    # sequelize 强制同步
+    ("SEC-186", r"\bsequelize\s+sync\s+.*--force", Severity.WARNING),
+    # typeorm 模式同步
+    ("SEC-187", r"\btypeorm\s+schema:sync", Severity.INFO),
+    # knex 迁移回滚
+    ("SEC-188", r"\bknex\s+migrate:rollback", Severity.INFO),
+    # drizzle 强制推送
+    ("SEC-189", r"\bdrizzle-kit\s+push.*--force", Severity.WARNING),
+    # migrate-mongo 重置
+    ("SEC-190", r"\bmigrate-mongo\s+reset", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
