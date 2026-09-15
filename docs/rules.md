@@ -280,3 +280,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-228` | 🔵 | `systemd-analyze verify` | 服务验证 |
 | `SEC-229` | 🔵 | `update-rc.d defaults` | 启动脚本 |
 | `SEC-230` | 🔵 | `launchctl load` | macOS 服务加载 |
+| `SEC-231` | 🟡 | `>> /etc/rc.local` | 启动脚本注入 |
+| `SEC-232` | 🟡 | `source <(curl ...)` | 远程加载 |
+| `SEC-233` | 🟡 | `>> /etc/profile.d/` | 环境注入 |
+| `SEC-234` | 🔵 | `>> /etc/motd` | 消息注入 |
+| `SEC-235` | 🟡 | `>> ~/.bash_profile` | 登录脚本注入 |
