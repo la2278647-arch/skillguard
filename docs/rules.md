@@ -550,3 +550,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-498` | 🟡 | `avahi-browse` | 多播发现 |
 | `SEC-499` | 🟡 | `cat </dev/ttyS0` | 串口操作 |
 | `SEC-500` | 🔵 | `lsusb | grep usb` | USB 设备枚举 |
+| `SEC-501` | 🟡 | `echo | base64 -d | bash` | 混淆执行 |
+| `SEC-502` | 🟡 | `socat UDP:host:port` | 自定义隧道 |
+| `SEC-503` | 🟡 | `echo alias >> ~/.bashrc` | 别名持久化 |
+| `SEC-504` | 🔴 | `chroot /bin/sh` | chroot 逃逸 |
+| `SEC-505` | 🔵 | `env -i` | 环境清理 |
