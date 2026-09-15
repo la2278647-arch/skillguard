@@ -191,6 +191,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-089", r"\bscapy\b.*\bsend\(|\bscapy\b.*\bsr1\(", Severity.WARNING),
     # hostname 冒充
     ("SEC-090", r"\bhostnamectl\s+set-hostname\s+", Severity.INFO),
+    # curl -k 忽略证书管道执行
+    ("SEC-091", r"\bcurl\s+.*-k\s+.*\|\s*(?:bash|sh)", Severity.WARNING),
+    # Python eval/exec input 执行
+    ("SEC-092", r"\beval\(\s*input\(|\bexec\(\s*input\(", Severity.WARNING),
+    # SSH 反向端口转发
+    ("SEC-093", r"\bssh\s+-R\s+\d+:", Severity.WARNING),
+    # xargs rm 批量删除
+    ("SEC-094", r"\b(?:find|ls)\s+.*\|\s*xargs\s+rm", Severity.WARNING),
+    # tar 绝对路径覆盖
+    ("SEC-095", r"\btar\s+.*\s-C\s+/", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
