@@ -245,3 +245,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-193` | 🟡 | `atlas migrate reset` | 迁移重置 |
 | `SEC-194` | 🟡 | `supabase db reset` | 数据库重置 |
 | `SEC-195` | 🟡 | `firebase firestore:delete` | 数据清空 |
+| `SEC-196` | 🟡 | `heroku apps:destroy` | 应用删除 |
+| `SEC-197` | 🟡 | `vercel rm` | 项目删除 |
+| `SEC-198` | 🟡 | `netlify sites:delete` | 站点删除 |
+| `SEC-199` | 🟡 | `wrangler routes delete` | 域名删除 |
+| `SEC-200` | 🟡 | `glab project delete` | 项目删除 |
