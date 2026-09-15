@@ -620,3 +620,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-568` | 🔵 | `lsblk -o` | 磁盘信息泄露 |
 | `SEC-569` | 🟡 | `iptables -F` | 防火墙静默 |
 | `SEC-570` | 🔵 | `ip addr add` | 网络配置 |
+| `SEC-571` | 🟡 | `strace -e` | 系统调用跟踪 |
+| `SEC-572` | 🟡 | `setsebool -P` | 安全策略覆盖 |
+| `SEC-573` | 🟡 | `inotifywait -m` | 文件监控 |
+| `SEC-574` | 🟡 | `tc mirred` | 流量镜像 |
+| `SEC-575` | 🔵 | `openssl passwd` | 密码导出 |
