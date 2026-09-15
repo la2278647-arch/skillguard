@@ -440,3 +440,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-388` | 🟡 | `ssh -R` | 反向隧道 |
 | `SEC-389` | 🟡 | `nohup ... &` | 隐蔽持久化 |
 | `SEC-390` | 🟡 | `apt install netcat` | 恶意工具安装 |
+| `SEC-391` | 🟡 | `for ... do curl` | 批量执行 |
+| `SEC-392` | 🔴 | `export APISECRET=` | 凭据覆盖 |
+| `SEC-393` | 🟡 | `dig 超长子域名` | DNS 隧道 |
+| `SEC-394` | 🟡 | `eval $CMD` | 命令混淆 |
+| `SEC-395` | 🟡 | `rm -rf /var/log` | 日志清理 |
