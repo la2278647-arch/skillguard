@@ -405,3 +405,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-353` | 🔵 | `gsutil cp gs://` | GCS 访问 |
 | `SEC-354` | 🔵 | `az blob download` | Azure 下载 |
 | `SEC-355` | 🔴 | `curl 169.254.169.254` | 云元数据窃取 |
+| `SEC-356` | 🟡 | `system(${CMD})` | 环境变量执行 |
+| `SEC-357` | 🔵 | `uname -a` / `os-release` | 系统信息收集 |
+| `SEC-358` | 🔵 | `ip addr` / `ifconfig` | 网络侦察 |
+| `SEC-359` | 🔵 | `cat /etc/passwd` | 用户枚举 |
+| `SEC-360` | 🔵 | `ps aux` / `ps -ef` | 进程侦察 |
