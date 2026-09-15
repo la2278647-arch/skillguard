@@ -320,3 +320,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-268` | 🔵 | `mount -t debugfs` | 调试文件系统 |
 | `SEC-269` | 🟡 | `> /sys/` | 内核参数写入 |
 | `SEC-270` | 🟡 | `update-grub` / `grub-install --force` | 引导配置修改 |
+| `SEC-271` | 🔵 | `bootctl set-efivar` | EFI 变量操作 |
+| `SEC-272` | 🟡 | `>> /sys/firmware/efi/efivars` | UEFI 变量写入 |
+| `SEC-273` | 🟡 | `dd of=/dev/sdX` | MBR 写入 |
+| `SEC-274` | 🔵 | `dmidecode -s system-serial-number` | 硬件信息篡改 |
+| `SEC-275` | 🟡 | `fwupd update --force` | 固件强制更新 |
