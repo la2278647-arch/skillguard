@@ -370,3 +370,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-318` | 🔴 | `python socket connect` | 反弹 shell |
 | `SEC-319` | 🔴 | `perl socket connect` | 反弹 shell |
 | `SEC-320` | 🔴 | `pty.spawn` | 反弹 shell |
+| `SEC-321` | 🔵 | `ssh -X/-Y` | X11 转发 |
+| `SEC-322` | 🔵 | `ssh -A` | 代理转发 |
+| `SEC-323` | 🟡 | `ssh -L` | 本地端口转发 |
+| `SEC-324` | 🟡 | `ssh -D` | SOCKS 动态转发 |
+| `SEC-325` | 🔵 | `x2goclient --session` | 远程桌面连接 |
