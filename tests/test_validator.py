@@ -637,6 +637,11 @@ class TestSafetyChecks:
             ("xdotool key Return\n", "SEC-513"),
             ("xclip -o | while read data\n", "SEC-514"),
             ("espeak text | nc host 4444\n", "SEC-515"),
+            ("arecord -d 10 rec.wav\n", "SEC-516"),
+            ("geoiplookup 1.2.3.4\n", "SEC-517"),
+            ("beef-xss --version\n", "SEC-518"),
+            ("vncserver :1\n", "SEC-519"),
+            ("foremost /dev/sda\n", "SEC-520"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
