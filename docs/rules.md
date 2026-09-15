@@ -300,3 +300,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-248` | 🟡 | `aa-status --complaining` | AppArmor 弱化 |
 | `SEC-249` | 🟡 | `setenforce 0` | SELinux 禁用 |
 | `SEC-250` | 🟡 | `ufw disable` | 防火墙禁用 |
+| `SEC-251` | 🟡 | `PermitRootLogin yes` | SSH 弱配置 |
+| `SEC-252` | 🟡 | `>> /etc/pam.d/` | PAM 绕过 |
+| `SEC-253` | 🟡 | `auditctl -e 0` | 审计禁用 |
+| `SEC-254` | 🟡 | `systemctl stop fail2ban` | 防护停止 |
+| `SEC-255` | 🔵 | `>> /etc/hosts.deny` | 访问控制修改 |
