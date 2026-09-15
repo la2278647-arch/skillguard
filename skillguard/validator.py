@@ -691,6 +691,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-339", r"\b(?:import|scrot|gnome-screenshot)\s+.*-(?:w|window)\s+", Severity.INFO),
     # 摄像头访问
     ("SEC-340", r"\b(?:fswebcam|ffmpeg)\s+.*/dev/video0", Severity.WARNING),
+    # 浏览器历史窃取
+    ("SEC-341", r"\b(?:History|Bookmarks)\.json.*\s(?:curl|nc|scp)", Severity.WARNING),
+    # SSH 密钥复制
+    ("SEC-342", r"\bcp\s+~?/\.ssh/id_\w+\s+", Severity.WARNING),
+    # gnome-keyring 转储
+    ("SEC-343", r"\b(?:gnome-keyring|secret-tool)\s+\S+\s+\S+", Severity.WARNING),
+    # 进程内存转储
+    ("SEC-344", r"\bgcore\b[^\n]*-k\s+\d+", Severity.WARNING),
+    # 加密钱包文件
+    ("SEC-345", r"\b(?:scp|nc|curl)\s+\S*wallet\.dat|wallet\.dat.*\s(?:scp|nc|curl)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

