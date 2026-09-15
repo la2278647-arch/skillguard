@@ -445,3 +445,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-393` | 🟡 | `dig 超长子域名` | DNS 隧道 |
 | `SEC-394` | 🟡 | `eval $CMD` | 命令混淆 |
 | `SEC-395` | 🟡 | `rm -rf /var/log` | 日志清理 |
+| `SEC-396` | 🟡 | `export https_proxy=user:pass@` | 恶意代理 |
+| `SEC-397` | 🟡 | `pip --index-url` | 供应链替换 |
+| `SEC-398` | 🟡 | `export LD_PRELOAD=` | 环境篡改 |
+| `SEC-399` | 🟡 | `crontab curl` | 定时回连 |
+| `SEC-400` | 🔴 | `>> /etc/rc.local` | 启动项注入 |
