@@ -625,3 +625,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-573` | 🟡 | `inotifywait -m` | 文件监控 |
 | `SEC-574` | 🟡 | `tc mirred` | 流量镜像 |
 | `SEC-575` | 🔵 | `openssl passwd` | 密码导出 |
+| `SEC-576` | 🔵 | `pip install --no-deps` | 依赖锁定绕过 |
+| `SEC-577` | 🟡 | `pip --extra-index-url` | 包源替换 |
+| `SEC-578` | 🟡 | `export SSL_CERT_FILE=` | 证书覆盖 |
+| `SEC-579` | 🔵 | `Set-ExecutionPolicy` | 脚本策略 |
+| `SEC-580` | 🟡 | `alias pip=` | 包管理器别名 |
