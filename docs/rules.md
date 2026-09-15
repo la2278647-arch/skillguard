@@ -450,3 +450,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-398` | 🟡 | `export LD_PRELOAD=` | 环境篡改 |
 | `SEC-399` | 🟡 | `crontab curl` | 定时回连 |
 | `SEC-400` | 🔴 | `>> /etc/rc.local` | 启动项注入 |
+| `SEC-401` | 🟡 | `docker run -v /etc/passwd` | 敏感挂载 |
+| `SEC-402` | 🔴 | `docker run --privileged -v /` | 容器逃逸 |
+| `SEC-403` | 🟡 | `docker pull evil/backdoor` | 恶意镜像 |
+| `SEC-404` | 🔵 | `docker network connect` | 网络劫持 |
+| `SEC-405` | 🟡 | `docker login -p` | 明文凭据 |
