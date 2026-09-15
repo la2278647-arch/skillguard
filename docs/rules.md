@@ -90,3 +90,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-033` | 🟡 | `docker --privileged` | 特权容器 |
 | `SEC-034` | 🟡 | `pickle.loads` | 不安全反序列化 |
 | `SEC-035` | 🔵 | `IFS=` | Bash IFS 劫持 |
+| `SEC-036` | 🟡 | `chown -R` / `chmod -R 777` | 递归权限滥用 |
+| `SEC-037` | 🟡 | `curl → /etc/systemd/system` | systemd 单元下载 |
+| `SEC-038` | 🟡 | `find -delete` | 批量删除 |
+| `SEC-039` | 🔵 | `nohup ... &` | 后台隐藏执行 |
+| `SEC-040` | 🟡 | `>> ~/.bashrc` | Shell RC 注入持久化 |
