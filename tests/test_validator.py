@@ -297,6 +297,11 @@ class TestSafetyChecks:
             ("nomad job stop job1\n", "SEC-173"),
             ("vault delete secret/data\n", "SEC-174"),
             ("kcadm delete realms/master\n", "SEC-175"),
+            ("oc delete cluster mycluster\n", "SEC-176"),
+            ("rancher clusters rm mycluster\n", "SEC-177"),
+            ("aws eks delete-cluster --name mycluster\n", "SEC-178"),
+            ("gcloud container clusters delete mycluster\n", "SEC-179"),
+            ("az aks delete -n mycluster\n", "SEC-180"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

@@ -361,6 +361,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-174", r"\bvault\s+delete\s+secret", Severity.WARNING),
     # keycloak 领域删除
     ("SEC-175", r"\bkcadm\s+delete\s+realms", Severity.WARNING),
+    # openshift 集群删除
+    ("SEC-176", r"\boc\s+delete\s+cluster", Severity.WARNING),
+    # rancher 集群删除
+    ("SEC-177", r"\brancher\s+clusters\s+rm", Severity.WARNING),
+    # eks 集群删除
+    ("SEC-178", r"\baws\s+eks\s+delete-cluster", Severity.WARNING),
+    # gke 集群删除
+    ("SEC-179", r"\bgcloud\s+container\s+clusters\s+delete", Severity.WARNING),
+    # aks 集群删除
+    ("SEC-180", r"\baz\s+aks\s+delete", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
