@@ -177,6 +177,26 @@ class SkillGuard:
 
 
 def _is_skipped_dir(path: Path) -> bool:
-    """批量扫描时跳过的目录。"""
+    """批量扫描时跳过的目录。
+
+    注意：常见的 agent 配置隐藏目录（.agents / .claude / .cursor / .codex 等）
+    正是 Skills 的存放位置，因此不能一概跳过隐藏目录；只跳过
+    VCS 元数据、依赖目录与构建缓存。
+    """
     name = path.name
-    return name in {".git", ".hg", ".svn", "__pycache__", "node_modules", ".venv", "venv", "site", "htmlcov", ".pytest_cache", ".ruff_cache", ".mypy_cache"} or name.startswith(".")
+    return name in {
+        ".git",
+        ".hg",
+        ".svn",
+        "__pycache__",
+        "node_modules",
+        ".venv",
+        "venv",
+        "site",
+        "htmlcov",
+        ".pytest_cache",
+        ".ruff_cache",
+        ".mypy_cache",
+        ".idea",
+        ".vscode",
+    }

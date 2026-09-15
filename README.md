@@ -73,7 +73,17 @@ skillguard scan .
 skillguard scan ./skills --depth 2 --top 10
 ```
 
-### 4. 作为 Python 库使用
+### 4. 生态质量基准（扫描远程仓库）
+
+```bash
+# 扫描一个 GitHub 仓库中的全部 Skills，输出生态质量报告
+skillguard bench https://github.com/anthropics/skills.git
+
+# 限制扫描量 + 导出 JSON
+skillguard bench https://github.com/obra/superpowers.git --max-skills 50 --json report.json
+```
+
+### 5. 作为 Python 库使用
 
 ```python
 from skillguard import SkillGuard, Config

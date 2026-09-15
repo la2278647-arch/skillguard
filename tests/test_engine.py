@@ -192,6 +192,18 @@ class TestScanDirectory:
         results = guard.scan_directory(tree)
         assert len(results) == 3  # .git 被跳过，不产生干扰
 
+    def test_finds_skills_in_hidden_agent_dirs(self, tmp_path: Path) -> None:
+        """.agents/.claude 等隐藏目录是 Skills 常见存放位置，必须能扫到。"""
+        hidden = tmp_path / ".agents" / "skills"
+        hidden.mkdir(parents=True)
+        (hidden / "SKILL.md").write_text(
+            "---\nname: hidden-skill\ndescription: d\n---\n# hidden\n", encoding="utf-8"
+        )
+        guard = SkillGuard(Config(skill_dir=str(tmp_path)))
+        results = guard.scan_directory(tmp_path)
+        names = {r["name"] for r in results}
+        assert "hidden-skill" in names
+
     def test_empty_dir(self, tmp_path: Path) -> None:
         guard = SkillGuard(Config(skill_dir=str(tmp_path)))
         results = guard.scan_directory(tmp_path)

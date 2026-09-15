@@ -82,6 +82,50 @@ skillguard check my-skill --timeout 120
 📄 报告已写入: report.html
 ```
 
+## 命令：`bench`
+
+对远程 GitHub 仓库执行**生态质量基准扫描**：克隆仓库 → 扫描全部 Skill → 输出聚合质量报告（平均分、通过率、评分分布、Top 排行）。
+
+```bash
+skillguard bench REPO_URL
+```
+
+### 选项
+
+| 选项 | 默认值 | 说明 |
+|------|--------|------|
+| `--depth INT` | `2` | 扫描深度 |
+| `--max-skills INT` | `200` | 最多扫描的 Skill 数 |
+| `--threshold FLOAT` | `60.0` | 质量门禁分数 |
+| `--top INT` | `10` | 排行榜显示条数 |
+| `--json PATH` | 无 | JSON 报告输出路径 |
+
+### 示例
+
+```bash
+# 扫描 Anthropic 官方 Skills
+skillguard bench https://github.com/anthropics/skills.git
+
+# 扫描社区仓库并导出 JSON
+skillguard bench https://github.com/obra/superpowers.git --max-skills 50 --json bench.json
+```
+
+### 输出示例
+
+```
+📊 生态质量报告: https://github.com/anthropics/skills.git
+  扫描到 15 个 Skill | 平均分 98.5 | 通过率 100%
+  累计问题: 🔴 0 error / 🟡 1 warning
+  评分分布: 90-100:15  75-89:0  60-74:0  40-59:0  0-39:0
+
+  Top 8 排行:
+     1. [ 99.5] ✅ skill-creator                (errors:0)
+     2. [ 99.5] ✅ webapp-testing               (errors:0)
+     ...
+```
+
+---
+
 ## 命令：`init`
 
 初始化一个 SkillGuard 兼容的 Skill 项目骨架。
