@@ -592,6 +592,11 @@ class TestSafetyChecks:
             ("aws configure export\n", "SEC-468"),
             ("cat ~/.bash_sessions/session\n", "SEC-469"),
             ("gpg --export-secret-keys key1\n", "SEC-470"),
+            ("nsenter --mount /proc/1/ns/mnt\n", "SEC-471"),
+            ("echo 1234 > /tmp/cgrp/cgroup.procs\n", "SEC-472"),
+            ("tc filter add dev eth0 egress\n", "SEC-473"),
+            ("crictl exec --privileged container\n", "SEC-474"),
+            ("docker build --network=host .\n", "SEC-475"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

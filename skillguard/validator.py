@@ -951,6 +951,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-469", r"\bcat\s+~?/\.(?:bash_sessions|zsh_sessions)/", Severity.WARNING),
     # 恶意密钥环导出
     ("SEC-470", r"\bgpg\s+--export-secret-keys\s+\S+", Severity.ERROR),
+    # 恶意容器逃逸利用
+    ("SEC-471", r"\b(?:nsenter|setns)\s+--(?:mount|pid|net|uts|ipc)\s+/proc/\d+/ns/", Severity.ERROR),
+    # 危险 cgroup 逃逸
+    ("SEC-472", r"\bmkdir\s+/tmp/cgrp|\becho\s+\d+\s*>\s+/tmp/cgrp/cgroup\.procs", Severity.ERROR),
+    # 恶意 eBPF 逃逸
+    ("SEC-473", r"\b(?:bpftool|tc)\s+[^\n]*filter\s+add\s+[^\n]*(?:clsact|egress)", Severity.WARNING),
+    # 危险运行时调试
+    ("SEC-474", r"\bcrictl\s+exec\s+--privileged|\bctr\s+run\s+--privileged", Severity.WARNING),
+    # 恶意容器镜像投毒
+    ("SEC-475", r"\b(?:docker|podman)\s+build\s+[^\n]*(?:--network=host|--security-opt)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
