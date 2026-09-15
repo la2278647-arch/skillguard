@@ -255,3 +255,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-203` | 🟡 | `glab ci variable delete` | 变量删除 |
 | `SEC-204` | 🟡 | `gh secret delete` | 密钥删除 |
 | `SEC-205` | 🟡 | `bitbucket repo delete` | 仓库删除 |
+| `SEC-206` | 🟡 | `npm unpublish` | 撤销发布 |
+| `SEC-207` | 🔵 | `twine --skip-existing` | 跳过重复上传 |
+| `SEC-208` | 🔵 | `docker push --all-tags` | 全标签推送 |
+| `SEC-209` | 🔵 | `helm repo remove` | 仓库移除 |
+| `SEC-210` | 🟡 | `cargo publish --allow-dirty` | 脏发布 |
