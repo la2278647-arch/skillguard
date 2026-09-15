@@ -931,6 +931,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-459", r"\b(?:mkfs(?:\.\w+)?|fdisk|parted)\s+[^\n]*/dev/sd", Severity.ERROR),
     # 恶意内核模块编译
     ("SEC-460", r"\bmake\s+.*\s-C\s+/usr/src|\binsmod\s+.*\.ko\s*$", Severity.WARNING),
+    # 恶意浏览器扩展安装
+    ("SEC-461", r"\b(?:npm|npx)\s+install\s+.*(?:browser-extension|userscript)", Severity.WARNING),
+    # 危险 screen 会话窃取
+    ("SEC-462", r"\bscreen\s+-x\b|\bscreen\s+-r\s+\S+", Severity.WARNING),
+    # 恶意共享库注入
+    ("SEC-463", r"\b(?:cp|mv)\s+\S*\.so\s+/(?:lib|usr/lib|usr/local/lib)", Severity.WARNING),
+    # 危险进程环境泄露
+    ("SEC-464", r"\bcat\s+/proc/\d+/environ", Severity.WARNING),
+    # 恶意命令历史清理
+    ("SEC-465", r"\brm\s+-f\s+~?/\.(?:bash_history|zsh_history)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

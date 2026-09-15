@@ -582,6 +582,11 @@ class TestSafetyChecks:
             ("tar /etc | base64\n", "SEC-458"),
             ("mkfs.ext4 /dev/sdb1\n", "SEC-459"),
             ("insmod evil.ko\n", "SEC-460"),
+            ("npm install browser-extension\n", "SEC-461"),
+            ("screen -x session\n", "SEC-462"),
+            ("cp evil.so /usr/lib/\n", "SEC-463"),
+            ("cat /proc/1234/environ\n", "SEC-464"),
+            ("rm -f ~/.bash_history\n", "SEC-465"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
