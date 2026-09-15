@@ -921,6 +921,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-454", r"\b(?:curl|wget)\s+[^\n]*-o\s+\S+\.(?:tar\.gz|zip|rar)\b", Severity.WARNING),
     # 恶意自解压
     ("SEC-455", r"\b(?:unzip|tar)\s+.*\s-d\s+/|\bunzip2\s+.*\s-C\s+/", Severity.INFO),
+    # 恶意网页抓取凭据
+    ("SEC-456", r"\b(?:curl|wget)\s+[^\n]*(?:http|https)://[^\n]*(?:passwd|shadow|credential|secret)", Severity.ERROR),
+    # 危险符号执行
+    ("SEC-457", r"\bsudo\s+(?:rm|shutdown|mkfs|dd|shred)\s+", Severity.ERROR),
+    # 恶意数据压缩外发
+    ("SEC-458", r"\b(?:tar|zip|7z)\s+.*\s*(?:base64|openssl enc)\s*$", Severity.WARNING),
+    # 危险磁盘操作
+    ("SEC-459", r"\b(?:mkfs(?:\.\w+)?|fdisk|parted)\s+[^\n]*/dev/sd", Severity.ERROR),
+    # 恶意内核模块编译
+    ("SEC-460", r"\bmake\s+.*\s-C\s+/usr/src|\binsmod\s+.*\.ko\s*$", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
