@@ -645,3 +645,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-593` | 🟡 | `nft delete table` | 网络策略静默 |
 | `SEC-594` | 🟡 | `cp sudoers /tmp` | 配置导出 |
 | `SEC-595` | 🟡 | `cat auth.log | nc` | 日志外传 |
+| `SEC-596` | 🟡 | `curl typosquat.com` | 域名抢注 |
+| `SEC-597` | 🟡 | `dig rebind` | DNS 重绑定 |
+| `SEC-598` | 🔵 | `squid -p localhost` | 代理污染 |
+| `SEC-599` | 🟡 | `chrome --no-sandbox` | 浏览器策略绕过 |
+| `SEC-600` | 🟡 | `openssl s_client cert.pem` | 证书欺骗 |
