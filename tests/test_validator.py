@@ -737,6 +737,11 @@ class TestSafetyChecks:
             ("echo %0a fake\n", "SEC-613"),
             ("restic prune\n", "SEC-614"),
             ("ip link set eth0 speed 100\n", "SEC-615"),
+            ("touch -t 20200101 file.txt\n", "SEC-616"),
+            ("fdupes --delete /tmp\n", "SEC-617"),
+            ("zip -r -9 /etc backup.zip\n", "SEC-618"),
+            ("dmidecode -t memory\n", "SEC-619"),
+            ("flashrom -w firmware.bin\n", "SEC-620"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

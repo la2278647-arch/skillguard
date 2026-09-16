@@ -1241,6 +1241,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-614", r"\b(?:restic|borg)\s+[^\n]*(?:prune|forget|delete)\b", Severity.WARNING),
     # 恶意配置一致性破坏
     ("SEC-615", r"\b(?:ethtool|ip)\s+[^\n]*(?:--set-|link\s+set)\s+\S+\s+(?:speed|duplex|mtu)", Severity.INFO),
+    # 恶意文件时间戳清理
+    ("SEC-616", r"\b(?:touch|utimensat)\s+[^\n]*(?:-t|-d)\s+[^\n]*\S+\.\w+", Severity.INFO),
+    # 危险数据重复删除滥用
+    ("SEC-617", r"\b(?:rdfind|fdupes)\s+[^\n]*(?:-d|--delete)\s+", Severity.WARNING),
+    # 恶意系统压缩炸弹
+    ("SEC-618", r"\b(?:zip|bzip2|gzip)\s+[^\n]*(?:-r|-9)\s+[^\n]*(?:/etc|/usr|/var)", Severity.WARNING),
+    # 危险硬件信息泄露
+    ("SEC-619", r"\b(?:dmidecode|lspci|lsusb)\s+[^\n]*(?:-t|-s)\s+\S+", Severity.INFO),
+    # 恶意系统固件替换
+    ("SEC-620", r"\bflashrom\s+[^\n]*-w\s+\S+\.(?:rom|bin)\b|\bdd\s+[^\n]*(?:if=|of=)\S*\.(?:rom|bin)\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
