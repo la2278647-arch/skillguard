@@ -732,6 +732,11 @@ class TestSafetyChecks:
             ("klist --cache /tmp/kcache\n", "SEC-608"),
             ("nc host:88\n", "SEC-609"),
             ("secret-tool read --label key\n", "SEC-610"),
+            ("echo 1.2.3.4 evil.com > /etc/hosts\n", "SEC-611"),
+            ("aws secretsmanager --no-rotate\n", "SEC-612"),
+            ("echo %0a fake\n", "SEC-613"),
+            ("restic prune\n", "SEC-614"),
+            ("ip link set eth0 speed 100\n", "SEC-615"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

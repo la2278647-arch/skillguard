@@ -1231,6 +1231,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-609", r"\b(?:socat|nc)\s+[^\n]*:(?:464|88)\b", Severity.WARNING),
     # 恶意身份存储导出
     ("SEC-610", r"\b(?:keyctl|secret-tool)\s+[^\n]*(?:read|print|dump)\s+", Severity.WARNING),
+    # 恶意系统数据篡改
+    ("SEC-611", r"\b(?:echo|printf)\s+.*\s>\s*(?:/etc/hosts|/etc/resolv.conf)", Severity.WARNING),
+    # 危险凭据轮换绕过
+    ("SEC-612", r"\b(?:aws|gcloud)\s+.*\s(?:--no-rotate|--disable-rotation)\s+", Severity.WARNING),
+    # 恶意日志注入
+    ("SEC-613", r"\b(?:logger|echo)\s+.*\S*(?:\x1b|%0a|%0d)\S*", Severity.WARNING),
+    # 危险系统恢复篡改
+    ("SEC-614", r"\b(?:restic|borg)\s+[^\n]*(?:prune|forget|delete)\b", Severity.WARNING),
+    # 恶意配置一致性破坏
+    ("SEC-615", r"\b(?:ethtool|ip)\s+[^\n]*(?:--set-|link\s+set)\s+\S+\s+(?:speed|duplex|mtu)", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
