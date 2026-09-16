@@ -660,3 +660,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-613` | 🟡 | `echo %0a` | 日志注入 |
 | `SEC-614` | 🟡 | `restic prune` | 恢复篡改 |
 | `SEC-615` | 🔵 | `ip link set speed` | 配置一致性破坏 |
+| `SEC-616` | 🔵 | `touch -t` | 时间戳清理 |
+| `SEC-617` | 🟡 | `fdupes --delete` | 去重删除滥用 |
+| `SEC-618` | 🟡 | `zip -9 /etc` | 压缩炸弹 |
+| `SEC-619` | 🔵 | `dmidecode -t` | 硬件信息泄露 |
+| `SEC-620` | 🟡 | `flashrom -w` | 固件替换 |
