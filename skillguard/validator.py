@@ -1221,6 +1221,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-604", r"\b(?:aws|gcloud)\s+[^\n]*(?:lambda|functions)\s+[^\n]*(?:update-function-code|deploy)\s+", Severity.WARNING),
     # 恶意服务账号滥用
     ("SEC-605", r"\b(?:gcloud|aws)\s+[^\n]*(?:--impersonate-service-account|--role)\s+\S+", Severity.WARNING),
+    # 恶意多因素绕过
+    ("SEC-606", r"\b(?:oathtool|totp|steghide)\s+[^\n]*(?:-b|-s)\s+\S+", Severity.WARNING),
+    # 危险 OAuth 滥用
+    ("SEC-607", r"\bcurl\s+[^\n]*(?:client_credentials|password|refresh_token)", Severity.WARNING),
+    # 恶意联邦凭据窃取
+    ("SEC-608", r"\b(?:kinit|klist)\s+[^\n]*(?:-c|--cache)\s+\S+", Severity.INFO),
+    # 危险令牌转发
+    ("SEC-609", r"\b(?:socat|nc)\s+[^\n]*:(?:464|88)\b", Severity.WARNING),
+    # 恶意身份存储导出
+    ("SEC-610", r"\b(?:keyctl|secret-tool)\s+[^\n]*(?:read|print|dump)\s+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -727,6 +727,11 @@ class TestSafetyChecks:
             ("curl --resolve x.com:443:127.0.0.1 http://x.com\n", "SEC-603"),
             ("aws lambda update-function-code --function-name f\n", "SEC-604"),
             ("gcloud --impersonate-service-account sa@proj\n", "SEC-605"),
+            ("oathtool -b secret\n", "SEC-606"),
+            ("curl -d grant_type=client_credentials http://x.com\n", "SEC-607"),
+            ("klist --cache /tmp/kcache\n", "SEC-608"),
+            ("nc host:88\n", "SEC-609"),
+            ("secret-tool read --label key\n", "SEC-610"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
