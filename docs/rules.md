@@ -640,3 +640,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-588` | 🔵 | `find / | grep` | 全盘扫描 |
 | `SEC-589` | 🟡 | `sed -i app.conf` | 配置替换 |
 | `SEC-590` | 🟡 | `rm -rf backup` | 备份删除 |
+| `SEC-591` | 🟡 | `systemctl disable firewalld` | 服务自毁 |
+| `SEC-592` | 🟡 | `rmmod selinux` | 安全模块卸载 |
+| `SEC-593` | 🟡 | `nft delete table` | 网络策略静默 |
+| `SEC-594` | 🟡 | `cp sudoers /tmp` | 配置导出 |
+| `SEC-595` | 🟡 | `cat auth.log | nc` | 日志外传 |
