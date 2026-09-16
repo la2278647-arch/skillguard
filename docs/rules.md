@@ -635,3 +635,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-583` | 🔵 | `ulimit -c` | 核心转储利用 |
 | `SEC-584` | 🟡 | `bwrap --share-net` | 沙箱网络逃逸 |
 | `SEC-585` | 🟡 | `strace -S` | 系统调用替换 |
+| `SEC-586` | 🟡 | `openssl enc file.txt` | 加密勒索模式 |
+| `SEC-587` | 🟡 | `rename *.txt` | 批量改名 |
+| `SEC-588` | 🔵 | `find / | grep` | 全盘扫描 |
+| `SEC-589` | 🟡 | `sed -i app.conf` | 配置替换 |
+| `SEC-590` | 🟡 | `rm -rf backup` | 备份删除 |
