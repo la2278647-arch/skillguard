@@ -665,3 +665,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-618` | 🟡 | `zip -9 /etc` | 压缩炸弹 |
 | `SEC-619` | 🔵 | `dmidecode -t` | 硬件信息泄露 |
 | `SEC-620` | 🟡 | `flashrom -w` | 固件替换 |
+| `SEC-621` | 🟡 | `notify-send --text password` | 通知欺骗 |
+| `SEC-622` | 🔵 | `wmctrl -l --name` | 窗口操控 |
+| `SEC-623` | 🔵 | `ibus daemon --verbose` | 输入法日志 |
+| `SEC-624` | 🟡 | `scrot -d 5` | 屏幕捕获 |
+| `SEC-625` | 🟡 | `xclip -o | base64` | 剪贴板窃取 |
