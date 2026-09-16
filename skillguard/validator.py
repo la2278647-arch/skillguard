@@ -1201,6 +1201,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-594", r"\b(?:tar|cp)\s+.*\S*(?:sudoers|fstab|passwd)\S*\s+\S+", Severity.WARNING),
     # 恶意安全日志外传
     ("SEC-595", r"\b(?:cat|tail)\s+.*\S*(?:audit|secure|auth)\S*\.log\s*\|\s*(?:curl|nc)", Severity.WARNING),
+    # 恶意域名抢注利用
+    ("SEC-596", r"\b(?:curl|wget)\s+.*\S*(?:typosquat|lookalike|homoglyph)", Severity.WARNING),
+    # 危险 DNS 重绑定
+    ("SEC-597", r"\b(?:dig|nslookup)\s+.*\S*(?:rebind|dnsrebind)", Severity.WARNING),
+    # 恶意流量代理污染
+    ("SEC-598", r"\b(?:proxy|squid)\s+[^\n]*(?:-p|-port)\s+\S+\s+[^\n]*(?:127\.0\.0\.1|localhost)", Severity.INFO),
+    # 危险浏览器策略绕过
+    ("SEC-599", r"\b(?:chrome|firefox|chromium)\s+[^\n]*(?:--no-sandbox|--disable-web-security|--allow-insecure)", Severity.WARNING),
+    # 恶意系统证书欺骗
+    ("SEC-600", r"\b(?:openssl|keytool)\s+[^\n]*(?:s_client|x509)\s+[^\n]*\.(?:pem|crt)\b", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

