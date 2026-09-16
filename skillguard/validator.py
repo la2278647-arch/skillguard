@@ -1251,6 +1251,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-619", r"\b(?:dmidecode|lspci|lsusb)\s+[^\n]*(?:-t|-s)\s+\S+", Severity.INFO),
     # 恶意系统固件替换
     ("SEC-620", r"\bflashrom\s+[^\n]*-w\s+\S+\.(?:rom|bin)\b|\bdd\s+[^\n]*(?:if=|of=)\S*\.(?:rom|bin)\b", Severity.WARNING),
+    # 恶意系统通知欺骗
+    ("SEC-621", r"\b(?:notify-send|zenity)\s+[^\n]*(?:--text|--title)\s+[^\n]*(?:password|token|secret)", Severity.WARNING),
+    # 危险窗口管理器操控
+    ("SEC-622", r"\b(?:xdotool|wmctrl)\s+[^\n]*(?:search|list|-l)\s+--name\s+\S+", Severity.INFO),
+    # 恶意输入法日志窃取
+    ("SEC-623", r"\b(?:ibus|fcitx5)\s+[^\n]*(?:daemon|engine)\s+[^\n]*(?:--verbose|--debug)", Severity.INFO),
+    # 危险屏幕内容捕获
+    ("SEC-624", r"\b(?:scrot|import|maim)\s+[^\n]*(?:-d|--delay)\s+\d+\s+\S+\.png", Severity.WARNING),
+    # 恶意剪贴板定时窃取
+    ("SEC-625", r"\b(?:xclip|xsel)\s+-o\s*\|\s*(?:base64|curl|nc)\s+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

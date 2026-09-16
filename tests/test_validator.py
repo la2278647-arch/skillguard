@@ -742,6 +742,11 @@ class TestSafetyChecks:
             ("zip -r -9 /etc backup.zip\n", "SEC-618"),
             ("dmidecode -t memory\n", "SEC-619"),
             ("flashrom -w firmware.bin\n", "SEC-620"),
+            ("notify-send --text password\n", "SEC-621"),
+            ("wmctrl -l --name window\n", "SEC-622"),
+            ("ibus daemon --verbose\n", "SEC-623"),
+            ("scrot -d 5 shot.png\n", "SEC-624"),
+            ("xclip -o | base64\n", "SEC-625"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
