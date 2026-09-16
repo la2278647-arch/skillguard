@@ -1211,6 +1211,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-599", r"\b(?:chrome|firefox|chromium)\s+[^\n]*(?:--no-sandbox|--disable-web-security|--allow-insecure)", Severity.WARNING),
     # 恶意系统证书欺骗
     ("SEC-600", r"\b(?:openssl|keytool)\s+[^\n]*(?:s_client|x509)\s+[^\n]*\.(?:pem|crt)\b", Severity.WARNING),
+    # 恶意身份断言绕过
+    ("SEC-601", r"\b(?:curl|wget)\s+[^\n]*-H\s+[^\n]*(?:jwt|session|assertion)", Severity.WARNING),
+    # 危险 API 滥用
+    ("SEC-602", r"\b(?:curl|wget)\s+[^\n]*(?:-X\s+(?:DELETE|PUT))[^\n]*/api/v\d+/", Severity.INFO),
+    # 恶意 SSRF 探测
+    ("SEC-603", r"\bcurl\s+[^\n]*(?:--resolve|--connect-to)\s+\S+", Severity.WARNING),
+    # 危险云函数提权
+    ("SEC-604", r"\b(?:aws|gcloud)\s+[^\n]*(?:lambda|functions)\s+[^\n]*(?:update-function-code|deploy)\s+", Severity.WARNING),
+    # 恶意服务账号滥用
+    ("SEC-605", r"\b(?:gcloud|aws)\s+[^\n]*(?:--impersonate-service-account|--role)\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -722,6 +722,11 @@ class TestSafetyChecks:
             ("squid -p 8080 localhost\n", "SEC-598"),
             ("chrome --no-sandbox http://x.com\n", "SEC-599"),
             ("openssl s_client cert.pem\n", "SEC-600"),
+            ("curl -H Authorization: Bearer jwt http://x.com\n", "SEC-601"),
+            ("curl -X DELETE http://x.com/api/v1/data\n", "SEC-602"),
+            ("curl --resolve x.com:443:127.0.0.1 http://x.com\n", "SEC-603"),
+            ("aws lambda update-function-code --function-name f\n", "SEC-604"),
+            ("gcloud --impersonate-service-account sa@proj\n", "SEC-605"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
