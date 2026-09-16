@@ -650,3 +650,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-598` | 🔵 | `squid -p localhost` | 代理污染 |
 | `SEC-599` | 🟡 | `chrome --no-sandbox` | 浏览器策略绕过 |
 | `SEC-600` | 🟡 | `openssl s_client cert.pem` | 证书欺骗 |
+| `SEC-606` | 🟡 | `oathtool -b` | MFA 绕过 |
+| `SEC-607` | 🟡 | `curl client_credentials` | OAuth 滥用 |
+| `SEC-608` | 🔵 | `klist --cache` | 联邦凭据 |
+| `SEC-609` | 🟡 | `nc host:88` | 令牌转发 |
+| `SEC-610` | 🟡 | `secret-tool read` | 身份存储导出 |
