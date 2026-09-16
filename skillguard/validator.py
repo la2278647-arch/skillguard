@@ -1181,6 +1181,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-584", r"\b(?:bwrap|firejail)\s+[^\n]*(?:--share-net|--net=host)", Severity.WARNING),
     # 恶意系统调用替换
     ("SEC-585", r"\b(?:auditctl|strace)\s+[^\n]*(?:-S|--syscall)\s+\S+", Severity.WARNING),
+    # 恶意加密勒索模式
+    ("SEC-586", r"\b(?:openssl|gpg)\s+[^\n]*(?:enc|--encrypt)\s+[^\n]*\.(?:txt|doc|pdf)", Severity.WARNING),
+    # 危险文件批量改名
+    ("SEC-587", r"\brename\s+.*\S*\.(?:txt|doc|pdf)\S*\s+\S+", Severity.WARNING),
+    # 恶意全盘扫描
+    ("SEC-588", r"\bfind\s+[^\n]*\|\s*(?:grep|egrep)|\bls\s+-laR?\s+/\s*\|\s*(?:grep|egrep)", Severity.INFO),
+    # 危险文件内容替换
+    ("SEC-589", r"\bsed\s+-i\s+.*\S+\.(?:conf|ini|cfg)\b", Severity.WARNING),
+    # 恶意系统备份删除
+    ("SEC-590", r"\brm\s+-rf\s+.*(?:backup|\.bak|\.old)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

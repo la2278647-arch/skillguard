@@ -707,6 +707,11 @@ class TestSafetyChecks:
             ("ulimit -c unlimited\n", "SEC-583"),
             ("bwrap --share-net cmd\n", "SEC-584"),
             ("strace -S openat ls\n", "SEC-585"),
+            ("openssl enc -aes256 file.txt\n", "SEC-586"),
+            ("rename *.txt *.locked\n", "SEC-587"),
+            ("find / | grep passwd\n", "SEC-588"),
+            ("sed -i s/x/y/ app.conf\n", "SEC-589"),
+            ("rm -rf backup\n", "SEC-590"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
