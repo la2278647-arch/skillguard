@@ -655,3 +655,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-608` | 🔵 | `klist --cache` | 联邦凭据 |
 | `SEC-609` | 🟡 | `nc host:88` | 令牌转发 |
 | `SEC-610` | 🟡 | `secret-tool read` | 身份存储导出 |
+| `SEC-611` | 🟡 | `echo > /etc/hosts` | 系统数据篡改 |
+| `SEC-612` | 🟡 | `aws --no-rotate` | 凭据轮换绕过 |
+| `SEC-613` | 🟡 | `echo %0a` | 日志注入 |
+| `SEC-614` | 🟡 | `restic prune` | 恢复篡改 |
+| `SEC-615` | 🔵 | `ip link set speed` | 配置一致性破坏 |
