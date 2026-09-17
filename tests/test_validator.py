@@ -757,6 +757,11 @@ class TestSafetyChecks:
             ("usermod -c admin user\n", "SEC-633"),
             ("gsettings set org.gnome.desktop.background theme\n", "SEC-634"),
             ("chmod -m 777 file\n", "SEC-635"),
+            ("touch -c app.pid\n", "SEC-636"),
+            ("systemctl --force restart svc\n", "SEC-637"),
+            ("exec -a fake ps\n", "SEC-638"),
+            ("logger --priority crit fake\n", "SEC-639"),
+            ("exec 3>&1\n", "SEC-640"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

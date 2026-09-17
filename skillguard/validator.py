@@ -1281,6 +1281,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-634", r"\b(?:gsettings|dconf)\s+[^\n]*(?:--set|set)\s+[^\n]*(?:theme|background)", Severity.INFO),
     # 恶意权限掩码绕过
     ("SEC-635", r"\b(?:setfacl|chmod)\s+[^\n]*(?:-m|--modify)\s+\S*[47]77\S*\s+\S+", Severity.WARNING),
+    # 恶意系统状态欺骗
+    ("SEC-636", r"\b(?:touch|stat)\s+[^\n]*\S+\.(?:pid|lock)", Severity.INFO),
+    # 危险服务状态伪造
+    ("SEC-637", r"\b(?:systemctl|service)\s+[^\n]*(?:-f|--force)\s+[^\n]*(?:start|stop|restart)\s+", Severity.WARNING),
+    # 恶意进程伪装
+    ("SEC-638", r"\bexec\s+-a\s+\S+\s+\S+|\b(?:prctl|setproctitle)\s+", Severity.WARNING),
+    # 危险系统日志伪造
+    ("SEC-639", r"\b(?:logger|journalctl)\s+[^\n]*(?:--priority|--facility)\s+\S+\s+[^\n]*\S+", Severity.INFO),
+    # 恶意文件句柄滥用
+    ("SEC-640", r"\b(?:exec|eval)\s+\d+>&\d+|\b(?:dup|dup2)\s+\d+\s+\d+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
