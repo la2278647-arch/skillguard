@@ -1301,6 +1301,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-644", r"\b(?:fork|stress|yes)\s+[^\n]*(?:-b|--backoff|> /dev/null)", Severity.WARNING),
     # 恶意系统范围探活
     ("SEC-645", r"\b(?:fping|nmap)\s+[^\n]*\d+\.\d+\.\d+\.\d+\s+\d+$", Severity.INFO),
+    # 恶意数据持久层破坏
+    ("SEC-646", r"\b(?:sqlite3|mysql)\s+.*\s(?:DROP|TRUNCATE)\s+\S+", Severity.ERROR),
+    # 危险消息队列投毒
+    ("SEC-647", r"\b(?:rabbitmqadmin|kafka-console-producer)\s+[^\n]*(?:--routing-key|--topic)\s+\S+", Severity.WARNING),
+    # 恶意缓存污染
+    ("SEC-648", r"\b(?:redis-cli|memcached)\s+[^\n]*(?:FLUSHALL|set\s+\S+\s+\S+)", Severity.WARNING),
+    # 危险数据库用户枚举
+    ("SEC-649", r"\b(?:mysql|psql)\s+[^\n]*(?:-e|--command)\s+[^\n]*(?:user|select\s+user)", Severity.WARNING),
+    # 恶意数据目录清理
+    ("SEC-650", r"\brm\s+-rf\s+.*(?:/var/lib/(?:mysql|postgresql|redis)|/data/db)", Severity.ERROR),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

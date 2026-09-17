@@ -767,6 +767,11 @@ class TestSafetyChecks:
             ("hping3 -c 100 host\n", "SEC-643"),
             ("stress -b 4\n", "SEC-644"),
             ("fping 192.168.1.1 5\n", "SEC-645"),
+            ("mysql -e DROP TABLE users\n", "SEC-646"),
+            ("kafka-console-producer --topic logs\n", "SEC-647"),
+            ("redis-cli FLUSHALL\n", "SEC-648"),
+            ("mysql -e select user from mysql.user\n", "SEC-649"),
+            ("rm -rf /var/lib/mysql\n", "SEC-650"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
