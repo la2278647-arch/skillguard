@@ -1261,6 +1261,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-624", r"\b(?:scrot|import|maim)\s+[^\n]*(?:-d|--delay)\s+\d+\s+\S+\.png", Severity.WARNING),
     # 恶意剪贴板定时窃取
     ("SEC-625", r"\b(?:xclip|xsel)\s+-o\s*\|\s*(?:base64|curl|nc)\s+", Severity.WARNING),
+    # 恶意终端仿真器利用
+    ("SEC-626", r"\b(?:script|tmux)\s+[^\n]*(?:-c|--command)\s+\S+", Severity.WARNING),
+    # 危险伪终端窃取
+    ("SEC-627", r"\b(?:socat|nc)\s+[^\n]*(?:PTY|pty)\s*:\S+", Severity.WARNING),
+    # 恶意会话记录窃取
+    ("SEC-628", r"\b(?:script|screen)\s+[^\n]*(?:-f|--file|log)\s+\S+\.(?:log|txt)", Severity.WARNING),
+    # 危险终端控制注入
+    ("SEC-629", r"\b(?:tput|stty)\s+[^\n]*(?:-e|erase|kill)\s+\S+", Severity.INFO),
+    # 恶意窗口标题欺骗
+    ("SEC-630", r"\b(?:xdotool|wmctrl)\s+[^\n]*(?:set_window|set-window|rename)\s+\S+\s+[^\n]*(?:password|login|root)", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

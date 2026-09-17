@@ -747,6 +747,11 @@ class TestSafetyChecks:
             ("ibus daemon --verbose\n", "SEC-623"),
             ("scrot -d 5 shot.png\n", "SEC-624"),
             ("xclip -o | base64\n", "SEC-625"),
+            ("script -c whoami\n", "SEC-626"),
+            ("socat PTY:/dev/pts/2\n", "SEC-627"),
+            ("script -f session.log\n", "SEC-628"),
+            ("stty erase ^H\n", "SEC-629"),
+            ("xdotool set_window name root\n", "SEC-630"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
