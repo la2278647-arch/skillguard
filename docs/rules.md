@@ -680,3 +680,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-638` | 🟡 | `exec -a fake` | 进程伪装 |
 | `SEC-639` | 🔵 | `logger --priority crit` | 日志伪造 |
 | `SEC-640` | 🟡 | `exec 3>&1` | 文件句柄滥用 |
+| `SEC-641` | 🔵 | `dbus-send --system` | 消息总线滥用 |
+| `SEC-642` | 🔵 | `curl -X /system/` | 系统 API 滥用 |
+| `SEC-643` | 🟡 | `hping3 -c` | 网络策略测试 |
+| `SEC-644` | 🟡 | `stress -b` | 资源耗尽 |
+| `SEC-645` | 🔵 | `fping 192.168.x` | 范围探活 |
