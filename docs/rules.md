@@ -675,3 +675,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-633` | 🟡 | `usermod -c admin` | 账户伪装 |
 | `SEC-634` | 🔵 | `gsettings set` | 主题覆盖 |
 | `SEC-635` | 🟡 | `chmod -m 777` | 权限放宽 |
+| `SEC-636` | 🔵 | `touch app.pid` | 状态欺骗 |
+| `SEC-637` | 🟡 | `systemctl --force restart` | 服务状态伪造 |
+| `SEC-638` | 🟡 | `exec -a fake` | 进程伪装 |
+| `SEC-639` | 🔵 | `logger --priority crit` | 日志伪造 |
+| `SEC-640` | 🟡 | `exec 3>&1` | 文件句柄滥用 |
