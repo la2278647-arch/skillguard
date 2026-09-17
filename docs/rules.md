@@ -685,3 +685,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-643` | 🟡 | `hping3 -c` | 网络策略测试 |
 | `SEC-644` | 🟡 | `stress -b` | 资源耗尽 |
 | `SEC-645` | 🔵 | `fping 192.168.x` | 范围探活 |
+| `SEC-646` | 🔴 | `mysql DROP TABLE` | 数据层破坏 |
+| `SEC-647` | 🟡 | `kafka --topic` | 消息队列投毒 |
+| `SEC-648` | 🟡 | `redis-cli FLUSHALL` | 缓存污染 |
+| `SEC-649` | 🟡 | `mysql -e select user` | 用户枚举 |
+| `SEC-650` | 🔴 | `rm -rf /var/lib/mysql` | 数据目录清理 |
