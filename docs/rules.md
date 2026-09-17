@@ -670,3 +670,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-623` | 🔵 | `ibus daemon --verbose` | 输入法日志 |
 | `SEC-624` | 🟡 | `scrot -d 5` | 屏幕捕获 |
 | `SEC-625` | 🟡 | `xclip -o | base64` | 剪贴板窃取 |
+| `SEC-631` | 🟡 | `macchanger --set` | 指纹绕过 |
+| `SEC-632` | 🔵 | `hostnamectl set-hostname admin` | 主机伪装 |
+| `SEC-633` | 🟡 | `usermod -c admin` | 账户伪装 |
+| `SEC-634` | 🔵 | `gsettings set` | 主题覆盖 |
+| `SEC-635` | 🟡 | `chmod -m 777` | 权限放宽 |
