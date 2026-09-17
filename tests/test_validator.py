@@ -752,6 +752,11 @@ class TestSafetyChecks:
             ("script -f session.log\n", "SEC-628"),
             ("stty erase ^H\n", "SEC-629"),
             ("xdotool set_window name root\n", "SEC-630"),
+            ("macchanger --set 00:11:22:33:44:55 eth0\n", "SEC-631"),
+            ("hostnamectl set-hostname admin\n", "SEC-632"),
+            ("usermod -c admin user\n", "SEC-633"),
+            ("gsettings set org.gnome.desktop.background theme\n", "SEC-634"),
+            ("chmod -m 777 file\n", "SEC-635"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
