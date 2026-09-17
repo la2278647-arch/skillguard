@@ -1291,6 +1291,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-639", r"\b(?:logger|journalctl)\s+[^\n]*(?:--priority|--facility)\s+\S+\s+[^\n]*\S+", Severity.INFO),
     # 恶意文件句柄滥用
     ("SEC-640", r"\b(?:exec|eval)\s+\d+>&\d+|\b(?:dup|dup2)\s+\d+\s+\d+", Severity.WARNING),
+    # 恶意系统消息总线滥用
+    ("SEC-641", r"\b(?:dbus-send|gdbus)\s+[^\n]*(?:--system|--session)\s+[^\n]*\S+\.\S+", Severity.INFO),
+    # 危险系统 API 滥用
+    ("SEC-642", r"\b(?:curl|wget)\s+[^\n]*-X\s+\S+[^\n]*/system/", Severity.INFO),
+    # 恶意网络策略测试
+    ("SEC-643", r"\b(?:tcping|hping3|mtr)\s+[^\n]*(?:-c|-p)\s+\d+", Severity.WARNING),
+    # 危险系统资源耗尽
+    ("SEC-644", r"\b(?:fork|stress|yes)\s+[^\n]*(?:-b|--backoff|> /dev/null)", Severity.WARNING),
+    # 恶意系统范围探活
+    ("SEC-645", r"\b(?:fping|nmap)\s+[^\n]*\d+\.\d+\.\d+\.\d+\s+\d+$", Severity.INFO),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -762,6 +762,11 @@ class TestSafetyChecks:
             ("exec -a fake ps\n", "SEC-638"),
             ("logger --priority crit fake\n", "SEC-639"),
             ("exec 3>&1\n", "SEC-640"),
+            ("dbus-send --system /org/x.Method\n", "SEC-641"),
+            ("curl -X POST http://x.com/system/op\n", "SEC-642"),
+            ("hping3 -c 100 host\n", "SEC-643"),
+            ("stress -b 4\n", "SEC-644"),
+            ("fping 192.168.1.1 5\n", "SEC-645"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
