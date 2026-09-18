@@ -690,3 +690,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-648` | 🟡 | `redis-cli FLUSHALL` | 缓存污染 |
 | `SEC-649` | 🟡 | `mysql -e select user` | 用户枚举 |
 | `SEC-650` | 🔴 | `rm -rf /var/lib/mysql` | 数据目录清理 |
+| `SEC-651` | 🟡 | `terraform state rm` | IaC 状态篡改 |
+| `SEC-652` | 🔴 | `terraform destroy` | IaC 破坏 |
+| `SEC-653` | 🔴 | `gh --token` | CI 凭据导出 |
+| `SEC-654` | 🔵 | `aws iam list-users` | 云资源枚举 |
+| `SEC-655` | 🟡 | `istioctl inject` | 服务网格注入 |
