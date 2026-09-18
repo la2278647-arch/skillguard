@@ -777,6 +777,11 @@ class TestSafetyChecks:
             ("gh --token ghp_xxx repo clone\n", "SEC-653"),
             ("aws iam list-users\n", "SEC-654"),
             ("istioctl inject -f app.yaml\n", "SEC-655"),
+            ("ip route add default via 10.0.0.1\n", "SEC-656"),
+            ("echo nameserver 8.8.8.8 > /etc/resolv.conf\n", "SEC-657"),
+            ("arp -s 10.0.0.2 00:11:22:33:44:55\n", "SEC-658"),
+            ("ip link del eth0\n", "SEC-659"),
+            ("ip netns add ns1\n", "SEC-660"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:

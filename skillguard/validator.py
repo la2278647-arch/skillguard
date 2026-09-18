@@ -1321,6 +1321,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-654", r"\baws\s+(?:iam|ec2)\s+list-\S+|\bgcloud\s+iam\s+list", Severity.INFO),
     # 恶意服务网格注入
     ("SEC-655", r"\bistioctl\s+[^\n]*(?:inject|operator)\s+\S+", Severity.WARNING),
+    # 恶意系统网关篡改
+    ("SEC-656", r"\b(?:ip|route)\s+.*\s(?:add|change)\s+default\s+via\s+\S+", Severity.WARNING),
+    # 危险 DNS 服务器篡改
+    ("SEC-657", r"\b(?:echo|sed)\s+.*\s>\s*/etc/resolv\.conf|\bresolvconf\s+-a\s+", Severity.WARNING),
+    # 恶意 ARP 表投毒
+    ("SEC-658", r"\b(?:ip\s+neigh|arp)\s+[^\n]*(?:-s|replace|add)\s+\S+", Severity.ERROR),
+    # 危险接口流量静默
+    ("SEC-659", r"\b(?:tc|ip)\s+[^\n]*(?:qdisc|link)\s+[^\n]*(?:down|del)\s+", Severity.WARNING),
+    # 恶意网络命名空间创建
+    ("SEC-660", r"\bip\s+netns\s+add\s+\S+\s*$|\bunshare\s+-n\s*$", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式
