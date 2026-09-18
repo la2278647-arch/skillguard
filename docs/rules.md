@@ -695,3 +695,8 @@ passed = (无 ERROR 检查) 且 (无失败测试) 且 (综合评分 ≥ threshol
 | `SEC-653` | 🔴 | `gh --token` | CI 凭据导出 |
 | `SEC-654` | 🔵 | `aws iam list-users` | 云资源枚举 |
 | `SEC-655` | 🟡 | `istioctl inject` | 服务网格注入 |
+| `SEC-656` | 🟡 | `ip route add default` | 网关篡改 |
+| `SEC-657` | 🟡 | `echo > /etc/resolv.conf` | DNS 篡改 |
+| `SEC-658` | 🔴 | `arp -s` | ARP 投毒 |
+| `SEC-659` | 🟡 | `ip link del` | 接口静默 |
+| `SEC-660` | 🟡 | `ip netns add` | 命名空间创建 |
