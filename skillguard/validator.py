@@ -1311,6 +1311,16 @@ DANGEROUS_PATTERNS: list[tuple[str, str, Severity]] = [
     ("SEC-649", r"\b(?:mysql|psql)\s+[^\n]*(?:-e|--command)\s+[^\n]*(?:user|select\s+user)", Severity.WARNING),
     # 恶意数据目录清理
     ("SEC-650", r"\brm\s+-rf\s+.*(?:/var/lib/(?:mysql|postgresql|redis)|/data/db)", Severity.ERROR),
+    # 恶意 IaC 状态篡改
+    ("SEC-651", r"\bterraform\s+state\s+(?:rm|mv|push)\s+", Severity.WARNING),
+    # 危险 IaC 破坏操作
+    ("SEC-652", r"\bterraform\s+destroy|\bpulumi\s+destroy", Severity.ERROR),
+    # 恶意 CI 凭据导出
+    ("SEC-653", r"\b(?:gh|gitlab|circleci)\s+[^\n]*(?:--token|--password|token)\s+\S+", Severity.ERROR),
+    # 危险云资源枚举
+    ("SEC-654", r"\baws\s+(?:iam|ec2)\s+list-\S+|\bgcloud\s+iam\s+list", Severity.INFO),
+    # 恶意服务网格注入
+    ("SEC-655", r"\bistioctl\s+[^\n]*(?:inject|operator)\s+\S+", Severity.WARNING),
 ]
 
 # 引用完整性：常见的本地文件/脚本引用模式

@@ -772,6 +772,11 @@ class TestSafetyChecks:
             ("redis-cli FLUSHALL\n", "SEC-648"),
             ("mysql -e select user from mysql.user\n", "SEC-649"),
             ("rm -rf /var/lib/mysql\n", "SEC-650"),
+            ("terraform state rm resource\n", "SEC-651"),
+            ("terraform destroy\n", "SEC-652"),
+            ("gh --token ghp_xxx repo clone\n", "SEC-653"),
+            ("aws iam list-users\n", "SEC-654"),
+            ("istioctl inject -f app.yaml\n", "SEC-655"),
         ],
     )
     def test_various_dangerous_patterns(self, tmp_path: Path, content: str, rule_id: str) -> None:
